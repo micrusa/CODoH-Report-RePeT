@@ -1,0 +1,6 @@
+\begin{figure}
+	\centering
+	\includegraphics[width= 0.8\textwidth]{figures/dns-resolution-process}
+	\caption{DNS Resolution process}
+	\label{fig-resolution-process}
+\end{figure}

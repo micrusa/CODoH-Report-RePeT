@@ -1,10 +1,9 @@
 \begin{thebibliography}{}
 
-\bibitem[G{\"o}del, 1931]{godel1931formal}
-G{\"o}del, K. (1931).
-\newblock {\"U}ber formal unentscheidbare s{\"a}tze der principia mathematica
-  und verwandter systeme i.
-\newblock {\em Monatshefte f{\"u}r mathematik und physik}, 38(1):173--198.
+\bibitem[Atkins and Austein, 2004]{rfc3833}
+Atkins, D. and Austein, R. (2004).
+\newblock {Threat Analysis of the Domain Name System (DNS)}.
+\newblock RFC 3833.
 
 \bibitem[Hoffman and McManus, 2018]{rfc8484}
 Hoffman, P. and McManus, P. (2018).
