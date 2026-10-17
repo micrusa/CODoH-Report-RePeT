@@ -5,6 +5,11 @@ Atkins, D. and Austein, R. (2004).
 \newblock {Threat Analysis of the Domain Name System (DNS)}.
 \newblock RFC 3833.
 
+\bibitem[Costan and Devadas, 2016]{cryptoeprint:2016/086}
+Costan, V. and Devadas, S. (2016).
+\newblock Intel {SGX} explained.
+\newblock Cryptology {ePrint} Archive, Paper 2016/086.
+
 \bibitem[Hoffman and McManus, 2018]{rfc8484}
 Hoffman, P. and McManus, P. (2018).
 \newblock {DNS Queries over HTTPS (DoH)}.
@@ -35,6 +40,11 @@ Mockapetris, P. (1987).
 Niroula, P., Gloudemans, L., Poudel, A., MacDonald, C., and Herwig, S. (2026).
 \newblock Codoh: Privacy-preserving caching for oblivious dns over https.
 \newblock {\em Proceedings on Privacy Enhancing Technologies}.
+
+\bibitem[Sabt et~al., 2015]{7345265}
+Sabt, M., Achemlal, M., and Bouabdallah, A. (2015).
+\newblock Trusted execution environment: What it is, and what it is not.
+\newblock In {\em 2015 IEEE Trustcom/BigDataSE/ISPA}, volume~1, pages 57--64.
 
 \bibitem[Singanamalla et~al., 2020]{singanamalla2020oblivious}
 Singanamalla, S., Chunhapanya, S., Vavru{\v{s}}a, M., Verma, T., Wu, P., Fayed,

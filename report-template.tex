@@ -56,7 +56,7 @@ This report examines the architecture and privacy-enhancing mechanisms of CODoH.
 \subsection{DNS \& DNS Caching}
 \label{sec:dnsanddnscaching}
 
-The Domain Name System is a distributed naming system that allows mapping domain names into certain information, usually into IP addresses \citep{rfc1034}. When a client needs to resolve a domain address, usually it sends a query to a recursive DNS resolver, which may contact multiple DNS servers following the DNS hierarchy, as illustrated in Figure~\ref{fig-resolution-process}. For example, a client may request the DNS resolver the resolution of the domain "example.com". In such case, the DNS resolver will initially query the Root Server to get the Top Level Domain (TLD) server information. Then, it will query the TLD server ".com" to obtain the authoritative Name Server (NS) of "example.com". Finally, it will query the NS to obtain the corresponding IP Address, and answer the original client.
+The \textit{Domain Name System (DNS)} is a distributed naming system that allows mapping domain names into certain information, usually into IP addresses \citep{rfc1034}. When a client needs to resolve a domain address, usually it sends a query to a recursive \textit{DNS resolver}, which may contact multiple DNS servers following the DNS hierarchy, as illustrated in Figure~\ref{fig-resolution-process}. For example, a client may request the DNS resolver the resolution of the domain "example.com". In such case, the DNS resolver will initially query the Root Server to get the Top Level Domain (TLD) server information. Then, it will query the TLD server ".com" to obtain the authoritative Name Server (NS) of "example.com". Finally, it will query the NS to obtain the corresponding IP Address, and answer the original client.
 
 \begin{figure}[H]
 	\centering
@@ -88,11 +88,11 @@ To reduce the overhead associated with the DNS resolution process, recursive res
 \subsection{DNS Privacy: DoH \& ODoH}
 \label{sec:dnsprivacy}
 
-Traditionally, DNS messages have been transported without encryption, usually over User Datagram Protocol (UDP) \citep{rfc1034}. This implies that network observers can read all the packet information, including Source IP Address and the requested domain name, potentially exposing browsing activity. Furthermore, the lack of encryption in traditional DNS increases its vulnerability to network attacks. An attacker may intercept a query and try to manipulate the response to redirect the victim to a malicious location \citep{rfc3833}.
+Traditionally, DNS messages have been transported without encryption, usually encapsulated over User Datagram Protocol (UDP) \citep{rfc1034}. This implies that network observers can read all the packet information, including Source IP Address and the requested domain name, potentially exposing browsing activity. Furthermore, the lack of encryption in traditional DNS increases its vulnerability to network attacks. An attacker may intercept a query and try to manipulate the response to redirect the victim to a malicious location \citep{rfc3833}.
 
 \citet{rfc8484} solved the lack of encryption by transporting DNS over HTTPS, using Transport Layer Security (TLS) for encryption, integrity and confidentiality. This is done by encapsulating DNS messages in HTTP requests under HTTPS URIs, using either POST or GET methods. DoH prevents network observers and/or attackers from reading the DNS queries, partly protecting users' privacy. However, it still has a key limitation: the resolver has access to the unencrypted DNS message and can associate it with the client's IP address.
 
-To solve this problem, \citet{singanamalla2020oblivious} introduced Oblivious DNS over HTTPS, which introduces a proxy between the client and the resolver. The client encrypts the DNS message for the resolver, so the proxy does not have access to the contents of the query, and forwards the encrypted DNS message, as illustrated in Figure~\ref{fig-odoh}. Assuming the proxy and the resolver do not collude, the client's IP address is unknown for the resolver, and the queried domain name is unknown for the proxy, so the users' privacy remains protected. However, this introduces a new problem: encryption makes two equal DNS queries different to the proxy, so conventional caching becomes impossible.
+To solve this problem, \citet{singanamalla2020oblivious} introduced \textit{Oblivious DNS over HTTPS (ODoH)}, which introduces a proxy between the client and the resolver. The client encrypts the DNS message for the resolver, so the proxy does not have access to the contents of the query, and forwards the encrypted DNS message, as illustrated in Figure~\ref{fig-odoh}. Assuming the proxy and the resolver do not collude, the client's IP address is unknown for the resolver, and the queried domain name is unknown for the proxy, so the users' privacy remains protected. However, this introduces a new problem: encryption makes two equal DNS queries different to the proxy, so conventional caching becomes impossible.
 
 \begin{figure}[H]
 	\centering
@@ -106,37 +106,39 @@ To solve this problem, \citet{singanamalla2020oblivious} introduced Oblivious DN
 	\label{fig-odoh}
 \end{figure}
 
-\subsection{Trusted Execution Environments (TEEs)}
+\subsection{Trusted Execution Environments (TEEs) \& Remote Attestation}
 \label{sec:tees}
+
+Although encryption protects sensitive information in transit and rest, processing this information usually requires it to be decrypted and loaded into memory. Traditionally, privileged software such as the Operating System has been allowed to access and manipulate all computer memory. Consequently, applications must trust the environment in which they execute. \textit{Trusted Execution Environments (TEEs)} address this limitation by providing hardware-enforced isolation. \citep{7345265}
+
+\textit{Intel SGX} \citep{cryptoeprint:2016/086} is a TEE that extends the Intel architecture to guarantee isolated execution in protected containers called \textit{enclaves}, and permits proving to a remote computer that it is communicating with a specific secure container using \textit{software attestation}. The proof is an attestation signature covering the container's initial state, a challenge random number produced by the remote computer, and a message produced by the container. This allows remote hosts to execute programs in a secure container, as illustrated in Figure~\ref{fig-sgx-secure}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width= 0.7\textwidth]{figures/intel-sgx-remote}
+	\caption{Intel SGX Secure Remote Computation.}
+	\label{fig-sgx-secure}
+\end{figure}
 
 \subsection{Oblivious RAM (ORAM)}
 \label{sec:oram}
 
-\section{Main content}
-\label{sec:main}
-
-Note that you \textit{must} rename this section to indicate \textit{what the content is}.
-
-
-\section{Another topic in the main content}
-\label{sec:anohter-topic}
-
-Your ``main content'' can be split into as many sections as needed.
-
-
-\section{Related work}
-\label{sec:relwork}
+\subsection{Related work}
+\label{sec:relatedwork}
 
 Here, you include short descriptions of similar work and explain \textit{how} they are different from the main content you have presented.
 
 Level of detail similar to an abstract.
 
-Note that you may include the related work as a subsection in the Background Section~\ref{sec:background}.
+\section{Main content}
+\label{sec:main}
+
+\section{Another topic in the main content}
+\label{sec:anohter-topic}
 
 
 \section{Conclusion}
 \label{sec:conclusion}
-\lipsum[3]
 
 \section{Use of generative digital tools}
 
