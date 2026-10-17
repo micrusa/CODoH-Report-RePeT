@@ -69,4 +69,110 @@
   url = {https://www.gutenberg.org/ebooks/37134}
 }
 
+@misc{rfc1034,
+	series =    {Request for Comments},
+	number =    1034,
+	howpublished =  {RFC 1034},
+	publisher = {RFC Editor},
+	doi =       {10.17487/RFC1034},
+	url =       {https://www.rfc-editor.org/info/rfc1034/},
+	author =    {P. Mockapetris},
+	title =     {{Domain names - concepts and facilities}},
+	pagetotal = 55,
+	year =      1987,
+	month =     nov,
+	abstract =  {This RFC is the revised basic definition of The Domain Name System. It obsoletes RFC-882. This memo describes the domain style names and their used for host address look up and electronic mail forwarding. It discusses the clients and servers in the domain name system and the protocol used between them.},
+}
+
+
+@article{singanamalla2020oblivious,
+	title={Oblivious DNS over HTTPS (ODoH): A practical privacy enhancement to DNS},
+	author={Singanamalla, Sudheesh and Chunhapanya, Suphanat and Vavru{\v{s}}a, Marek and Verma, Tanya and Wu, Peter and Fayed, Marwan and Heimerl, Kurtis and Sullivan, Nick and Wood, Christopher},
+	journal={arXiv preprint arXiv:2011.10121},
+	year={2020}
+}
+
+
+@misc{rfc9076,
+	series =    {Request for Comments},
+	number =    9076,
+	howpublished =  {RFC 9076},
+	publisher = {RFC Editor},
+	doi =       {10.17487/RFC9076},
+	url =       {https://www.rfc-editor.org/info/rfc9076/},
+	author =    {T. Wicinski},
+	title =     {{DNS Privacy Considerations}},
+	pagetotal = 22,
+	year =      2021,
+	month =     jul,
+	abstract =  {This document describes the privacy issues associated with the use of the DNS by Internet users. It provides general observations about typical current privacy practices. It is intended to be an analysis of the present situation and does not prescribe solutions. This document obsoletes RFC 7626.},
+}
+
+@article{niroula2026codoh,
+	title={CODoH: Privacy-Preserving Caching for Oblivious DNS over HTTPS},
+	author={Niroula, Pankaj and Gloudemans, Lily and Poudel, Aashutosh and MacDonald, Collin and Herwig, Stephen},
+	journal={Proceedings on Privacy Enhancing Technologies},
+	year={2026}
+}
+
+@misc{rfc8484,
+	series =    {Request for Comments},
+	number =    8484,
+	howpublished =  {RFC 8484},
+	publisher = {RFC Editor},
+	doi =       {10.17487/RFC8484},
+	url =       {https://www.rfc-editor.org/info/rfc8484/},
+	author =    {P. Hoffman and P. McManus},
+	title =     {{DNS Queries over HTTPS (DoH)}},
+	pagetotal = 21,
+	year =      2018,
+	month =     oct,
+	abstract =  {This document defines a protocol for sending DNS queries and getting DNS responses over HTTPS. Each DNS query-response pair is mapped into an HTTP exchange.},
+}
+
+@misc{rfc7858,
+	series =    {Request for Comments},
+	number =    7858,
+	howpublished =  {RFC 7858},
+	publisher = {RFC Editor},
+	doi =       {10.17487/RFC7858},
+	url =       {https://www.rfc-editor.org/info/rfc7858/},
+	author =    {Z. Hu and L. Zhu and J. Heidemann and A. Mankin and D. Wessels and P. Hoffman},
+	title =     {{Specification for DNS over Transport Layer Security (TLS)}},
+	pagetotal = 19,
+	year =      2016,
+	month =     may,
+	abstract =  {This document describes the use of Transport Layer Security (TLS) to provide privacy for DNS. Encryption provided by TLS eliminates opportunities for eavesdropping and on-path tampering with DNS queries in the network, such as discussed in RFC 7626. In addition, this document specifies two usage profiles for DNS over TLS and provides advice on performance considerations to minimize overhead from using TCP and TLS with DNS. This document focuses on securing stub-to-recursive traffic, as per the charter of the DPRIVE Working Group. It does not prevent future applications of the protocol to recursive-to-authoritative traffic.},
+}
+
+@misc{rfc9250,
+	series =    {Request for Comments},
+	number =    9250,
+	howpublished =  {RFC 9250},
+	publisher = {RFC Editor},
+	doi =       {10.17487/RFC9250},
+	url =       {https://www.rfc-editor.org/info/rfc9250/},
+	author =    {C. Huitema and S. Dickinson and A. Mankin},
+	title =     {{DNS over Dedicated QUIC Connections}},
+	pagetotal = 27,
+	year =      2022,
+	month =     may,
+	abstract =  {This document describes the use of QUIC to provide transport confidentiality for DNS. The encryption provided by QUIC has similar properties to those provided by TLS, while QUIC transport eliminates the head-of-line blocking issues inherent with TCP and provides more efficient packet-loss recovery than UDP. DNS over QUIC (DoQ) has privacy properties similar to DNS over TLS (DoT) specified in RFC 7858, and latency characteristics similar to classic DNS over UDP. This specification describes the use of DoQ as a general-purpose transport for DNS and includes the use of DoQ for stub to recursive, recursive to authoritative, and zone transfer scenarios.},
+}
+
+@misc{rfc9230,
+	series =    {Request for Comments},
+	number =    9230,
+	howpublished =  {RFC 9230},
+	publisher = {RFC Editor},
+	doi =       {10.17487/RFC9230},
+	url =       {https://www.rfc-editor.org/info/rfc9230/},
+	author =    {E. Kinnear and P. McManus and T. Pauly and T. Verma and C.A. Wood},
+	title =     {{Oblivious DNS over HTTPS}},
+	pagetotal = 19,
+	year =      2022,
+	month =     jun,
+	abstract =  {This document describes a protocol that allows clients to hide their IP addresses from DNS resolvers via proxying encrypted DNS over HTTPS (DoH) messages. This improves privacy of DNS operations by not allowing any one server entity to be aware of both the client IP address and the content of DNS queries and answers. This experimental protocol has been developed outside the IETF and is published here to guide implementation, ensure interoperability among implementations, and enable wide-scale experimentation.},
+}
+
 

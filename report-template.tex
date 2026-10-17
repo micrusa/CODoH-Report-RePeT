@@ -39,11 +39,15 @@
 
 \section{Introduction}
 \label{sec:intro}
-This sentence is supported by a reference \citep{chaum1981untraceable}.
-This sentence is justified with multiple references \citep{chaum1981untraceable,shamir1979how}.
-\citet{alley2018craft} as well as \citet{strunk1999elements} use in-line references.
+The Domain Name System (DNS) is a fundamental component of the Internet, responsible for translating human-readable domain names into IP addresses \citep{rfc1034}. Most interactions with the internet require DNS resolution, which makes DNS queries a source of information for users' online activity. Originally, DNS queries have been transmitted without encryption, allowing all intermediaries with access to the datagram to observe which domains users access \citep{rfc9076}. Protocols such as DNS over HTTPS (DoH), DNS over TLS (DoT) and DNS over QUIC (DoQ) have been invented to provide a solution for this issue by encrypting the communication between clients and DNS servers \citep{rfc8484,rfc7858,rfc9250}. However, while these protocols protect DNS queries from intermediaries in the network, the DNS server can still associate a query to the IP Address of the user that issued them.
 
-\lipsum[4]
+Oblivious DNS over HTTPS (ODoH) addresses this issue by introducing an intermediary proxy that separates the client's identity from the query contents, forwarding encrypted requests to the target DNS server, which ensures that neither the proxy or the DNS server possess both the user's identity and the query contents \citep{singanamalla2020oblivious,rfc9230}. Although this approach guarantees the privacy of the client's request end to end, it also prevents intermediary proxies from caching requests, since the query contents only get decrypted at the target resolver.
+
+To overcome this issue, \citet{niroula2026codoh} developed Cacheable Oblivious DNS over HTTPS (CODoH) protocol. Rather than simply decrypting and caching DNS queries, CODoH combines trusted execution environments with techniques to prevent cache access patterns from revealing information. Its objective is to preserve the privacy properties of ODoH while partly recovering the performance benefits of DNS caching. However, these mechanisms also introduce overhead, raising questions about the performance of CODoH.
+
+This report examines the architecture and privacy-enhancing mechanisms of CODoH.
+
+
 
 \section{Background}
 \label{sec:background}
@@ -106,9 +110,9 @@ Your ``main content'' can be split into as many sections as needed.
 
 Here, you include short descriptions of similar work and explain \textit{how} they are different from the main content you have presented.
 
-Level of detail similar to an abstract. 
+Level of detail similar to an abstract.
 
-Note that you may include the related work as a subsection in the Background Section~\ref{sec:background}. 
+Note that you may include the related work as a subsection in the Background Section~\ref{sec:background}.
 
 
 \section{Conclusion}
@@ -117,7 +121,7 @@ Note that you may include the related work as a subsection in the Background Sec
 
 \section{Use of generative digital tools}
 
-The use of AI tools must always be declared completely and transparently. 
+The use of AI tools must always be declared completely and transparently.
 For examples of how to do this, please see the DMI guidance: \url{https://dmi.unibas.ch/fileadmin/user_upload/dmi/Studium/Computer_Science/Diverses/Wegleitungen/Dokumente_2023/Guidance_on_AI_in_teaching_in_Computer_Science.pdf}.
 
 

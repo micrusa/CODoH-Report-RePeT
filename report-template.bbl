@@ -1,0 +1,52 @@
+\begin{thebibliography}{}
+
+\bibitem[G{\"o}del, 1931]{godel1931formal}
+G{\"o}del, K. (1931).
+\newblock {\"U}ber formal unentscheidbare s{\"a}tze der principia mathematica
+  und verwandter systeme i.
+\newblock {\em Monatshefte f{\"u}r mathematik und physik}, 38(1):173--198.
+
+\bibitem[Hoffman and McManus, 2018]{rfc8484}
+Hoffman, P. and McManus, P. (2018).
+\newblock {DNS Queries over HTTPS (DoH)}.
+\newblock RFC 8484.
+
+\bibitem[Hu et~al., 2016]{rfc7858}
+Hu, Z., Zhu, L., Heidemann, J., Mankin, A., Wessels, D., and Hoffman, P.
+  (2016).
+\newblock {Specification for DNS over Transport Layer Security (TLS)}.
+\newblock RFC 7858.
+
+\bibitem[Huitema et~al., 2022]{rfc9250}
+Huitema, C., Dickinson, S., and Mankin, A. (2022).
+\newblock {DNS over Dedicated QUIC Connections}.
+\newblock RFC 9250.
+
+\bibitem[Kinnear et~al., 2022]{rfc9230}
+Kinnear, E., McManus, P., Pauly, T., Verma, T., and Wood, C. (2022).
+\newblock {Oblivious DNS over HTTPS}.
+\newblock RFC 9230.
+
+\bibitem[Mockapetris, 1987]{rfc1034}
+Mockapetris, P. (1987).
+\newblock {Domain names - concepts and facilities}.
+\newblock RFC 1034.
+
+\bibitem[Niroula et~al., 2026]{niroula2026codoh}
+Niroula, P., Gloudemans, L., Poudel, A., MacDonald, C., and Herwig, S. (2026).
+\newblock Codoh: Privacy-preserving caching for oblivious dns over https.
+\newblock {\em Proceedings on Privacy Enhancing Technologies}.
+
+\bibitem[Singanamalla et~al., 2020]{singanamalla2020oblivious}
+Singanamalla, S., Chunhapanya, S., Vavru{\v{s}}a, M., Verma, T., Wu, P., Fayed,
+  M., Heimerl, K., Sullivan, N., and Wood, C. (2020).
+\newblock Oblivious dns over https (odoh): A practical privacy enhancement to
+  dns.
+\newblock {\em arXiv preprint arXiv:2011.10121}.
+
+\bibitem[Wicinski, 2021]{rfc9076}
+Wicinski, T. (2021).
+\newblock {DNS Privacy Considerations}.
+\newblock RFC 9076.
+
+\end{thebibliography}
