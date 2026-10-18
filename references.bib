@@ -208,3 +208,36 @@
 	pages={57-64},
 	keywords={Security;Kernel;Hardware;Runtime;Secure storage;Context;survey;TEE;TrustZone;DRTM;secure boot;secure scheduling;trusted UI},
 	doi={10.1109/Trustcom.2015.357}}
+
+@inproceedings{oramgoldreich,
+	author = {Goldreich, O.},
+	title = {Towards a theory of software protection and simulation by oblivious RAMs},
+	year = {1987},
+	isbn = {0897912217},
+	publisher = {Association for Computing Machinery},
+	address = {New York, NY, USA},
+	url = {https://doi.org/10.1145/28395.28416},
+	doi = {10.1145/28395.28416},
+	abstract = {Software protection is one of the most important issues concerning computer practice. There exist many heuristics and ad-hoc methods for protection, but the problem as a whole has not received the theoretical treatment it deserves. In this paper, we make the first steps towards a theoretic treatment of software protection: First, we distill and formulate the key problem of learning about a program from its execution. Second, assuming the existence of one-way permutations, we present an efficient way of executing programs such that it is infeasible to learn anything about the program by monitoring its executions.How can one efficiently execute programs without allowing an adversary, monitoring the execution, to learn anything about the program? Traditional cryptographic techniques can be applied to keep the contents of the memory unknown throughout the execution, but are not applicable to the problem of hiding the access pattern. The problem of hiding the access pattern efficiently corresponds to efficient simulation of Random Access Machines (RAM) on an oblivious RAM. We define an oblivious RAM to be a (probabilistic) RAM for which (the distribution of) the memory access pattern is independent of the input. We present an (on-line) simulation of t steps of an arbitrary RAM with m memory cells, by less than t·mε steps of an oblivious RAM with 2m memory cells, where ε>0 is an arbitrary constant.},
+	booktitle = {Proceedings of the Nineteenth Annual ACM Symposium on Theory of Computing},
+	pages = {182–194},
+	numpages = {13},
+	location = {New York, New York, USA},
+	series = {STOC '87}
+}
+
+@article{pathoram,
+	author       = {Emil Stefanov and
+	Elaine Shi},
+	title        = {Path {O-RAM:} An Extremely Simple Oblivious {RAM} Protocol},
+	journal      = {CoRR},
+	volume       = {abs/1202.5150},
+	year         = {2012},
+	url          = {https://doi.org/10.48550/arXiv.1202.5150},
+	doi          = {10.48550/ARXIV.1202.5150},
+	eprinttype   = {arXiv},
+	eprint       = {1202.5150},
+	timestamp    = {Thu, 01 Oct 2026 11:17:18 +0200},
+	biburl       = {https://dblp.org/rec/journals/corr/abs-1202-5150.bib},
+	bibsource    = {dblp computer science bibliography, https://dblp.org}
+}

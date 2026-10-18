@@ -10,6 +10,14 @@ Costan, V. and Devadas, S. (2016).
 \newblock Intel {SGX} explained.
 \newblock Cryptology {ePrint} Archive, Paper 2016/086.
 
+\bibitem[Goldreich, 1987]{oramgoldreich}
+Goldreich, O. (1987).
+\newblock Towards a theory of software protection and simulation by oblivious
+  rams.
+\newblock In {\em Proceedings of the Nineteenth Annual ACM Symposium on Theory
+  of Computing}, STOC '87, page 182–194, New York, NY, USA. Association for
+  Computing Machinery.
+
 \bibitem[Hoffman and McManus, 2018]{rfc8484}
 Hoffman, P. and McManus, P. (2018).
 \newblock {DNS Queries over HTTPS (DoH)}.
@@ -52,6 +60,11 @@ Singanamalla, S., Chunhapanya, S., Vavru{\v{s}}a, M., Verma, T., Wu, P., Fayed,
 \newblock Oblivious dns over https (odoh): A practical privacy enhancement to
   dns.
 \newblock {\em arXiv preprint arXiv:2011.10121}.
+
+\bibitem[Stefanov and Shi, 2012]{pathoram}
+Stefanov, E. and Shi, E. (2012).
+\newblock Path {O-RAM:} an extremely simple oblivious {RAM} protocol.
+\newblock {\em CoRR}, abs/1202.5150.
 
 \bibitem[Wicinski, 2021]{rfc9076}
 Wicinski, T. (2021).

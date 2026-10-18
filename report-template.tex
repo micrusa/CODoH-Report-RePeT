@@ -45,7 +45,7 @@ The Domain Name System (DNS) is a fundamental component of the Internet, respons
 Oblivious DNS over HTTPS (ODoH) addresses this issue by introducing an intermediary proxy that separates the client's identity from the query contents, forwarding encrypted requests to the target DNS server, which ensures that neither the proxy or the DNS server possess both the user's identity and the query contents \citep{singanamalla2020oblivious,rfc9230}. Although this approach guarantees the privacy of the client's request end to end, it also prevents intermediary proxies from caching requests, since the query contents only get decrypted at the target resolver.
 
 To overcome this issue, \citet{niroula2026codoh} developed Cacheable Oblivious DNS over HTTPS (CODoH) protocol. Rather than simply decrypting and caching DNS queries, CODoH combines trusted execution environments with techniques to prevent cache access patterns from revealing information. Its objective is to preserve the privacy properties of ODoH while partly recovering the performance benefits of DNS caching. However, these mechanisms also introduce overhead, raising questions about the performance of CODoH.
-
+% TODO
 This report examines the architecture and privacy-enhancing mechanisms of CODoH.
 
 
@@ -116,22 +116,35 @@ Although encryption protects sensitive information in transit and rest, processi
 \begin{figure}[H]
 	\centering
 	\includegraphics[width= 0.7\textwidth]{figures/intel-sgx-remote}
-	\caption{Intel SGX Secure Remote Computation.}
+	\caption[Intel SGX Secure Remote Computation]{
+	Intel SGX Secure Remote Computation. A local host setups computation in a remote secure container (enclave), and receives encrypted results from that computation.
+	}
 	\label{fig-sgx-secure}
 \end{figure}
 
 \subsection{Oblivious RAM (ORAM)}
 \label{sec:oram}
 
+Even though Intel SGX's enclaves have their memory encrypted \citep{cryptoeprint:2016/086}, this alone may not be enough to protect their data. An attacker observing memory access patterns may be able to infer sensitive information, even if the underlying information is encrypted. \citet{oramgoldreich} introduced \textit{Oblivious RAM (ORAM)} to address this problem by transforming how memory is accessed, preventing observable access patterns from revealing what data is being accessed.
+
+\textit{Path ORAM} \citep{pathoram} is a modern ORAM protocol that organizes encrypted data blocks by assigning them to leafs in a binary tree. After each access, the block is moved to a different leaf, preventing repeated access to the same data block from revealing access patterns. However, this introduces significant memory access overhead when compared to traditional memory access.
+
 \subsection{Related work}
 \label{sec:relatedwork}
+
+% TODO
 
 Here, you include short descriptions of similar work and explain \textit{how} they are different from the main content you have presented.
 
 Level of detail similar to an abstract.
 
-\section{Main content}
+\section{CODoH Design}
 \label{sec:main}
+
+\subsection{Design Goals}
+\label{sec:designgoals}
+
+CODoH 
 
 \section{Another topic in the main content}
 \label{sec:anohter-topic}
@@ -144,7 +157,7 @@ Level of detail similar to an abstract.
 
 Large Language Models (LLMs), specifically Gemini and ChatGPT models, have been used in the creation of this report for the following purposes:
 
-A. Research and understanding concepts, using prompts of the type: "How does [...] work?", "Explain [...]", "What solutions similar to [...] have been used to solve [...] problem?"
+A. Research and understanding concepts, using prompts of the type: "How does [...] work?", "Explain [...]", "What solutions similar to [...] have been used to solve [...] problem?", "What is [...]?", "What problem does [...] solve?"
 
 B. Generation of diagrams. All prompts were of the type: "Generate a mermaid diagram illustrating [...]"
 
