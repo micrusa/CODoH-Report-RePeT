@@ -144,7 +144,7 @@ Level of detail similar to an abstract.
 \subsection{Design Goals}
 \label{sec:designgoals}
 
-ODoH separates the knowledge between two parties: the proxy, aware of the user's IP address, and the target, with access to the unencrypted DNS query  \citep{singanamalla2020oblivious}. However, effective conventional DoH proxy caching requires the proxy to be able to identify repeated requests \citep{rfc8484}, which is not possible with CODoH's encryption. CODoH's fundamental goal therefore to implement a cache at the proxy while preserving ODoH's privacy enhancements \citep{niroula2026codoh}, in order to achieve \textit{performance requirements} and \textit{cache-specific security goals}.
+ODoH separates the knowledge between two parties: the proxy, aware of the user's IP address, and the target, with access to the unencrypted DNS query  \citep{singanamalla2020oblivious}. However, effective conventional DoH proxy caching requires the proxy to be able to identify repeated requests \citep{rfc8484}, which is not possible with CODoH's encryption. CODoH's fundamental goal therefore is to implement a cache at the proxy while preserving ODoH's privacy enhancements \citep{niroula2026codoh}, in order to achieve \textit{performance requirements} and \textit{cache-specific security goals}.
 
 \textbf{Performance requirements.} CODoH should reduce latency for cache hits relative to ODoH baseline; for cache misses, latency should not significantly differ relative to ODoH baseline. \citep{niroula2026codoh}
 
