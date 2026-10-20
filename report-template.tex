@@ -35,7 +35,7 @@
 \maketitle
 
 \begin{abstract}
-  \lipsum[1]
+  TODO %TODO
 \end{abstract}
 
 \section{Introduction}
@@ -92,7 +92,7 @@ Traditionally, DNS messages have been transported without encryption, usually en
 
 \citet{rfc8484} solved the lack of encryption by transporting DNS over HTTPS, using Transport Layer Security (TLS) for encryption, integrity and confidentiality. This is done by encapsulating DNS messages in HTTP requests under HTTPS URIs, using either POST or GET methods. DoH prevents network observers and/or attackers from reading the DNS queries, partly protecting users' privacy. However, it still has a key limitation: the resolver has access to the unencrypted DNS message and can associate it with the client's IP address.
 
-To solve this problem, \citet{singanamalla2020oblivious} introduced \textit{Oblivious DNS over HTTPS (ODoH)}, which introduces a proxy between the client and the resolver. The client encrypts the DNS message for the resolver, so the proxy does not have access to the contents of the query, and forwards the encrypted DNS message, as illustrated in Figure~\ref{fig-odoh}. Assuming the proxy and the resolver do not collude, the client's IP address is unknown for the resolver, and the queried domain name is unknown for the proxy, so the users' privacy remains protected. However, this introduces a new problem: encryption makes two equal DNS queries different to the proxy, so conventional caching becomes impossible.
+To solve this problem, \citet{singanamalla2020oblivious} introduced \textit{Oblivious DNS over HTTPS (ODoH)}, which introduces a proxy between the client and the resolver. The client encrypts the DNS message for the resolver, so the proxy does not have access to the contents of the query, and forwards the encrypted DNS message, as illustrated in Figure~\ref{fig-odoh}. Assuming the proxy and the resolver do not collude, the client's IP address is unknown for the resolver, and the queried domain name is unknown for the proxy, so the users' privacy remains protected. However, this introduces a new problem: encryption makes two equal DNS queries different to the proxy, so conventional caching becomes impossible \citep{niroula2026codoh}.
 
 \begin{figure}[H]
 	\centering
@@ -144,7 +144,42 @@ Level of detail similar to an abstract.
 \subsection{Design Goals}
 \label{sec:designgoals}
 
-CODoH 
+ODoH separates the knowledge between two parties: the proxy, aware of the user's IP address, and the target, with access to the unencrypted DNS query  \citep{singanamalla2020oblivious}. However, effective conventional DoH proxy caching requires the proxy to be able to identify repeated requests \citep{rfc8484}, which is not possible with CODoH's encryption. CODoH's fundamental goal therefore to implement a cache at the proxy while preserving ODoH's privacy enhancements \citep{niroula2026codoh}, in order to achieve \textit{performance requirements} and \textit{cache-specific security goals}.
+
+\textbf{Performance requirements.} CODoH should reduce latency for cache hits relative to ODoH baseline; for cache misses, latency should not significantly differ relative to ODoH baseline. \citep{niroula2026codoh}
+
+\textbf{Cache-specific attack vectors.} Caching introduces new attack vectors \citep{niroula2026codoh}. For example, in a \textit{set-difference (bracketing) attack}, a malicious proxy may:
+
+(1) Learn the current cache state.
+
+(2) Allow a victim query to proceed, queueing other traffic.
+
+(3) Learn the cache state again.
+
+(4) Compute the difference to isolate the newly added entry, potentially identifying the victim's query.
+
+\textbf{Cache-specific security goals.} Given the new attack vectors,  CODoH aims to achieve the security goals below:
+
+(G1) \textit{Authorized and fresh cached answer}. A proxy must not be able to cause clients to accept answers not authorized by the target, or answers with an expired TTL.
+
+(G2) \textit{Cache-state indistinguishability}. The proxy must not be able to learn meaningful information about particular queries by comparing cache states across time, like in the previous example of a set-difference attack.
+
+(G3) \textit{Query equality and profiling resistance}. The proxy must not be able to determine whether two DNS queries are equal by comparing them.
+
+\subsection{Design Overview}
+\label{sec:architecture}
+
+\subsection{CODoH's Limitations}
+\label{sec:limitations}
+
+\subsection{Performance}
+\label{sec:performance}
+
+
+
+\subsection{Security \& Privacy}
+\label{sec:security}
+
 
 \section{Another topic in the main content}
 \label{sec:anohter-topic}
