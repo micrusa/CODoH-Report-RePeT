@@ -1,0 +1,42 @@
+flowchart LR
+    C["<b>Client</b>"]
+
+    subgraph PROXY["<b>Proxy</b>"]
+        Q["Query Forwarding"]
+        E["<b>SGX Enclave</b><br/>CODoH Cache"]
+        R["Response Forwarding"]
+    end
+
+    T["<b>Target</b>"]
+
+    C -->|"Encrypted Queries<br/>for Enclave & Target"| Q
+
+    Q -->|"Encrypted Query<br/>for Enclave"| E
+    Q -->|"Encrypted Query<br/>for Target"| T
+
+    E -->|"Encrypted Cache<br/>Response / Miss"| R
+    T -->|"Encrypted<br/>Target Response"| R
+
+    R -->|"Encrypted<br/>Enclave Response"| C
+    R -->|"Encrypted<br/>Target Response"| C
+
+    T -.->|"Encrypted & Signed<br/>Cache-Insert Bundle"| R
+    R -.->|"Batched<br/>Cache Insert"| E
+
+    classDef client fill:#ffffff,stroke:#64748b,color:#111111
+    classDef proxy fill:#ffffff,stroke:#64748b,color:#111111
+    classDef enclave fill:#eff6ff,stroke:#2563eb,color:#111111
+    classDef target fill:#ffffff,stroke:#64748b,color:#111111
+
+    class C client
+    class Q,R proxy
+    class E enclave
+    class T target
+
+    style PROXY fill:#FFF4EE,stroke:#D87545,stroke-width:2px
+
+    linkStyle 0,1,2 stroke:#2563eb,stroke-width:2px
+    linkStyle 3,5 stroke:#16a34a,stroke-width:2px
+    linkStyle 4,6 stroke:#ca8a04,stroke-width:2px
+    linkStyle 7,8 stroke:#15803d,stroke-width:2px,stroke-dasharray:5 5
+

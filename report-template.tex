@@ -169,16 +169,36 @@ ODoH separates the knowledge between two parties: the proxy, aware of the user's
 \subsection{Design Overview}
 \label{sec:architecture}
 
+CODoH \citep{niroula2026codoh} aims to achieve its goals by following an architecture, illustrated in Figure~\ref{fig-sgx-secure}, with three independent parties: the \textit{client}, the \textit{proxy}, which contains the \textit{enclave}, and the \textit{DNS resolver}
+
+\textbf{The client} is expected to have access to the HPKE public keys of the enclave and the target. Using these, it encrypts the query for both the enclave (CODoH query) and the target (ODoH query), and sends both encrypted queries to the proxy. Finally, it receives both encrypted DNS responses from the proxy, and decrypts them.
+
+\textbf{The proxy} forwards both encrypted messages to the enclave and the target. In addition, it forwards encrypted responses from the enclave and the target, whose contents are encrypted, so whether it is a cache hit or miss is unknown to the proxy, and the client always needs to receive both responses.
+
+\textbf{The enclave} contains the cache table, accessed using Path ORAM to avoid access patterns leaking information. Cache gets filled with signed and encrypted response batches received from the target, which include a trusted timestamp that ensures safe cache expiration and replay protection.
+
+\textbf{The target} decrypts the DNS query and answers with an encrypted response whose private key is only known by the client. It has no way to identify the client, so privacy is preserved.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width= 1\textwidth]{figures/codoh-arch}
+	\caption[Simplified CODoH Architecture]{
+		Simplified CODoH Architecture, adapted from \citet{niroula2026codoh}. The proxy forwards independently encrypted queries to the SGX enclave and target. The enclave provides privacy-preserving cache. Target provides signed and encrypted cache insert bundles with a trusted timestamp. Solid arrows represent queries and responses, while dashed arrows represent cache inserts. Blue arrows represent queries, red arrows represent cached responses and cache inserts, and yellow arrows represent target responses.
+	}
+	\label{fig-sgx-secure}
+\end{figure}
+
+\subsection{Security \& Privacy}
+\label{sec:security}
+
+
+
 \subsection{CODoH's Limitations}
 \label{sec:limitations}
 
 \subsection{Performance}
 \label{sec:performance}
 
-
-
-\subsection{Security \& Privacy}
-\label{sec:security}
 
 
 \section{Another topic in the main content}
