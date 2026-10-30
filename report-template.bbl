@@ -5,6 +5,12 @@ Atkins, D. and Austein, R. (2004).
 \newblock {Threat Analysis of the Domain Name System (DNS)}.
 \newblock RFC 3833.
 
+\bibitem[Belamaric and Liu, 2019]{belamaric2019learning}
+Belamaric, J. and Liu, C. (2019).
+\newblock {\em Learning CoreDNS: configuring DNS for cloud native
+  environments}.
+\newblock O'Reilly Media.
+
 \bibitem[Costan and Devadas, 2016]{cryptoeprint:2016/086}
 Costan, V. and Devadas, S. (2016).
 \newblock Intel {SGX} explained.

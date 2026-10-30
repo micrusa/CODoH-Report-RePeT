@@ -26,8 +26,8 @@
 \newtheorem{theorem}{Theorem}
 
 % TODO
-\author{A. Student (\textit{remember to remove ID for the first draft and peer review!})}
-\title{The title (\textit{which should really have more than two words, but should not be longer than two lines})}
+\author{A. Student}
+\title{Performance and Privacy Mechanisms in CODoH: Cacheable Oblivious DNS over HTTPS}
 \date{\today}
 
 \begin{document}
@@ -35,7 +35,7 @@
 \maketitle
 
 \begin{abstract}
-  TODO %TODO
+  Oblivious DNS over HTTPS (ODoH) improves DNS privacy by separating users' identities from their queries. However, this prevents intermediary proxies from caching responses, increasing DNS resolution latency. Cacheable Oblivious DNS over HTTPS (CODoH) addresses this limitation by introducing privacy-preserving caching. In this report, we examine CODoH's design and the security mechanisms used to prevent attackers from inferring sensitive information through cache behavior. We also analyze the performance results reported by its authors, which show substantial latency reductions for repeated queries while maintaining similar performance for uncached queries. These improvements come at the cost of additional network traffic and processing overhead.
 \end{abstract}
 
 \section{Introduction}
@@ -45,8 +45,8 @@ The Domain Name System (DNS) is a fundamental component of the Internet, respons
 Oblivious DNS over HTTPS (ODoH) addresses this issue by introducing an intermediary proxy that separates the client's identity from the query contents, forwarding encrypted requests to the target DNS server, which ensures that neither the proxy or the DNS server possess both the user's identity and the query contents \citep{singanamalla2020oblivious,rfc9230}. Although this approach guarantees the privacy of the client's request end to end, it also prevents intermediary proxies from caching requests, since the query contents only get decrypted at the target resolver.
 
 To overcome this issue, \citet{niroula2026codoh} developed Cacheable Oblivious DNS over HTTPS (CODoH) protocol. Rather than simply decrypting and caching DNS queries, CODoH combines trusted execution environments with techniques to prevent cache access patterns from revealing information. Its objective is to preserve the privacy properties of ODoH while partly recovering the performance benefits of DNS caching. However, these mechanisms also introduce overhead, raising questions about the performance of CODoH.
-% TODO
-This report examines the architecture and privacy-enhancing mechanisms of CODoH.
+
+This report examines and discusses the privacy-enhanced mechanisms suggested by CODoH as well as its effects on performance.
 
 
 
@@ -167,9 +167,9 @@ ODoH separates the knowledge between two parties: the proxy, aware of the user's
 (G3) \textit{Query equality and profiling resistance}. The proxy must not be able to determine whether two DNS queries are equal by comparing them.
 
 \subsection{Design Overview}
-\label{sec:architecture}
+\label{sec:designoverview}
 
-CODoH \citep{niroula2026codoh} aims to achieve its goals by following an architecture, illustrated in Figure~\ref{fig-sgx-secure}, with three independent parties: the \textit{client}, the \textit{proxy}, which contains the \textit{enclave}, and the \textit{DNS resolver}
+CODoH \citep{niroula2026codoh} aims to achieve its goals by following an architecture, illustrated in Figure~\ref{fig-codoh-arch}, with three independent parties: the \textit{client}, the \textit{proxy}, which contains the \textit{enclave}, and the \textit{DNS resolver}
 
 \textbf{The client} is expected to have access to the HPKE public keys of the enclave and the target. Using these, it encrypts the query for both the enclave (CODoH query) and the target (ODoH query), and sends both encrypted queries to the proxy. Finally, it receives both encrypted DNS responses from the proxy, and decrypts them.
 
@@ -185,24 +185,74 @@ CODoH \citep{niroula2026codoh} aims to achieve its goals by following an archite
 	\caption[Simplified CODoH Architecture]{
 		Simplified CODoH Architecture, adapted from \citet{niroula2026codoh}. The proxy forwards independently encrypted queries to the SGX enclave and target. The enclave provides privacy-preserving cache. Target provides signed and encrypted cache insert bundles with a trusted timestamp. Solid arrows represent queries and responses, while dashed arrows represent cache inserts. Blue arrows represent queries, red arrows represent cached responses and cache inserts, and yellow arrows represent target responses.
 	}
-	\label{fig-sgx-secure}
+	\label{fig-codoh-arch}
 \end{figure}
 
-\subsection{Security \& Privacy}
+\subsection{Security}
 \label{sec:security}
 
+As explained in Section~\ref{sec:designgoals}, caching introduces new attack vectors that may reveal or allow to infer sensitive information. This subsection examines the design decisions taken on CODoH \citep{niroula2026codoh} to protect from these.
 
+\subsubsection{Cache State}
+Sending encrypted requests to both the proxy and the target even on cache hits may look redundant. However, it is essential to prevent the proxy from being aware of whether a query was already cached, which, could reveal information to a malicious proxy. For example, the proxy may populate an empty cache with certain domains, and not let any new responses be inserted into the cache. In such case, any cache hit from a victim would certainly be a query to these domains.
 
-\subsection{CODoH's Limitations}
-\label{sec:limitations}
+\citet{niroula2026codoh} addressed this issue in CODoH by sending both encrypted requests to the enclave and the target in every request, even if it is a cache hit. In addition, to prevent cache hits from being distinguished from cache misses, the target resolver's response is always sent to the client, and cache messages contain padding. Padding prevents, for example, a cache miss being identified due to a smaller size.
 
-\subsection{Performance}
-\label{sec:performance}
+\subsubsection{Set-Difference Attacks}
+An attacker controlling the proxy may compare the states before and after a victim's query to detect what domains were queried. In order to mitigate it, the target resolver generates \textit{cover responses} and inserts them in the cache with real responses. However, if these are generated uniformly from a list of popular domains, an attacker could easily detect rare domains. Therefore, a realistic distribution from a realistic list of domains is necessary \citep{niroula2026codoh}.
 
+Even then, each query produces only small updates, so the probability of the attacker simply guessing the victim's queried domain is high, unless a very large number of cover responses are introduced into the cache per response, which would create a large DNS resolution, bandwidth and cache maintenance overhead. Therefore, CODoH introduces \textit{batching} \citep{niroula2026codoh}, so, instead of caching every independent response, the resolver waits for a number of responses, before inserting them into the cache, reducing the overhead required for the same protection. This comes with the limitation of potentially increased cache misses, especially with larger batches and lower variability of domain names.
 
+\subsubsection{Replay Attacks}
+Since SGX enclaves do not provide a trusted clock, enclave cache in CODoH determines whether a cache entry's TTL has expired by having the resolver include a timestamp with every cache insert. In order to prevent against unauthorized inserts, this timestamp is signed with every insert \citep{niroula2026codoh}. However, even with a signed timestamp, a malicious proxy could re-insert an old insertion batch and roll-back in time, causing potentially incorrect answers to be served. Therefore, in CODoH, enclave cache rejects cache insertions older than the last previous insertion, with a configurable tolerance to prevent benign network delays from blocking insertions \citep{niroula2026codoh}.
 
-\section{Another topic in the main content}
-\label{sec:anohter-topic}
+\subsubsection{Controlled Cache State}
+
+A malicious proxy may try to control the cache state to facilitate set-difference attacks.
+
+\textbf{Enclave Restarts}. For example, the proxy could restart the enclave to have an initial empty state, and then comparing it with the next state would be much simpler. CODoH \citep{niroula2026codoh} enables accountability by generating new key pairs on each restart, facilitating detection. However, since that alone does not prevent the attacks, the enclave has a \textit{defensive mode} that returns cache misses for every request, removing the ability to check the cache state. The enclave starts in defensive mode as a warm-up on every restart, not serving cache hits until certain configurable threshold has been reached.
+
+\textbf{Cache Omission}. With the same purpose, the proxy may also skip certain resolver responses from being inserted into the cache. For example, it may check for a domain in the cache after every request to check whether that client queried the domain. In such case, the proxy would want to prevent the cache to be populated from that response, as otherwise future clients could not be distinguished from the probe query's cached entry.
+
+This attack gets mitigated in CODoH \citep{niroula2026codoh} by having the enclave track what queries it has not received a matching resolver cache insert for. When the count of queries without matching cache insert reaches a threshold, the enclave enters the same defensive mode introduced previously, disabling cache hits temporarily.
+
+\subsubsection{Memory Access Patterns}
+
+Intel SGX encrypts memory \citep{cryptoeprint:2016/086}. However, if the proxy runs on an untrusted machine, where some attacker can see what memory addresses are accessed by the enclave, it could infer whether two clients are querying the same domain checking if memory access patterns match, or simulate its own queries and compare their memory access patterns with a client's query ones, potentially fingerprinting cache entries and revealing the queried domains.
+
+CODoH \citep{niroula2026codoh} addresses this by using ORAM, which makes memory access patterns indistinguishable. Two consecutive lookups to the same cache entry will not share memory access patterns, and therefore malicious actors can not infer what domain a user enters. In addition, the enclave performs a fixed number of ORAM operations per lookup or insert, reducing timing variation that could also reveal information from patterns in time to access entries.
+
+\section{Performance}
+
+\citet{niroula2026codoh} evaluated CODoH's performance on an implementation as a set of plugins for CoreDNS, a DNS server written in Go \citep{belamaric2019learning} that facilitates controlled comparisons by using a plugin for each protocol variant (DoH, ODoH and CODoH). This section examines the methodology and results of performance aspects from \citet{niroula2026codoh}'s CODoH evaluation.
+
+\subsection{End-to-End Benchmarks}
+
+\subsubsection{Methodology}
+
+\textbf{Experimental setup}. \citet{niroula2026codoh} deployed the system across three Azure VMs in separate regions to capture realistic network latencies. The \textit{client} was deployed on a Standard D2alds v6 (2 vCPUs, 4 GiB), the \textit{proxy} on a Standard DC4s v2 (4 vCPUs, 16 GiB,
+112 MiB EPC) with Intel SGX support, and the \textit{target} on a standard D2s v3 (2 vCPUs, 8 GiB), using Ubuntu 24.04 LTS, Go 1.25 and EGo 1.8.1
+
+The target VM's CoreDNS instance uses a local Unbound recursive resolver in the same VM \citep{niroula2026codoh}, mitigating potential latency that could appear if it were external. Caching is enabled in its default setting, but flushed between workloads to ensure independent measurements \citep{niroula2026codoh}. However, the usage of a recursive resolver that queries external servers implies that the normal variation of network conditions may cause variability in the results unrelated to the configuration, especially in workloads with less cache hits at the resolver level.
+
+\textbf{Configurations}. \citet{niroula2026codoh} used five configurations for the experiments: C1 (traditional DNS over HTTPS), C2 (Oblivious DNS over HTTPS), C3 (Cached ODoH on SGX without CODoH's defense mechanisms from Section~\ref{sec:security}), C4 (CODoH, running in normal userspace instead of an Intel SGX enclave) and C5 (Full CODoH)
+
+\textbf{Workloads} \citet{niroula2026codoh} used three different workloads: \textit{Cold}, with 10,000 unique domains queried, so every query is a cache miss; \textit{Zipf}, with 10,000 queries drawn from an Zipf distribution over 1,000 domains, trying to simulate real traffic; And \textit{warm}, with 10,000 queries for a single domain, so almost every query is a cache hit.
+
+These workloads were used aiming to understand whether CODoH has fulfilled its latency goals, examined on Section~\ref{sec:designgoals}, with Cold aiming to show its impact on cache misses latency, zipf on real traffic, and warm on cache hits. 
+
+\subsubsection{End-to-end latency}
+
+In \citep{niroula2026codoh}'s experiments, CODoH substantially improved ODoH's latency for both zipf (48.59ms/22.34ms) and warm (47.97ms/17.96ms) workloads, as illustrated in Figure~\ref{fig-odoh-latency}. Cold workload shows a small difference (108.49ms/97.20ms) that may be caused by the variability in upstream DNS resolution latency.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width= 0.8\textwidth]{figures/codoh-latency}
+	\caption[CODoH Latency]{
+		CODoH Median Latency (ms) comparison between ODoH Baseline and Full CODoH. Adapted from Table 3 \citep{niroula2026codoh}
+	}
+	\label{fig-odoh-latency}
+\end{figure}
 
 
 \section{Conclusion}
