@@ -26,7 +26,7 @@
 \newtheorem{theorem}{Theorem}
 
 % TODO
-\author{A. Student}
+\author{M. Cruces Sánchez}
 \title{Performance and Privacy Mechanisms in CODoH: Cacheable Oblivious DNS over HTTPS}
 \date{\today}
 
@@ -46,9 +46,7 @@ Oblivious DNS over HTTPS (ODoH) addresses this issue by introducing an intermedi
 
 To overcome this issue, \citet{niroula2026codoh} developed Cacheable Oblivious DNS over HTTPS (CODoH) protocol. Rather than simply decrypting and caching DNS queries, CODoH combines trusted execution environments with techniques to prevent cache access patterns from revealing information. Its objective is to preserve the privacy properties of ODoH while partly recovering the performance benefits of DNS caching. However, these mechanisms also introduce overhead, raising questions about the performance of CODoH.
 
-This report examines and discusses the privacy-enhanced mechanisms suggested by CODoH as well as its effects on performance.
-
-
+This report discusses the design of CODoH, focusing on its privacy-enhancing mechanisms, how they protect clients' privacy, and their performance trade-offs, as well as the performance improvements achieved by the protocol.
 
 \section{Background}
 \label{sec:background}
@@ -188,7 +186,7 @@ CODoH \citep{niroula2026codoh} aims to achieve its goals by following an archite
 	\label{fig-codoh-arch}
 \end{figure}
 
-\subsection{Security}
+\subsection{Privacy Protection}
 \label{sec:security}
 
 As explained in Section~\ref{sec:designgoals}, caching introduces new attack vectors that may reveal or allow to infer sensitive information. This subsection examines the design decisions taken on CODoH \citep{niroula2026codoh} to protect from these.
@@ -202,6 +200,17 @@ Sending encrypted requests to both the proxy and the target even on cache hits m
 An attacker controlling the proxy may compare the states before and after a victim's query to detect what domains were queried. In order to mitigate it, the target resolver generates \textit{cover responses} and inserts them in the cache with real responses. However, if these are generated uniformly from a list of popular domains, an attacker could easily detect rare domains. Therefore, a realistic distribution from a realistic list of domains is necessary \citep{niroula2026codoh}.
 
 Even then, each query produces only small updates, so the probability of the attacker simply guessing the victim's queried domain is high, unless a very large number of cover responses are introduced into the cache per response, which would create a large DNS resolution, bandwidth and cache maintenance overhead. Therefore, CODoH introduces \textit{batching} \citep{niroula2026codoh}, so, instead of caching every independent response, the resolver waits for a number of responses, before inserting them into the cache, reducing the overhead required for the same protection. This comes with the limitation of potentially increased cache misses, especially with larger batches and lower variability of domain names.
+
+High batch sizes are especially important for privacy because websites usually request information from many different domains, so an attacker may create \textit{fingerprints} of websites, and use cache state to rank a victim's possible candidates from their DNS queries. \citet{niroula2026codoh} measured this by simulating normal DNS traffic and an attacker with access to the cache states, while reproducing CODoH's cache mechanisms. As illustrated in Figure~\ref{fig-batch-size-privacy}, Top-1 accuracy drops significantly at batch sizes over 20, while reducing Top-5 accuracy requires higher batch sizes. Therefore, the authors suggested three batch sizes depending on the desired privacy level: Permissive (\(B\geq20\)), Moderate (\(B\geq50\)) and Strict (\(B\geq20\))
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width= 0.8\textwidth]{figures/batch_privacy.png}
+	\caption[Effect of batch size on website identification accuracy]{
+		Effect of batch size on website identification accuracy. Adapted from Table 13 \citep{niroula2026codoh} %TODO: Put src code
+	}
+	\label{fig-batch-size-privacy}
+\end{figure}
 
 \subsubsection{Replay Attacks}
 Since SGX enclaves do not provide a trusted clock, enclave cache in CODoH determines whether a cache entry's TTL has expired by having the resolver include a timestamp with every cache insert. In order to prevent against unauthorized inserts, this timestamp is signed with every insert \citep{niroula2026codoh}. However, even with a signed timestamp, a malicious proxy could re-insert an old insertion batch and roll-back in time, causing potentially incorrect answers to be served. Therefore, in CODoH, enclave cache rejects cache insertions older than the last previous insertion, with a configurable tolerance to prevent benign network delays from blocking insertions \citep{niroula2026codoh}.
@@ -218,7 +227,7 @@ This attack gets mitigated in CODoH \citep{niroula2026codoh} by having the encla
 
 \subsubsection{Memory Access Patterns}
 
-Intel SGX encrypts memory \citep{cryptoeprint:2016/086}. However, if the proxy runs on an untrusted machine, where some attacker can see what memory addresses are accessed by the enclave, it could infer whether two clients are querying the same domain checking if memory access patterns match, or simulate its own queries and compare their memory access patterns with a client's query ones, potentially fingerprinting cache entries and revealing the queried domains.
+Intel SGX encrypts memory \citep{cryptoeprint:2016/086}. However, if the proxy runs on an untrusted machine, where some attacker can see what memory addresses are accessed by the enclave, it could infer whether two clients are querying the same domain by checking if memory access patterns match, or simulate its own queries and compare their memory access patterns with a client's query ones, potentially fingerprinting cache entries and revealing the queried domains.
 
 CODoH \citep{niroula2026codoh} addresses this by using ORAM, which makes memory access patterns indistinguishable. Two consecutive lookups to the same cache entry will not share memory access patterns, and therefore malicious actors can not infer what domain a user enters. In addition, the enclave performs a fixed number of ORAM operations per lookup or insert, reducing timing variation that could also reveal information from patterns in time to access entries.
 
@@ -241,19 +250,32 @@ The target VM's CoreDNS instance uses a local Unbound recursive resolver in the 
 
 These workloads were used aiming to understand whether CODoH has fulfilled its latency goals, examined on Section~\ref{sec:designgoals}, with Cold aiming to show its impact on cache misses latency, zipf on real traffic, and warm on cache hits. 
 
-\subsubsection{End-to-end latency}
+\subsubsection{Latency improvements}
 
-In \citep{niroula2026codoh}'s experiments, CODoH substantially improved ODoH's latency for both zipf (48.59ms/22.34ms) and warm (47.97ms/17.96ms) workloads, as illustrated in Figure~\ref{fig-odoh-latency}. Cold workload shows a small difference (108.49ms/97.20ms) that may be caused by the variability in upstream DNS resolution latency.
+In \citet{niroula2026codoh}'s experiments, CODoH substantially improved ODoH's latency for both zipf (48.59ms/22.34ms) and warm (47.97ms/17.96ms) workloads, as illustrated in Figure~\ref{fig-odoh-latency}. Cold workload shows a small difference (108.49ms/97.20ms) that may be caused by the variability in upstream DNS resolution latency.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width= 0.8\textwidth]{figures/codoh-latency}
 	\caption[CODoH Latency]{
-		CODoH Median Latency (ms) comparison between ODoH Baseline and Full CODoH. Adapted from Table 3 \citep{niroula2026codoh}
+		CODoH Median Latency (ms) comparison between ODoH Baseline and Full CODoH. Adapted from Table 3 \citep{niroula2026codoh} %TODO: Put src code
 	}
 	\label{fig-odoh-latency}
 \end{figure}
 
+\subsubsection{Limitations of the end-to-end benchmarks}
+
+An important limitation of the end-to-end evaluations is that a batch size of 10 was used. However, the privacy analysis performed by \citet{niroula2026codoh} recommends a minimum batch size of $B=50$ for short-lived sessions, and up to $B=256$ to protect against long-term correlation attacks.
+
+This is relevant because batching introduces a trade-off between performance and privacy: it delays cache insertion, potentially reducing cache hits and increasing cache misses, and it protects against set-difference attacks by mixing queries from more clients.
+
+Therefore, the results from Figure~\ref{fig-odoh-latency} could differ when using a higher batch size which provides a better protection of users' privacy, especially in the Zipf workload, which is the most sensible to cache hit/misses changes due to their variability in the queried domain names.
+
+\subsection{Overhead of Intel SGX and ORAM}
+
+TEEs (such as Intel SGX) and ORAM introduce an overhead in CODoH, which was measured in \citet{niroula2026codoh}'s experiments. This subsection examines them.
+
+\subsubsection{SGX Overhead}
 
 \section{Conclusion}
 \label{sec:conclusion}

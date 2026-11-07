@@ -17,13 +17,13 @@
 \citation{rfc1034}
 \citation{rfc1034}
 \citation{rfc3833}
-\citation{rfc8484}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces DNS resolution process}}{2}{}\protected@file@percent }
 \newlabel{fig-resolution-process}{{1}{2}{}{}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces DNS caching}}{2}{}\protected@file@percent }
 \newlabel{fig-caching}{{2}{2}{}{}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2}DNS Privacy: DoH \& ODoH}{2}{}\protected@file@percent }
 \newlabel{sec:dnsprivacy}{{2.2}{2}{}{}{}}
+\citation{rfc8484}
 \citation{singanamalla2020oblivious}
 \citation{niroula2026codoh}
 \citation{7345265}
@@ -60,16 +60,23 @@
 \citation{niroula2026codoh}
 \citation{niroula2026codoh}
 \citation{niroula2026codoh}
-\citation{niroula2026codoh}
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Simplified CODoH Architecture}}{5}{}\protected@file@percent }
 \newlabel{fig-codoh-arch}{{5}{5}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Security}{5}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Privacy Protection}{5}{}\protected@file@percent }
 \newlabel{sec:security}{{3.3}{5}{}{}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.1}Cache State}{5}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.2}Set-Difference Attacks}{5}{}\protected@file@percent }
 \citation{niroula2026codoh}
 \citation{niroula2026codoh}
+\citation{niroula2026codoh}
+\citation{niroula2026codoh}
+\citation{niroula2026codoh}
+\citation{niroula2026codoh}
 \citation{cryptoeprint:2016/086}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Effect of batch size on website identification accuracy}}{6}{}\protected@file@percent }
+\newlabel{fig-batch-size-privacy}{{6}{6}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.3}Replay Attacks}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.4}Controlled Cache State}{6}{}\protected@file@percent }
 \citation{niroula2026codoh}
 \citation{niroula2026codoh}
 \citation{belamaric2019learning}
@@ -77,27 +84,30 @@
 \citation{niroula2026codoh}
 \citation{niroula2026codoh}
 \citation{niroula2026codoh}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.3}Replay Attacks}{6}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.4}Controlled Cache State}{6}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.5}Memory Access Patterns}{6}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4}Performance}{6}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}End-to-End Benchmarks}{6}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.1}Methodology}{6}{}\protected@file@percent }
 \citation{niroula2026codoh}
 \citation{niroula2026codoh}
 \citation{niroula2026codoh}
 \citation{niroula2026codoh}
 \citation{niroula2026codoh}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.2}End-to-end latency}{7}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces CODoH Latency}}{7}{}\protected@file@percent }
-\newlabel{fig-odoh-latency}{{6}{7}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusion}{7}{}\protected@file@percent }
-\newlabel{sec:conclusion}{{5}{7}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Use of generative digital tools}{7}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.5}Memory Access Patterns}{7}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Performance}{7}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}End-to-End Benchmarks}{7}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.1}Methodology}{7}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.2}Latency improvements}{7}{}\protected@file@percent }
+\citation{niroula2026codoh}
+\citation{niroula2026codoh}
 \bibstyle{apalike}
 \bibdata{references}
 \bibcite{rfc3833}{{1}{2004}{{Atkins and Austein}}{{}}}
 \bibcite{belamaric2019learning}{{2}{2019}{{Belamaric and Liu}}{{}}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces CODoH Latency}}{8}{}\protected@file@percent }
+\newlabel{fig-odoh-latency}{{7}{8}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.3}Limitations of the end-to-end benchmarks}{8}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Overhead of Intel SGX and ORAM}{8}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.1}SGX Overhead}{8}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusion}{8}{}\protected@file@percent }
+\newlabel{sec:conclusion}{{5}{8}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Use of generative digital tools}{8}{}\protected@file@percent }
 \bibcite{cryptoeprint:2016/086}{{3}{2016}{{Costan and Devadas}}{{}}}
 \bibcite{oramgoldreich}{{4}{1987}{{Goldreich}}{{}}}
 \bibcite{rfc8484}{{5}{2018}{{Hoffman and McManus}}{{}}}
@@ -110,4 +120,4 @@
 \bibcite{singanamalla2020oblivious}{{12}{2020}{{Singanamalla et~al.}}{{}}}
 \bibcite{pathoram}{{13}{2012}{{Stefanov and Shi}}{{}}}
 \bibcite{rfc9076}{{14}{2021}{{Wicinski}}{{}}}
-\gdef \@abspage@last{8}
+\gdef \@abspage@last{10}
