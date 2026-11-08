@@ -238,6 +238,7 @@ CODoH \citep{niroula2026codoh} addresses this by using ORAM, which makes memory 
 \subsection{End-to-End Benchmarks}
 
 \subsubsection{Methodology}
+\label{sec:e2emeth}
 
 \textbf{Experimental setup}. \citet{niroula2026codoh} deployed the system across three Azure VMs in separate regions to capture realistic network latencies. The \textit{client} was deployed on a Standard D2alds v6 (2 vCPUs, 4 GiB), the \textit{proxy} on a Standard DC4s v2 (4 vCPUs, 16 GiB,
 112 MiB EPC) with Intel SGX support, and the \textit{target} on a standard D2s v3 (2 vCPUs, 8 GiB), using Ubuntu 24.04 LTS, Go 1.25 and EGo 1.8.1
@@ -276,6 +277,27 @@ Therefore, the results from Figure~\ref{fig-odoh-latency} could differ when usin
 TEEs (such as Intel SGX) and ORAM introduce an overhead in CODoH, which was measured in \citet{niroula2026codoh}'s experiments. This subsection examines them.
 
 \subsubsection{SGX Overhead}
+
+Intel SGX overhead was measured in both end-to-end experiments and cache read latency microbenchmarks.
+
+\textbf{End-to-End Latency}. The end-to-end latency benchmarks in \citet{niroula2026codoh} included two configurations that were identical besides one using SGX (C5) and the other not using it (C4). In these configurations, the impact of Intel SGX was insignificant, with a slightly lower latency median in the SGX configuration (97.2ms with SGX vs 99.85ms without SGX on Cold workload), likely caused by measurement variability, rather than a performance benefit from SGX, which is unlikely.
+
+\textbf{Cache Read Latency}. Even though the end-to-end latency did not significantly differ between SGX and non-SGX configurations, this could easily be explained by the SGX effect being small when compared to all end-to-end latency, as we can see in Figure~\ref{fig-codoh-cache-overhead}. The overhead of Intel SGX stays constant between 256 and 1024 cache entries, and grows for 2048 cache entries. However, even though the overhead is significant when compared to the non-SGX reads, it is extremely small when compared to network latency, making SGX overhead insignificant for CODoH real applications.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{figures/codoh_cache_overhead}
+	\caption[CODoH Cache Access Overhead]{
+		Cache read latency (\textmu s) comparison between LRU, ORAM without SGX, and ORAM with SGX across different cache capacities. Adapted from Table 5 \citep{niroula2026codoh}.
+	}
+	\label{fig-codoh-cache-overhead}
+\end{figure}
+
+\subsubsection{Path ORAM Overhead}
+
+Figure~\ref{fig-codoh-cache-overhead} also illustrates the cost of using ORAM instead of a \textit{Least Recently Used (LRU)} cache. At 1024 entries, the latency increases from 0.12 $\mu$s for LRU to 99 $\mu$s for ORAM without SGX \citep{niroula2026codoh}, a ~825x increase, as a consequence of the extra operations required for the oblivious access mechanisms. However, the Cache Read Latency remains under a millisecond, extremely small when compared to normal network latency variability. Therefore, there is not a big latency trade-off when using ORAM instead of traditional LRU for caching.
+
+In the end-to-end benchmarks, configuration C3 used LRU cache instead of Path ORAM, but did not include the other defenses of CODoH like C5 (Full CODoH) did. Therefore, the experiments did not isolate Path ORAM effects on end-to-end latency.
 
 \section{Conclusion}
 \label{sec:conclusion}
