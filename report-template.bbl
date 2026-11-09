@@ -16,6 +16,13 @@ Costan, V. and Devadas, S. (2016).
 \newblock Intel {SGX} explained.
 \newblock Cryptology {ePrint} Archive, Paper 2016/086.
 
+\bibitem[Cruces~Sánchez, 2026]{cruces2026codohplots}
+Cruces~Sánchez, M. (2026).
+\newblock Chart generation scripts code for performance and privacy mechanisms
+  of {CODoH}.
+\newblock GitHub repository,
+  \url{https://github.com/micrusa/CODoH-Report-RePeT/tree/main/charts}.
+
 \bibitem[Goldreich, 1987]{oramgoldreich}
 Goldreich, O. (1987).
 \newblock Towards a theory of software protection and simulation by oblivious

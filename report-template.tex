@@ -17,6 +17,7 @@
 \usepackage{booktabs}
 
 \usepackage{lipsum}
+\usepackage[hidelinks]{hyperref}
 
 % German
 %\newtheorem{definition}{Definition}
@@ -25,9 +26,8 @@
 \newtheorem{definition}{Definition}
 \newtheorem{theorem}{Theorem}
 
-% TODO
 \author{M. Cruces Sánchez}
-\title{Performance and Privacy Mechanisms in CODoH: Cacheable Oblivious DNS over HTTPS}
+\title{Performance and Privacy Mechanisms of CODoH: Cacheable Oblivious DNS over HTTPS}
 \date{\today}
 
 \begin{document}
@@ -35,7 +35,7 @@
 \maketitle
 
 \begin{abstract}
-  Oblivious DNS over HTTPS (ODoH) improves DNS privacy by separating users' identities from their queries. However, this prevents intermediary proxies from caching responses, increasing DNS resolution latency. Cacheable Oblivious DNS over HTTPS (CODoH) addresses this limitation by introducing privacy-preserving caching. In this report, we examine CODoH's design and the security mechanisms used to prevent attackers from inferring sensitive information through cache behavior. We also analyze the performance results reported by its authors, which show substantial latency reductions for repeated queries while maintaining similar performance for uncached queries. These improvements come at the cost of additional network traffic and processing overhead.
+  Oblivious DNS over HTTPS (ODoH) improves DNS privacy by separating users' identities from their queries. However, this prevents intermediary proxies from caching responses, increasing DNS resolution latency. Cacheable Oblivious DNS over HTTPS (CODoH) addresses this limitation by introducing privacy-preserving caching. In this report, we examine CODoH's design and its privacy-enhancing mechanisms. We also analyze the performance results reported by its authors, which show substantial latency reductions for simulated common workloads while maintaining similar performance for uncached queries, at the cost of additional network traffic and processing overhead. In addition, we analyze the overhead of Intel SGX and Path ORAM in cache-related operations.
 \end{abstract}
 
 \section{Introduction}
@@ -207,7 +207,7 @@ High batch sizes are especially important for privacy because websites usually r
 	\centering
 	\includegraphics[width= 0.8\textwidth]{figures/batch_privacy.png}
 	\caption[Effect of batch size on website identification accuracy]{
-		Effect of batch size on website identification accuracy. Adapted from Table 13 \citep{niroula2026codoh} %TODO: Put src code
+		Effect of batch size on website identification accuracy. Adapted from Table 13 \citep{niroula2026codoh}. Chart source code from \citet{cruces2026codohplots}.
 	}
 	\label{fig-batch-size-privacy}
 \end{figure}
@@ -259,7 +259,7 @@ In \citet{niroula2026codoh}'s experiments, CODoH substantially improved ODoH's l
 	\centering
 	\includegraphics[width= 0.8\textwidth]{figures/codoh-latency}
 	\caption[CODoH Latency]{
-		CODoH Median Latency (ms) comparison between ODoH Baseline and Full CODoH. Adapted from Table 3 \citep{niroula2026codoh} %TODO: Put src code
+		CODoH Median Latency (ms) comparison between ODoH Baseline and Full CODoH. Adapted from Table 3 \citep{niroula2026codoh}. Chart source code from  \citet{cruces2026codohplots}.
 	}
 	\label{fig-odoh-latency}
 \end{figure}
@@ -288,7 +288,7 @@ Intel SGX overhead was measured in both end-to-end experiments and cache read la
 	\centering
 	\includegraphics[width=0.8\textwidth]{figures/codoh_cache_overhead}
 	\caption[CODoH Cache Access Overhead]{
-		Cache read latency (\textmu s) comparison between LRU, ORAM without SGX, and ORAM with SGX across different cache capacities. Adapted from Table 5 \citep{niroula2026codoh}.
+		Cache read latency (\textmu s, logarithmic scale) comparison between LRU, ORAM without SGX, and ORAM with SGX across different cache capacities. Adapted from Table 5 \citep{niroula2026codoh}. Chart source code from \citet{cruces2026codohplots}.
 	}
 	\label{fig-codoh-cache-overhead}
 \end{figure}
@@ -302,13 +302,17 @@ In the end-to-end benchmarks, configuration C3 used LRU cache instead of Path OR
 \section{Conclusion}
 \label{sec:conclusion}
 
+In conclusion, CODoH is a protocol that manages to extend ODoH by including private caching, achieving significantly lower latency in real workload simulations. However, the experiments have significant limitations, such as using batch sizes lower than the ones suggested in \citet{niroula2026codoh}, which could affect the cache hit percentage and the protection against set-difference attacks, or the network variability in upstream DNS resolution and connection between the VMs, which introduce some uncertainty in the end-to-end latency results.
+
+In addition, some of the used privacy mechanisms, such as Path ORAM and Intel SGX were proven to have a significant overhead in cache-related use cases that was measured in the report. However, the overhead is extremely small when compared to normal network latency variability. Therefore, the performance trade-off is small, while privacy greatly benefits from these mechanisms.
+
 \section{Use of generative digital tools}
 
 Large Language Models (LLMs), specifically Gemini and ChatGPT models, have been used in the creation of this report for the following purposes:
 
 A. Research and understanding concepts, using prompts of the type: "How does [...] work?", "Explain [...]", "What solutions similar to [...] have been used to solve [...] problem?", "What is [...]?", "What problem does [...] solve?"
 
-B. Generation of diagrams. All prompts were of the type: "Generate a mermaid diagram illustrating [...]"
+B. Generation of diagrams and charts. All prompts were of the type: "Generate a mermaid diagram illustrating [...]", "Generate code that uses matplotlib/python to generate a chart to display [...] from this table: [...]"
 
 C. Concept checking. Prompts of the type: "Is [...] conceptually correct?", "Is [...] correctly expressed?"
 
