@@ -304,9 +304,9 @@ In the end-to-end benchmarks, configuration C3 used LRU cache instead of Path OR
 \section{Conclusion}
 \label{sec:conclusion}
 
-In conclusion, CODoH is a protocol that manages to extend ODoH by including private caching, achieving significantly lower latency in real workload simulations. However, the experiments have significant limitations, such as using batch sizes lower than the ones suggested in \citet{niroula2026codoh}, which could affect the cache hit percentage and the protection against set-difference attacks, or the network variability in upstream DNS resolution and connection between the VMs, which introduce some uncertainty in the end-to-end latency results.
+In conclusion, CODoH is a protocol that manages to extend ODoH by including private caching, achieving significantly lower latency in real workload simulations. However, we have encountered some limitations in the performed end-to-end latency experiments, such as using batch sizes lower than the ones suggested in \citet{niroula2026codoh}, which could affect the cache hit percentage and the protection against set-difference attacks, or the network variability in upstream DNS resolution and connection between the VMs, which introduce some uncertainty in the end-to-end latency results.
 
-In addition, some of the used privacy mechanisms, such as Path ORAM and Intel SGX were proven to have a significant overhead in cache-related use cases that was measured in the report. However, the overhead is extremely small when compared to normal network latency variability. Therefore, the performance trade-off is small, while privacy greatly benefits from these mechanisms.
+In addition, some of the used privacy mechanisms, such as Path ORAM and Intel SGX, were proven to have a significant overhead in cache-related use cases, measured in \citet{niroula2026codoh}. However, the overhead is extremely small when compared to normal network latency variability. Therefore, the performance trade-off is small, while privacy greatly benefits from these mechanisms.
 
 \section{Use of generative digital tools}
 
