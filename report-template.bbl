@@ -57,6 +57,13 @@ Mockapetris, P. (1987).
 \newblock {Domain names - concepts and facilities}.
 \newblock RFC 1034.
 
+\bibitem[Nakatsuka et~al., 2019]{pdot}
+Nakatsuka, Y., Paverd, A., and Tsudik, G. (2019).
+\newblock Pdot: private dns-over-tls with tee support.
+\newblock In {\em Proceedings of the 35th Annual Computer Security Applications
+  Conference}, ACSAC '19, page 489–499, New York, NY, USA. Association for
+  Computing Machinery.
+
 \bibitem[Niroula et~al., 2026]{niroula2026codoh}
 Niroula, P., Gloudemans, L., Poudel, A., MacDonald, C., and Herwig, S. (2026).
 \newblock Codoh: Privacy-preserving caching for oblivious dns over https.
@@ -66,6 +73,11 @@ Niroula, P., Gloudemans, L., Poudel, A., MacDonald, C., and Herwig, S. (2026).
 Sabt, M., Achemlal, M., and Bouabdallah, A. (2015).
 \newblock Trusted execution environment: What it is, and what it is not.
 \newblock In {\em 2015 IEEE Trustcom/BigDataSE/ISPA}, volume~1, pages 57--64.
+
+\bibitem[Schmitt et~al., 2018]{schmitt2018oblivious}
+Schmitt, P., Edmundson, A., and Feamster, N. (2018).
+\newblock Oblivious dns: Practical privacy for dns queries.
+\newblock {\em arXiv preprint arXiv:1806.00276}.
 
 \bibitem[Singanamalla et~al., 2020]{singanamalla2020oblivious}
 Singanamalla, S., Chunhapanya, S., Vavru{\v{s}}a, M., Verma, T., Wu, P., Fayed,
@@ -83,5 +95,9 @@ Stefanov, E. and Shi, E. (2012).
 Wicinski, T. (2021).
 \newblock {DNS Privacy Considerations}.
 \newblock RFC 9076.
+
+\bibitem[Xiao et~al., 2025]{xiao2025collusionresistantdnsprivate}
+Xiao, Y., Liu, P., Yu, R., Weng, C., Varvello, M., and Kuzmanovic, A. (2025).
+\newblock Collusion resistant dns with private information retrieval.
 
 \end{thebibliography}

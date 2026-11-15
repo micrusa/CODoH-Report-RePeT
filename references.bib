@@ -255,3 +255,38 @@
     year = {2026},
     howpublished = {GitHub repository, \url{https://github.com/micrusa/CODoH-Report-RePeT/tree/main/charts}},
 }
+
+@article{schmitt2018oblivious,
+	title={Oblivious DNS: Practical privacy for DNS queries},
+	author={Schmitt, Paul and Edmundson, Anne and Feamster, Nick},
+	journal={arXiv preprint arXiv:1806.00276},
+	year={2018}
+}
+
+@inproceedings{pdot,
+	author = {Nakatsuka, Yoshimichi and Paverd, Andrew and Tsudik, Gene},
+	title = {PDoT: private DNS-over-TLS with TEE support},
+	year = {2019},
+	isbn = {9781450376280},
+	publisher = {Association for Computing Machinery},
+	address = {New York, NY, USA},
+	url = {https://doi.org/10.1145/3359789.3359793},
+	doi = {10.1145/3359789.3359793},
+	abstract = {Security and privacy of the Internet Domain Name System (DNS) have been longstanding concerns. Recently, there is a trend to protect DNS traffic using Transport Layer Security (TLS). However, at least two major issues remain: (1) how do clients authenticate DNS-over-TLS endpoints in a scalable and extensible manner; and (2) how can clients trust endpoints to behave as expected? In this paper, we propose a novel Private DNS-over-TLS (PDoT) architecture. PDoT includes a DNS Recursive Resolver (RecRes) that operates within a Trusted Execution Environment (TEE). Using Remote Attestation, DNS clients can authenticate, and receive strong assurance of trustworthiness of PDoT RecRes. We provide an open-source proof-of-concept implementation of PDoT and use it to experimentally demonstrate that its latency and throughput match that of the popular Unbound DNS-over-TLS resolver.},
+	booktitle = {Proceedings of the 35th Annual Computer Security Applications Conference},
+	pages = {489–499},
+	numpages = {11},
+	keywords = {domain name system, privacy, trusted execution environment},
+	location = {San Juan, Puerto Rico, USA},
+	series = {ACSAC '19}
+}
+
+@misc{xiao2025collusionresistantdnsprivate,
+	title={Collusion Resistant DNS With Private Information Retrieval}, 
+	author={Yunming Xiao and Peizhi Liu and Ruijie Yu and Chenkai Weng and Matteo Varvello and Aleksandar Kuzmanovic},
+	year={2025},
+	eprint={2507.20806},
+	archivePrefix={arXiv},
+	primaryClass={cs.NI},
+	url={https://arxiv.org/abs/2507.20806}, 
+}

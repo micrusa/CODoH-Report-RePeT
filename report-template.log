@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.25)  9 NOV 2026 17:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.25)  15 NOV 2026 13:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -520,62 +520,64 @@ File: figures/intel-sgx-remote.png Graphic file (type png)
 <use figures/intel-sgx-remote.png>
 Package pdftex.def Info: figures/intel-sgx-remote.png  used on input line 116.
 (pdftex.def)             Requested size: 298.75264pt x 146.23346pt.
- [3 <./figures/oblivious-doh.png> <./figures/intel-sgx-remote.png>] [4]
-<figures/codoh-arch.png, id=214, 3554.27875pt x 566.115pt>
+ [3 <./figures/oblivious-doh.png>] [4 <./figures/intel-sgx-remote.png>]
+<figures/codoh-arch.png, id=221, 3554.27875pt x 566.115pt>
 File: figures/codoh-arch.png Graphic file (type png)
 <use figures/codoh-arch.png>
-Package pdftex.def Info: figures/codoh-arch.png  used on input line 182.
+Package pdftex.def Info: figures/codoh-arch.png  used on input line 184.
 (pdftex.def)             Requested size: 426.79135pt x 67.97406pt.
  [5 <./figures/codoh-arch.png>]
-<figures/batch_privacy.png, id=236, 570.933pt x 317.988pt>
+<figures/batch_privacy.png, id=245, 570.933pt x 317.988pt>
 File: figures/batch_privacy.png Graphic file (type png)
 <use figures/batch_privacy.png>
-Package pdftex.def Info: figures/batch_privacy.png  used on input line 208.
+Package pdftex.def Info: figures/batch_privacy.png  used on input line 210.
 (pdftex.def)             Requested size: 341.43437pt x 190.17319pt.
  [6 <./figures/batch_privacy.png>]
-Overfull \hbox (3.58485pt too wide) in paragraph at lines 236--237
+Overfull \hbox (3.58485pt too wide) in paragraph at lines 238--239
 []\T1/ptm/m/n/10 Niroula et al.[] ([]2026[]) eval-u-ated CODoH's per-for-mance 
 on an im-ple-men-ta-tion as a set of plu-g-ins for CoreDNS,
  []
 
-<figures/codoh-latency.png, id=288, 643.203pt x 353.1594pt>
+[7]
+<figures/codoh-latency.png, id=304, 643.203pt x 353.1594pt>
 File: figures/codoh-latency.png Graphic file (type png)
 <use figures/codoh-latency.png>
-Package pdftex.def Info: figures/codoh-latency.png  used on input line 260.
+Package pdftex.def Info: figures/codoh-latency.png  used on input line 262.
 (pdftex.def)             Requested size: 341.43437pt x 187.46996pt.
-[7]
-<figures/codoh_cache_overhead.png, id=314, 642.2394pt x 353.1594pt>
+ [8 <./figures/codoh-latency.png>]
+<figures/codoh_cache_overhead.png, id=328, 642.2394pt x 353.1594pt>
 File: figures/codoh_cache_overhead.png Graphic file (type png)
 <use figures/codoh_cache_overhead.png>
 Package pdftex.def Info: figures/codoh_cache_overhead.png  used on input line 2
-89.
+91.
 (pdftex.def)             Requested size: 341.43437pt x 187.75555pt.
 LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 2
-92.
- (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd
+94.
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
-) [8 <./figures/codoh-latency.png>] [9 <./figures/codoh_cache_overhead.png>]
-(./report-template.bbl
+) [9 <./figures/codoh_cache_overhead.png>] (./report-template.bbl
 LaTeX Font Info:    Trying to load font information for T1+pcr on input line 24
 .
- (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
-))
+) [10])
 
 pdfTeX warning: /usr/bin/pdflatex (file ./wissensch_Redlichkeit_E_09-2023.pdf):
  PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-<wissensch_Redlichkeit_E_09-2023.pdf, id=341, 597.55246pt x 845.07718pt>
+<wissensch_Redlichkeit_E_09-2023.pdf, id=357, 597.55246pt x 845.07718pt>
 File: wissensch_Redlichkeit_E_09-2023.pdf Graphic file (type pdf)
 <use wissensch_Redlichkeit_E_09-2023.pdf>
 Package pdftex.def Info: wissensch_Redlichkeit_E_09-2023.pdf  used on input lin
-e 325.
+e 327.
 (pdftex.def)             Requested size: 426.79135pt x 603.59377pt.
 
-Overfull \hbox (15.0pt too wide) in paragraph at lines 325--326
+Overfull \hbox (15.0pt too wide) in paragraph at lines 327--328
 [][] 
  []
 
-[10] [11 <./wissensch_Redlichkeit_E_09-2023.pdf>] (./report-template.aux)
+[11] [12 <./wissensch_Redlichkeit_E_09-2023.pdf>] (./report-template.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
@@ -584,13 +586,13 @@ Package rerunfilecheck Info: File `report-template.out' has not changed.
 (rerunfilecheck)             Checksum: DC0EA8E3DC78A185349AD0288D5A60E2;4191.
  ) 
 Here is how much of TeX's memory you used:
- 12648 strings out of 476129
- 198413 string characters out of 5793185
+ 12661 strings out of 476129
+ 198747 string characters out of 5793185
  1939975 words of memory out of 5000000
- 34412 multiletter control sequences out of 15000+600000
+ 34421 multiletter control sequences out of 15000+600000
  592703 words of font info for 85 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 79i,6n,93p,929b,457s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 79i,6n,93p,929b,588s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share
 /texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texli
@@ -598,10 +600,10 @@ ve/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist
 /fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/ur
 w/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a
 .pfb>
-Output written on report-template.pdf (11 pages, 1032448 bytes).
+Output written on report-template.pdf (12 pages, 1035048 bytes).
 PDF statistics:
- 423 PDF objects out of 1000 (max. 8388607)
- 352 compressed objects within 4 object streams
- 62 named destinations out of 1000 (max. 500000)
+ 436 PDF objects out of 1000 (max. 8388607)
+ 364 compressed objects within 4 object streams
+ 66 named destinations out of 1000 (max. 500000)
  254 words of extra memory for PDF output out of 10000 (max. 10000000)
 

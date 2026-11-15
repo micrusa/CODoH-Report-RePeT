@@ -90,7 +90,7 @@ Traditionally, DNS messages have been transported without encryption, usually en
 
 \citet{rfc8484} solved the lack of encryption by transporting DNS over HTTPS, using Transport Layer Security (TLS) for encryption, integrity and confidentiality. This is done by encapsulating DNS messages in HTTP requests under HTTPS URIs, using either POST or GET methods. DoH prevents network observers and/or attackers from reading the DNS queries, partly protecting users' privacy. However, it still has a key limitation: the resolver has access to the unencrypted DNS message and can associate it with the client's IP address.
 
-To solve this problem, \citet{singanamalla2020oblivious} introduced \textit{Oblivious DNS over HTTPS (ODoH)}, which introduces a proxy between the client and the resolver. The client encrypts the DNS message for the resolver, so the proxy does not have access to the contents of the query, and forwards the encrypted DNS message, as illustrated in Figure~\ref{fig-odoh}. Assuming the proxy and the resolver do not collude, the client's IP address is unknown for the resolver, and the queried domain name is unknown for the proxy, so the users' privacy remains protected. However, this introduces a new problem: encryption makes two equal DNS queries different to the proxy, so conventional caching becomes impossible \citep{niroula2026codoh}.
+To solve this problem, \citet{singanamalla2020oblivious} introduced \textit{Oblivious DNS over HTTPS (ODoH)}, which introduces a proxy between the client and the resolver. The client encrypts the DNS message for the resolver, so the proxy does not have access to the contents of the query, and forwards the encrypted DNS message, as illustrated in Figure~\ref{fig-odoh}. Assuming the proxy and the resolver do not collude, meaning that they do not share the sensitive data between themselves, the client's IP address is unknown for the resolver, and the queried domain name is unknown for the proxy, so the users' privacy remains protected. However, this introduces a new problem: encryption makes two equal DNS queries different to the proxy, so conventional caching becomes impossible \citep{niroula2026codoh}.
 
 \begin{figure}[H]
 	\centering
@@ -130,11 +130,13 @@ Even though Intel SGX's enclaves have their memory encrypted \citep{cryptoeprint
 \subsection{Related work}
 \label{sec:relatedwork}
 
-% TODO
+DNS Privacy is a problem that has been extensively explored in the literature. Many different solutions have been proposed in order to achieve privacy-preserving domain resolution while mantaining an acceptable performance.
 
-Here, you include short descriptions of similar work and explain \textit{how} they are different from the main content you have presented.
+\textbf{Oblivious DNS (ODNS)}, proposed by \citet{schmitt2018oblivious}, solves the same problem as ODoH, but re-using existing DNS infrastructure, by introducing a ODNS-specific resolver and relying on an existing DNS resolver to query it, showing that private DNS can be achieved by separating the knowledge of the clients' IP addresses and the queries. However, it targets traditional DNS instead of DoH. Therefore, the transport is not necessarily encrypted.
 
-Level of detail similar to an abstract.
+\textbf{Private DNS over TLS (PDoT)}, proposed by \citet{pdot}, performs the DNS resolution process inside an Intel SGX enclave in the resolver, effectively reducing the need of trusting the DNS resolver. CODoH also uses Intel SGX, but uses it to introduce a privacy-preserving cache. PDoT differs from ODoH in that instead of separating the knowledge of the client's IP address and the queries between two parties, it hides the queries from the host using Intel SGX.
+
+\textbf{PDNS} \citep{xiao2025collusionresistantdnsprivate} addresses the non-collusion problem that both ODoH and CODoH have by using Private Information Retrieval (PIR), a cryptographic technique that allows PDNS to provide cached DNS responses without the resolver being able to see what domain is queried by each client. However, even though it achieves acceptable performance, PIR introduces a big computational overhead, resulting in a limited scalability.
 
 \section{CODoH Design}
 \label{sec:main}
@@ -201,7 +203,7 @@ An attacker controlling the proxy may compare the states before and after a vict
 
 Even then, each query produces only small updates, so the probability of the attacker simply guessing the victim's queried domain is high, unless a very large number of cover responses are introduced into the cache per response, which would create a large DNS resolution, bandwidth and cache maintenance overhead. Therefore, CODoH introduces \textit{batching} \citep{niroula2026codoh}, so, instead of caching every independent response, the resolver waits for a number of responses, before inserting them into the cache, reducing the overhead required for the same protection. This comes with the limitation of potentially increased cache misses, especially with larger batches and lower variability of domain names.
 
-High batch sizes are especially important for privacy because websites usually request information from many different domains, so an attacker may create \textit{fingerprints} of websites, and use cache state to rank a victim's possible candidates from their DNS queries. \citet{niroula2026codoh} measured this by simulating normal DNS traffic and an attacker with access to the cache states, while reproducing CODoH's cache mechanisms. As illustrated in Figure~\ref{fig-batch-size-privacy}, Top-1 accuracy drops significantly at batch sizes over 20, while reducing Top-5 accuracy requires higher batch sizes. Therefore, the authors suggested three batch sizes depending on the desired privacy level: Permissive (\(B\geq20\)), Moderate (\(B\geq50\)) and Strict (\(B\geq20\))
+High batch sizes are especially important for privacy because websites usually request information from many different domains, so an attacker may create \textit{fingerprints} of websites, and use cache state to rank a victim's possible candidates from their DNS queries. \citet{niroula2026codoh} measured this by simulating normal DNS traffic and an attacker with access to the cache states, while reproducing CODoH's cache mechanisms. As illustrated in Figure~\ref{fig-batch-size-privacy}, Top-1 accuracy drops significantly at batch sizes over 20, while reducing Top-5 accuracy requires higher batch sizes. Therefore, the authors suggested three batch sizes depending on the desired privacy level: Permissive (\(B\geq20\)), Moderate (\(B\geq50\)) and Strict (\(B\geq200\))
 
 \begin{figure}[H]
 	\centering
