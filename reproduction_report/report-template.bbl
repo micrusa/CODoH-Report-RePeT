@@ -1,0 +1,29 @@
+\begin{thebibliography}{}
+
+\bibitem[{Microsoft}, 2026a]{azure_dcsv2_retirement}
+{Microsoft} (2026a).
+\newblock {DCsv2-series Retirement}.
+\newblock
+  \url{https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/retirement/dcsv2-series-retirement}.
+\newblock Accessed: 2026-11-20.
+
+\bibitem[{Microsoft}, 2026b]{azure_dcsv3_retirement}
+{Microsoft} (2026b).
+\newblock {DCsv3-series and DCdsv3-series Retirement}.
+\newblock
+  \url{https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/retirement/dcsv3-series-retirement}.
+\newblock Accessed: 2026-11-20.
+
+\bibitem[{Microsoft}, 2026c]{azure_sgx_deployment}
+{Microsoft} (2026c).
+\newblock Solutions on {Azure} for {Intel SGX}.
+\newblock
+  \url{https://learn.microsoft.com/en-us/azure/confidential-computing/virtual-machine-solutions-sgx}.
+\newblock Accessed: 2026-11-20.
+
+\bibitem[Niroula et~al., 2026]{niroula2026codoh}
+Niroula, P., Gloudemans, L., Poudel, A., MacDonald, C., and Herwig, S. (2026).
+\newblock {CODoH}: Privacy-preserving caching for oblivious {DNS} over {HTTPS}.
+\newblock {\em Proceedings on Privacy Enhancing Technologies}.
+
+\end{thebibliography}

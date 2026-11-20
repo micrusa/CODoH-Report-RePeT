@@ -1,0 +1,109 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage[margin=3cm]{geometry}
+
+% German
+%\usepackage[ngerman]{babel}
+% English
+\usepackage[english]{babel}
+
+\usepackage[round,authoryear]{natbib}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[hyphens]{url}
+\usepackage{graphicx}
+\usepackage{booktabs,tabularx}
+\usepackage{float}
+
+\usepackage{lipsum}
+
+% German
+%\newtheorem{definition}{Definition}
+%\newtheorem{satz}{Satz}
+% English
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+
+\author{M.Cruces Sánchez}
+\title{Replicating CODoH End-to-End experiments on IBM Cloud and analyzing Batch Size effect on latency.}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Motivation and Goals}
+
+Batching in CODoH \citep{niroula2026codoh} introduces a trade-off between performance and privacy: it delays cache insertion, potentially reducing cache hits and increasing cache misses, and it protects against set-difference attacks by mixing queries from more clients. \citet{niroula2026codoh}'s experiments only tested end-to-end latency of CODoH using a batch size of $B=10$.
+
+In addition, the experiments were performed on three Microsoft Azure virtual machines: a Standard D2alds v6 (2 vCPUs, 4 GiB RAM) for the client, a Standard D2s v3 (2 vCPUs, 8 GiB RAM) for the target, and a Standard DC4s v2 (4 vCPUs, 16 GiB RAM) for the proxy. The latter provided Intel SGX support, essential for evaluating CODoH's performance. However, the DCsv2 series is no longer available \citep{azure_dcsv2_retirement}, making it impossible to reproduce the original experiments. Moreover, Azure heavily restricts Intel SGX-enabled VMs, only available in selected regions and with specific quotas \citep{azure_sgx_deployment}, and \citet{azure_dcsv3_retirement} has stopped allowing new subscriptions to deploy DCsv3/DCdsv3 instances, further limiting experimentation with Intel SGX.
+
+Therefore, this report aims to (1) replicate \citet{niroula2026codoh}'s experiments on IBM Cloud, using VM specifications as close as possible to the original experiments and (2) analyze the impact of Batch Size on end-to-end latency in a full CODoH configuration.
+
+\section{Methodology}
+
+\subsection{Experimental Setup}
+
+The system was deployed across three IBM Cloud VMs in separate regions. Table~\ref{tab:vm-testbeds} compares their specifications with those of the original Azure testbed.
+
+The most relevant differences are the deployment regions and network bandwidth. Since DNS messages are small, network bandwidth is unlikely to alter latency results. However, the differences in regions, as well as the cloud provider, could significantly alter the latency between the client, proxy and target, potentially affecting the experiment results.
+
+In addition, RAM memory and SGX Enclave Page Cache (EPC) memory significantly differ in the proxies of the original and the replication testbeds (16GiB/112MiB vs 20GiB/8 GB), which could have an effect that has not been measured in the experiments.
+
+\begin{table}[H]
+	\centering
+	\small
+	\setlength{\tabcolsep}{3pt}
+	\begin{tabularx}{\linewidth}{@{}llll>{\raggedright\arraybackslash}Xrlll@{}}
+		\toprule
+		Role & Testbed & Region & VM size & Processor & vCPUs & RAM &
+		\shortstack[l]{SGX\\EPC} & \shortstack[l]{Network\\Bandwidth} \\
+		\midrule
+		Client & Original & \texttt{northcentralus} &
+		\texttt{D2alds\_v6} & AMD EPYC 9004 (Genoa) &
+		2 & 4\,GiB & --- & 12.5\,Gbps \\
+		Client & Replication & \texttt{us-east} &
+		\texttt{cx2-2x4} & Intel Xeon (Gen 2 profile) &
+		2 & 4\,GiB & --- & 3\,Gbps \\
+		\addlinespace
+		Proxy & Original & \texttt{eastus} &
+		\texttt{DC4s\_v2} & Intel Xeon E-2288G (Coffee Lake) &
+		4 & 16\,GiB & 112\,MiB & Not reported \\
+		Proxy & Replication & \texttt{us-south} &
+		\texttt{bx3dc-4x20} & Intel Xeon Platinum 8474C (Sapphire Rapids) &
+		4 & 20\,GiB & 8\,GB & 6\,Gbps \\
+		\addlinespace
+		Target & Original & \texttt{centralus} &
+		\texttt{D2s\_v3} & Intel Xeon (Not reported) &
+		2 & 8\,GiB & --- & 1\,Gbps \\
+		Target & Replication & \texttt{ca-tor} &
+		\texttt{bx2-2x8} & Intel Xeon (Gen 2 profile) &
+		2 & 8\,GiB & --- & 3\,Gbps \\
+		\bottomrule
+	\end{tabularx}
+	\caption{VM specifications for the original Azure testbed and the IBM Cloud
+		replication. Azure bandwidth values are published VM limits. IBM Cloud
+		values are the network bandwidth allocations recorded in Terraform state.}
+	\label{tab:vm-testbeds}
+\end{table}
+
+
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+\section{Use of generative digital tools}
+
+
+
+
+\bibliographystyle{apalike}
+
+\bibliography{references}
+
+
+\hspace{-2cm}
+
+
+\end{document}

@@ -1,0 +1,12 @@
+resource_group_id   = "REPLACE_WITH_RESOURCE_GROUP_ID"
+operator_cidr       = "203.0.113.10/32"
+ssh_public_key_file = "~/.ssh/id_rsa.pub"
+
+# Reuse an existing IBM VPC key where its fingerprint is already registered.
+# existing_ssh_key_ids = { client = "EXISTING_KEY_ID_IN_US_EAST" }
+
+nodes = {
+  client = { zone = "us-east-1", profile = "cx2-2x4", image = "ibm-ubuntu-24-04-6-minimal-amd64-2" }
+  proxy  = { zone = "us-south-1", profile = "bx3dc-4x20", image = "ibm-ubuntu-24-04-6-minimal-amd64-2" }
+  target = { zone = "ca-tor-1", profile = "bx2-2x8", image = "ibm-ubuntu-24-04-6-minimal-amd64-2" }
+}
