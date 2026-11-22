@@ -145,12 +145,19 @@ Our initial attempt to replicate Table~6 from \citet{niroula2026codoh} using the
 
 We performed the experiments using the artifacts from Table~3 of \citet{niroula2026codoh}, running five trials per explored Batch Size $B$ and workload (Cold, Zipf, Warm), keeping all other parameters constant: a cache size of $N=1024$ entries, a batch commit probability of $p=0.1$ and a cover count of $k=3$.
 
-Table~\ref{tab:batch-size-median-latency} shows that the latency percentiles did not vary significantly across the tested batch sizes for all workloads. On the other side, the cache hit rate did show a clear difference across batch sizes (Table~\ref{tab:batch-size-cache-hits}), which rose from 57.78--59.82\% at $B=10$ and $B=20$ to 70.61--71.01\% at $B=50$ and $B=256$.
+Table~\ref{tab:batch-size-median-latency} shows that the latency percentiles did not vary significantly across the tested batch sizes for all workloads. On the other side, the cache hit rate did show a clear difference across batch sizes (Table~\ref{tab:batch-size-cache-hits} and Figure~\ref{fig:batch-size-cache-hits}), which rose from 57.78--59.82\% at $B=10$ and $B=20$ to 70.61--71.01\% at $B=50$ and $B=256$.
 
 In the released implementation from \citet{niroula2026codoh}, to compensate the sequential workload, the batching behavior was different from the protocol's: $B$ acts as a limit of inserted entries per batch, while $p$ determines the probability of a query triggering a cache insertion of up to $B$ responses. This may explain the higher cache hit rates in Table~\ref{tab:batch-size-cache-hits}, although it did not translate in a significant reduction in the Zipf latency percentiles.
 
 \input{tables/batch-size-latency}
 \input{tables/batch-size-cache-hits}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{figures/batch-size-cache-hits.pdf}
+    \caption{Mean cache hit rate for full CODoH (C5) by batch size across workloads. Error bars show one sample standard deviation on either side of the mean across five trials.}
+    \label{fig:batch-size-cache-hits}
+\end{figure}
 
 \subsection{Batch Size at Constant Insertion Budget}
 
