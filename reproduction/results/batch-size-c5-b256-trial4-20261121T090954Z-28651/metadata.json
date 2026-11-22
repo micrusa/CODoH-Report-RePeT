@@ -1,0 +1,18 @@
+{
+    "run_id": "batch-size-c5-b256-trial4-20261121T090954Z-28651",
+    "mode": "cloud_standard",
+    "proxy_ip": "52.118.190.200",
+    "target_ip": "163.66.92.156",
+    "iterations": 10000,
+    "warmup": 0,
+    "sgx_mode": true,
+    "resolver": "unbound",
+    "upstream_resolver": "127.0.0.1:5353",
+    "zipf_s": 1.0,
+    "configs": "5",
+    "workloads": "cold,zipf,warm",
+    "sweep_oram": false,
+    "sweep_cover": false,
+    "timestamp": "2026-11-21T19:07:18+00:00",
+    "client_hostname": "codoh-client"
+}

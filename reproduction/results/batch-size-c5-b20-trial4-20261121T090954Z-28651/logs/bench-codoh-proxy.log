@@ -1,0 +1,8 @@
+maxprocs: Leaving GOMAXPROCS=4: CPU quota undefined
+[INFO] plugin/codohproxy: Enclave reachable at /tmp/codoh-enclave.sock
+[INFO] plugin/codohproxy: Cached enclave public key (32 bytes)
+[INFO] plugin/codohproxy: Registered /enclave-keys and /cache-insert endpoints
+[INFO] plugin/codohproxy: CODoH proxy listening on :8080, target: https://163.66.92.156:8443/dns-query
+.:25357
+CoreDNS-1.13.1
+linux/amd64, go1.25.1, 

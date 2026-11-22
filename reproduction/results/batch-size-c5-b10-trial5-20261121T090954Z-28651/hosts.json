@@ -1,0 +1,1 @@
+{"client":{"image":"ibm-ubuntu-24-04-6-minimal-amd64-2","ip":"52.116.124.164","profile":"cx2-2x4","zone":"us-east-1"},"proxy":{"image":"ibm-ubuntu-24-04-6-minimal-amd64-2","ip":"52.118.190.200","profile":"bx3dc-4x20","zone":"us-south-1"},"target":{"image":"ibm-ubuntu-24-04-6-minimal-amd64-2","ip":"163.66.92.156","profile":"bx2-2x8","zone":"ca-tor-1"}}

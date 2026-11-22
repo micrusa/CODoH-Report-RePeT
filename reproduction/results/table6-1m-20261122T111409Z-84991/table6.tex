@@ -1,0 +1,17 @@
+\begin{table}
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lrrrrr}
+\toprule
+Capacity & Linear scan & Std. dev. & PathORAM & Std. dev. & PathORAM/Linear scan \\
+\midrule
+256 & 0.041 & 0.0005477 & 222.5 & 0.604 & $5.43e+03\times$ \\
+1024 & 0.041 & 0.0004472 & 178.1 & 0.6286 & $4.34e+03\times$ \\
+4096 & 0.04 & 0.0005477 & 177.8 & 0.1549 & $4.45e+03\times$ \\
+16384 & 0.041 & 0.0005477 & 265.1 & 2.983 & $6.47e+03\times$ \\
+\bottomrule
+\end{tabular}
+\caption{PathORAM and linear scan read latency under SGX in ${}\mu$s (4 KiB blocks). Both methods use 1,000,000 iterations per trial, repeating the first 100 lookups. Latencies are medians and standard deviations are sample estimates across 5 trials. One warm-up trial per benchmark case and mode was discarded.}
+\label{tab:reproduction-table6-1m}
+\end{table}

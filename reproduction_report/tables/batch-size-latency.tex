@@ -1,0 +1,23 @@
+\begin{table}[H]
+\centering
+\small
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{l rrr rrr rrr}
+\toprule
+ & \multicolumn{3}{c}{Cold} & \multicolumn{3}{c}{Zipf} & \multicolumn{3}{c}{Warm} \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7} \cmidrule(lr){8-10}
+Batch size $B$ & p50 & p95 & p99 & p50 & p95 & p99 & p50 & p95 & p99 \\
+\midrule
+10 & $111.03 \pm 0.85$ & $381.86 \pm 3.46$ & $858.86 \pm 29.22$ & $33.34 \pm 1.17$ & $73.78 \pm 2.67$ & $161.82 \pm 2.21$ & $30.81 \pm 0.92$ & $32.64 \pm 1.12$ & $59.61 \pm 15.60$ \\
+20 & $111.82 \pm 1.06$ & $384.94 \pm 5.29$ & $904.38 \pm 34.55$ & $34.11 \pm 0.82$ & $73.52 \pm 2.80$ & $155.68 \pm 8.24$ & $31.64 \pm 0.69$ & $34.06 \pm 1.08$ & $68.23 \pm 2.67$ \\
+50 & $112.06 \pm 2.11$ & $379.89 \pm 10.53$ & $875.62 \pm 18.02$ & $33.68 \pm 0.51$ & $72.33 \pm 1.80$ & $157.49 \pm 5.52$ & $31.35 \pm 1.38$ & $33.32 \pm 1.18$ & $45.56 \pm 16.73$ \\
+256 & $112.16 \pm 1.08$ & $381.08 \pm 6.12$ & $893.67 \pm 65.03$ & $33.11 \pm 0.35$ & $72.24 \pm 2.10$ & $159.72 \pm 5.99$ & $32.22 \pm 0.78$ & $33.37 \pm 0.65$ & $46.95 \pm 16.93$ \\
+\bottomrule
+\end{tabular}%
+}
+\caption{End-to-end latency for full CODoH (C5) by batch size.
+Each cell reports the mean of the corresponding percentile across
+five trials $\pm$ its sample standard deviation, in milliseconds.
+The first 1,000 queries of each workload were excluded from each trial.}
+\label{tab:batch-size-median-latency}
+\end{table}

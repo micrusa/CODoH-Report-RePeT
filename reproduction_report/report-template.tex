@@ -35,19 +35,19 @@
 
 \section{Motivation and Goals}
 
-Batching in CODoH \citep{niroula2026codoh} introduces a trade-off between performance and privacy: it delays cache insertion, potentially reducing cache hits and increasing cache misses, and it protects against set-difference attacks by mixing queries from more clients. \citet{niroula2026codoh}'s experiments only tested end-to-end latency of CODoH using a batch size of $B=10$.
+Cacheable Oblivious DNS over HTTPS (CODoH) extends Oblivious DNS over HTTPS aiming to improve its performance by implementing a privacy-preserving cache \citep{niroula2026codoh}.
+
+Batching in CODoH introduces a trade-off between performance and privacy: it delays cache insertion, potentially reducing cache hits and increasing cache misses, and it protects against set-difference attacks by mixing queries from more clients. \citet{niroula2026codoh}'s experiments only tested end-to-end latency of CODoH using a batch size of $B=10$.
 
 In addition, the experiments were performed on three Microsoft Azure virtual machines: a Standard D2alds v6 (2 vCPUs, 4 GiB RAM) for the client, a Standard D2s v3 (2 vCPUs, 8 GiB RAM) for the target, and a Standard DC4s v2 (4 vCPUs, 16 GiB RAM) for the proxy. The latter provided Intel SGX support, essential for evaluating CODoH's performance. However, the DCsv2 series is no longer available \citep{azure_dcsv2_retirement}, making it impossible to reproduce the original experiments. Moreover, Azure heavily restricts Intel SGX-enabled VMs, only available in selected regions and with specific quotas \citep{azure_sgx_deployment}, and \citet{azure_dcsv3_retirement} has stopped allowing new subscriptions to deploy DCsv3/DCdsv3 instances, further limiting experimentation with Intel SGX.
 
 Therefore, this report aims to (1) replicate \citet{niroula2026codoh}'s experiments on IBM Cloud, using VM specifications as close as possible to the original experiments and (2) analyze the impact of Batch Size on end-to-end latency in a full CODoH configuration.
 
-\section{Methodology}
+\section{Experimental Setup}
 
-\subsection{Experimental Setup}
+The system was deployed across three IBM Cloud VMs in separate regions. The resources were provisioned on IBM Cloud using Terraform, instead of using provisioning scripts as in \citet{niroula2026codoh}'s experiments. Table~\ref{tab:vm-testbeds} compares their specifications with those of the original Azure testbed. All IBM Cloud VMs were provisioned with Ubuntu 24.04.1 LTS, using kernel version 6.8.0-1016-ibm. The experiments were run using Go v1.25.1 and EGo v1.8.1.
 
-The system was deployed across three IBM Cloud VMs in separate regions. Table~\ref{tab:vm-testbeds} compares their specifications with those of the original Azure testbed.
-
-The most relevant differences are the deployment regions and network bandwidth. Since DNS messages are small, network bandwidth is unlikely to alter latency results. However, the differences in regions, as well as the cloud provider, could significantly alter the latency between the client, proxy and target, potentially affecting the experiment results.
+The most relevant differences were the deployment regions and network bandwidth. Since DNS messages are small, network bandwidth is unlikely to alter latency results. However, the differences in regions, as well as the cloud provider, could significantly alter the latency between the client, proxy and target, potentially affecting the experiment results.
 
 In addition, RAM memory and SGX Enclave Page Cache (EPC) memory significantly differ in the proxies of the original and the replication testbeds (16GiB/112MiB vs 20GiB/8 GB), which could have an effect that has not been measured in the experiments.
 
@@ -75,7 +75,7 @@ In addition, RAM memory and SGX Enclave Page Cache (EPC) memory significantly di
 		4 & 20\,GiB & 8\,GB & 6\,Gbps \\
 		\addlinespace
 		Target & Original & \texttt{centralus} &
-		\texttt{D2s\_v3} & Intel Xeon (Not reported) &
+		\texttt{D2s\_v3} & Intel Xeon (Not reported) &´
 		2 & 8\,GiB & --- & 1\,Gbps \\
 		Target & Replication & \texttt{ca-tor} &
 		\texttt{bx2-2x8} & Intel Xeon (Gen 2 profile) &
@@ -89,21 +89,119 @@ In addition, RAM memory and SGX Enclave Page Cache (EPC) memory significantly di
 \end{table}
 
 
+\section{Replication on IBM Cloud}
+\label{sec:results}
+
+\subsection{End-to-end latency}
+\label{sec:e2elat}
+ 
+We replicated the end-to-end latency experiments in Table~3 of \citet{niroula2026codoh} on IBM Cloud. Table~\ref{tab:e2e-reproduction-table3} shows the p50, p95, and p99 latencies for all five configurations across the cold, Zipf, and warm workloads. Following the authors' analysis, the first 1,000 queries of each workload were excluded.
+
+\input{tables/end-to-end-latency}
+
+The replication shows a similar reduction in median latency for Zipf traffic, comparing ODoH vs Full CODoH, when compared to \citet{niroula2026codoh}'s results. Full CODoH reduced the median from 67.58~ms to 33.05~ms on IBM Cloud, compared with 48.59~ms to 22.34~ms in the original experiments. The improvement was smaller for the warm workload, where the median decreased from 64.54 to 34.02~ms on IBM Cloud, compared with 47.97 to 17.96~ms on Azure. For the cold workload, the median with full CODoH was approximately 10\% lower than with ODoH in both experiments, which may be caused by cover responses including queried domains and network variability.
+
+The differences with \citet{niroula2026codoh}'s results may be explained by the difference in regions and networking between IBM Cloud and Azure.
+
+
+\subsection{Cryptographic operations}
+\label{sec:cryptoops}
+
+Table 4 from \citet{niroula2026codoh} was initially replicated using the provided artifacts on the proxy VM. For each operation, we report the median latency per operation across three trials of 10,000 operations in Table~\ref{tab:reproduction-table4}.
+
+The results were similar to \citet{niroula2026codoh}'s for HPKE and Ed25519 operations, while AES-GCM seal and nonce generation results significantly differ from the published results. This discrepancy was mostly caused by a lower clock precision in our experiments. The enclave clock advanced in 1ms steps, corresponding to 0.10~${}\mu$s per operation at 10,000 operations. Therefore, in order to obtain more precise results, the experiment was repeated with 1,000,000 operations per trial, obtaining a more precise step of 0.001 ~${}\mu$s per operation. In addition, six trials were done instead of three, and the first one was discarded, improving the confidence.
+
+\input{tables/crypto-latency}
+
+In the longer run, reported in Table~\ref{tab:reproduction-table4-1m}, AES-GCM with precomputed nonces took approximately $0.147\,\mu\mathrm{s}$ in both SGX and non-SGX modes, while nonce generation took about 22\% less time in SGX (0.338~${}\mu$s vs 0.433~${}\mu$s outside SGX). A plausible explanation is that the enclave's EGo runtime serves randomness requests directly using the CPU's \texttt{RDRAND} instruction, while the native Go build uses Linux's \texttt{getrandom}. Both testbeds used the same versions of Ubuntu, EGo and Go. However, \citet{niroula2026codoh} did not report the kernel version. Our proxy ran Linux 6.8, while Go can use a faster implementation of \texttt{getrandom} on Linux 6.11 and later \citep{go124release,go1251getrandom}. If this implementation was available on \citet{niroula2026codoh}'s Azure proxy, it could explain the faster nonce generation (0.04~${}\mu$s vs 0.43~${}\mu$s) on the native build.
+
+\input{tables/crypto-latency-1m}
+
+\subsection{Cache read latency}
+
+We replicated the cache read latency experiments from Table~5 \citep{niroula2026codoh} 
+
+In our replication, the SGX overhead ratio was 1.01--1.10 on IBM Cloud, significantly lower than the ratio of 2.1--3.5 in the original study. This could possibly be explained by the higher EPC memory in the replicated proxy (8GB vs 112MiB). However, we did not isolate that effect. Figure~\ref{fig:cache-read-latency} shows how median read latency varies with cache capacity, using ORAM natively and in the SGX enclave, illustrating the SGX overhead, which grows with capacity.
+
+\input{tables/cache-read-latency}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{figures/cache-read-latency.pdf}
+    \caption{Median ORAM read latency by cache capacity. Error bars show one sample standard deviation on either side of the median.}
+    \label{fig:cache-read-latency}
+\end{figure}
+
+\subsection{PathORAM Read Latency}
+
+Our initial attempt to replicate Table~6 from \citet{niroula2026codoh} using the original artifacts was unsuccessful due to the clock issue explored in Section~\ref{sec:cryptoops}: the enclave clock advances in 1ms steps, thus 100 iterations under 10~$\mu$s each can start and end in the same epoch millisecond, invalidating the results. Therefore, in order to achieve a theoretical 0.001~$\mu$s resolution per operation, we performed the experiments with 1,000,000 iterations. Table~\ref{tab:reproduction-table6} reports the median and sample standard deviation of the per-read latencies across the five trials.
+ 
+\input{tables/pathoram-read-latency}
+
+\section{Batch Size effect on End-to-end Latency}
+\label{sec:batchsizeeffect}
+
+\subsection{Batch Size at Constant Batch Commit Probability}
+
+We performed the experiments using the artifacts from Table~3 of \citet{niroula2026codoh}, running five trials per explored Batch Size $B$ and workload (Cold, Zipf, Warm), keeping all other parameters constant: a cache size of $N=1024$ entries, a batch commit probability of $p=0.1$ and a cover count of $k=3$.
+
+Table~\ref{tab:batch-size-median-latency} shows that the latency percentiles did not vary significantly across the tested batch sizes for all workloads. On the other side, the cache hit rate did show a clear difference across batch sizes (Table~\ref{tab:batch-size-cache-hits}), which rose from 57.78--59.82\% at $B=10$ and $B=20$ to 70.61--71.01\% at $B=50$ and $B=256$.
+
+In the released implementation from \citet{niroula2026codoh}, to compensate the sequential workload, the batching behavior was different from the protocol's: $B$ acts as a limit of inserted entries per batch, while $p$ determines the probability of a query triggering a cache insertion of up to $B$ responses. This may explain the higher cache hit rates in Table~\ref{tab:batch-size-cache-hits}, although it did not translate in a significant reduction in the Zipf latency percentiles.
+
+\input{tables/batch-size-latency}
+\input{tables/batch-size-cache-hits}
+
+\subsection{Batch Size at Constant Insertion Budget}
+
+With a fixed commit probability of $p=0.1$, the average number of insertions to the cache per query also increased with the batch size $B$ increases, by increasing the limit of responses inserted per each insertion. To control this effect, we repeated the experiments with $p=1/B$, attempting to simulate a real workload, where higher batch sizes result in less frequent cache insertions. We kept the same workloads, and the rest of parameters.
+
+
 
 \section{Conclusion}
 \label{sec:conclusion}
 
 \section{Use of generative digital tools}
 
+\subsection{Final Report}
 
+LLMs have been used for the following purposes:
+
+A. Research and understanding concepts, using prompts of the type: \textit{"How does [...] work?"}, \textit{"Explain [...]"}, \textit{"What solutions similar to [...] have been used to solve [...] problem?"}, \textit{"What is [...]?"}, \textit{"What problem does [...] solve?"}
+
+B. Generation of diagrams and charts. All prompts were of the type: \textit{"Generate a mermaid diagram illustrating [...]"}, \textit{"Generate code that uses matplotlib/python to generate a chart to display [...] from this table: [...]"}
+
+C. Concept checking. Prompts of the type: \textit{"Is [...] conceptually correct?",} \textit{"Is [...] correctly expressed?"}
+
+\subsection{Peer Review}
+
+No generative digital tools have been used to do the peer review.
+
+\subsection{Seminar Presentation}
+
+LLMs have been used for the following purposes:
+
+\textbf{Generation of Figure~\ref{fig-odoh-latency} chart} with prompts of the type "Generate code that uses matplotlib/python to generate a chart to display [...] from this table: [...]"
+
+\subsection{Programming Project}
+
+LLMs from OpenAI (ChatGPT) and Google (Gemini), in Codex and Antigravity harnesses, have been used in the development of this programming project for the following purposes:
+
+A. Understanding certain scripts and identifying relevant scripts in the repositories, with prompts such as \textit{"What does the following code snippet do? [...]"}, \textit{"In this repo: [...], what script [does ...]"}
+
+B. Generation of terraform configuration, with a prompt as follows: \textit{"Generate a Terraform configuration for deploying the following VMs: [...]"}, as well as follow-up prompts to adjust it to CODoH's requirements.
+
+C. Investigation of nonce generation being faster on SGX than non-SGX in Table~\ref{tab:reproduction-table4} and Table~\ref{tab:reproduction-table4-1m}, with a prompt similar to the following: \textit{"In the ./runs/table4\_1M\_ops.sh experiment, how could SGX be faster than non-SGX?"}
+
+D. Debugging, with prompts such as the following: \textit{"Is this missing from the prepare script? ERROR: failed to open Intel SGX device. Install the SGX base package with: sudo ego install libsgx-enclave-common"}, \textit{"sudo ego install libsgx-enclave-common returned No available components to install for your system. Why?"}
+
+E. Generation of tables, with prompts such as \textit{"Add my batch-size-comparison-20261121T090954Z-28651 results summary in a table similar to the e2e latency one to the reproduction report, with std dev: mean of median latencies $\pm$ StdDev of medians"}
 
 
 \bibliographystyle{apalike}
 
 \bibliography{references}
 
-
-\hspace{-2cm}
 
 
 \end{document}

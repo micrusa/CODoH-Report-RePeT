@@ -1,0 +1,5 @@
+table=4
+iterations=1000000
+trials=3
+benchmark_commit=37bffe3cc1a97574ddffc08500d4a93e22778db4
+enclave_heap_mb=2048

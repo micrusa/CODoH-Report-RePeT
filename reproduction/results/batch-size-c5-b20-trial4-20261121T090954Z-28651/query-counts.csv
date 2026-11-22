@@ -1,0 +1,4 @@
+config,workload,iterations,successful,failed,cache_hits
+codoh-full,cold,10000,9989,11,418
+codoh-full,zipf,10000,10000,0,5882
+codoh-full,warm,10000,10000,0,9572

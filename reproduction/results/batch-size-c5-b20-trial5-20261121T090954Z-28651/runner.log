@@ -1,0 +1,82 @@
+=== CODoH Cloud Benchmark (standard mode) ===
+Proxy:      52.118.190.200
+Target:     163.66.92.156
+Configs:    5
+Workloads:  cold,zipf,warm
+Iterations: 10000 (+ 0 warmup)
+Resolver:   unbound (127.0.0.1:5353)
+SGX mode:   true
+Output:     /home/ubuntu/codoh-reproduction/artifact/repos/coredns/benchmark/results/batch-size-c5-b20-trial5-20261121T090954Z-28651/
+
+=== Verifying SSH connectivity ===
+  Proxy SSH: OK
+  Target SSH: OK
+
+=== Generating Corefiles ===
+  Generated 7 Corefiles in /home/ubuntu/codoh-reproduction/artifact/repos/coredns/benchmark/results/batch-size-c5-b20-trial5-20261121T090954Z-28651/corefiles/
+=== Distributing files to VMs ===
+  Fetching proxy cert...
+  Sending proxy cert to target...
+  Sending Corefiles to proxy...
+  Sending Corefiles to target...
+  Distribution complete.
+
+
+========================================
+Config 5
+========================================
+Cleaning up remote processes...
+--- Starting Config 5: CODoH full (SGX) ---
+  Starting SGX enclave on proxy VM...
+  Waiting for enclave attestation (52.118.190.200:8444, up to 60s)...
+  Enclave attestation ready after 4s
+  Starting CODoH target on 163.66.92.156:8443...
+  Waiting for enclave IPC socket on proxy (up to 30s)...
+  IPC socket ready after 1s
+  Waiting for 163.66.92.156:8443 (up to 60s)...
+  163.66.92.156:8443 ready after 1s
+  Starting CODoH proxy on 52.118.190.200:8080...
+  Waiting for 52.118.190.200:8080 (up to 60s)...
+  52.118.190.200:8080 ready after 1s
+  Flushing Unbound cache on target...
+ok removed 11982 rrsets, 8878 messages and 263 key entries
+  Running cold (sequential, 10000 queries)...
+  Mean: 149.549
+  P50:  103.961
+  P95:  363.487
+  P99:  783.092
+==================================================
+  Flushing Unbound cache on target...
+ok removed 12693 rrsets, 8825 messages and 381 key entries
+  Running zipf (zipf, 10000 queries)...
+  Mean: 49.722
+  P50:  32.967
+  P95:  74.612
+  P99:  162.591
+==================================================
+  Flushing Unbound cache on target...
+ok removed 12903 rrsets, 9523 messages and 300 key entries
+  Running warm (sequential, 10000 queries)...
+  Mean: 32.504
+  P50:  31.073
+  P95:  33.170
+  P99:  64.882
+==================================================
+  Config 5: 3 passed, 0 failed
+
+=== Collecting remote logs ===
+  Logs: /home/ubuntu/codoh-reproduction/artifact/repos/coredns/benchmark/results/batch-size-c5-b20-trial5-20261121T090954Z-28651/logs/
+
+=== Results Summary ===
+
+Config               Workload     Median        P95        P99        QPS
+------               --------     ------     ------     ------     ------
+codoh-full           cold         103.96     363.49     783.09        6.5
+codoh-full           warm          31.07      33.17      64.88       30.8
+codoh-full           zipf          32.97      74.61     162.59       20.1
+
+=== Cloud Benchmark Complete ===
+Results: /home/ubuntu/codoh-reproduction/artifact/repos/coredns/benchmark/results/batch-size-c5-b20-trial5-20261121T090954Z-28651/
+Raw:     /home/ubuntu/codoh-reproduction/artifact/repos/coredns/benchmark/results/batch-size-c5-b20-trial5-20261121T090954Z-28651/raw/
+Logs:    /home/ubuntu/codoh-reproduction/artifact/repos/coredns/benchmark/results/batch-size-c5-b20-trial5-20261121T090954Z-28651/logs/
+Cleaning up remote processes...

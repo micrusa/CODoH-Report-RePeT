@@ -1,0 +1,15 @@
+\begin{table}
+\centering
+\begin{tabular}{lrrrr}
+\toprule
+Capacity & LRU & ORAM (Plain) & ORAM (SGX) & Overhead \\
+\midrule
+256 & 0.1992 & 136.6 & 138.5 & $1.01\times$ \\
+512 & 0.1144 & 121.4 & 129.1 & $1.06\times$ \\
+1024 & 0.1253 & 115.6 & 123.6 & $1.07\times$ \\
+2048 & 0.1303 & 116.1 & 127.4 & $1.1\times$ \\
+\bottomrule
+\end{tabular}
+\caption{Cache read latency in ${}\mu$s by cache capacity.}
+\label{tab:reproduction-table5}
+\end{table}

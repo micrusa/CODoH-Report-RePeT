@@ -1,0 +1,6 @@
+maxprocs: Leaving GOMAXPROCS=2: CPU quota undefined
+[INFO] plugin/odohtarget: Generated HPKE keypair
+[INFO] plugin/odohtarget: ODoH target listening on :9443
+.:25353
+CoreDNS-1.13.1
+linux/amd64, go1.25.1, 

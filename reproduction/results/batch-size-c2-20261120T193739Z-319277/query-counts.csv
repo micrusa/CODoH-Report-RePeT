@@ -1,0 +1,4 @@
+config,workload,iterations,successful,failed,cache_hits
+odoh,cold,10000,9988,12,0
+odoh,zipf,10000,10000,0,0
+odoh,warm,10000,10000,0,0

@@ -2,6 +2,4 @@
 /terraform/*.tfvars
 /terraform/*.tfstate*
 /terraform/*.tfplan
-/results/
 /.reference/
-ibmcloud_api_key.json

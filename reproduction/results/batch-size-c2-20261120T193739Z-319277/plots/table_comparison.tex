@@ -1,0 +1,15 @@
+\begin{table}[t]
+\centering
+\caption{Latency comparison across configurations (ms).}
+\label{tab:comparison}
+\small
+\begin{tabular}{l rrr rrr rrr}
+\toprule
+ & \multicolumn{3}{c}{Cold} & \multicolumn{3}{c}{Zipf} & \multicolumn{3}{c}{Warm} \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7} \cmidrule(lr){8-10}
+Configuration & p50 & p95 & p99 & p50 & p95 & p99 & p50 & p95 & p99 \\
+\midrule
+ODoH & 120.44 & 414.22 & 875.23 & 65.07 & 147.60 & 239.78 & 66.05 & 66.35 & 67.15 \\
+\bottomrule
+\end{tabular}
+\end{table}

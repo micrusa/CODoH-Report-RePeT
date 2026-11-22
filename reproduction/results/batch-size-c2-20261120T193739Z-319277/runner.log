@@ -1,0 +1,77 @@
+=== CODoH Cloud Benchmark (standard mode) ===
+Proxy:      150.240.71.66
+Target:     163.66.91.192
+Configs:    2
+Workloads:  cold,zipf,warm
+Iterations: 10000 (+ 0 warmup)
+Resolver:   unbound (127.0.0.1:5353)
+SGX mode:   false
+Output:     /home/ubuntu/codoh-reproduction/artifact/repos/coredns/benchmark/results/batch-size-c2-20261120T193739Z-319277/
+
+=== Verifying SSH connectivity ===
+  Proxy SSH: OK
+  Target SSH: OK
+
+=== Generating Corefiles ===
+  Generated 7 Corefiles in /home/ubuntu/codoh-reproduction/artifact/repos/coredns/benchmark/results/batch-size-c2-20261120T193739Z-319277/corefiles/
+=== Distributing files to VMs ===
+  Fetching proxy cert...
+  Sending proxy cert to target...
+  Sending Corefiles to proxy...
+  Sending Corefiles to target...
+  Distribution complete.
+
+
+========================================
+Config 2
+========================================
+Cleaning up remote processes...
+--- Starting Config 2: ODoH ---
+  Starting ODoH target on 163.66.91.192:9443...
+  Starting ODoH proxy on 150.240.71.66:9080...
+  Waiting for 150.240.71.66:9080 (up to 60s)...
+  150.240.71.66:9080 ready after 1s
+  Waiting for 163.66.91.192:9443 (up to 60s)...
+  163.66.91.192:9443 ready after 1s
+  Flushing Unbound cache on target...
+ok removed 7128 rrsets, 4269 messages and 59 key entries
+  Running cold (sequential, 10000 queries)...
+  Mean: 160.621
+  P50:  116.735
+  P95:  389.927
+  P99:  817.850
+==================================================
+  Flushing Unbound cache on target...
+ok removed 12301 rrsets, 7291 messages and 351 key entries
+  Running zipf (zipf, 10000 queries)...
+  Mean: 78.216
+  P50:  65.081
+  P95:  156.428
+  P99:  260.921
+==================================================
+  Flushing Unbound cache on target...
+ok removed 6847 rrsets, 2306 messages and 65 key entries
+  Running warm (sequential, 10000 queries)...
+  Mean: 66.067
+  P50:  66.051
+  P95:  66.349
+  P99:  67.152
+==================================================
+  Config 2: 3 passed, 0 failed
+
+=== Collecting remote logs ===
+  Logs: /home/ubuntu/codoh-reproduction/artifact/repos/coredns/benchmark/results/batch-size-c2-20261120T193739Z-319277/logs/
+
+=== Results Summary ===
+
+Config               Workload     Median        P95        P99        QPS
+------               --------     ------     ------     ------     ------
+odoh                 cold         116.73     389.93     817.85        6.0
+odoh                 warm          66.05      66.35      67.15       15.1
+odoh                 zipf          65.08     156.43     260.92       12.8
+
+=== Cloud Benchmark Complete ===
+Results: /home/ubuntu/codoh-reproduction/artifact/repos/coredns/benchmark/results/batch-size-c2-20261120T193739Z-319277/
+Raw:     /home/ubuntu/codoh-reproduction/artifact/repos/coredns/benchmark/results/batch-size-c2-20261120T193739Z-319277/raw/
+Logs:    /home/ubuntu/codoh-reproduction/artifact/repos/coredns/benchmark/results/batch-size-c2-20261120T193739Z-319277/logs/
+Cleaning up remote processes...

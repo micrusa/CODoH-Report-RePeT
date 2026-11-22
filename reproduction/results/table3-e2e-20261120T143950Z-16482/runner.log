@@ -1,0 +1,242 @@
+=== CODoH Cloud Benchmark (standard mode) ===
+Proxy:      150.240.71.66
+Target:     163.66.91.192
+Configs:    1,2,3,4,5
+Workloads:  cold,zipf,warm
+Iterations: 10000 (+ 0 warmup)
+Resolver:   unbound (127.0.0.1:5353)
+SGX mode:   true
+Output:     /home/ubuntu/codoh-reproduction/artifact/repos/coredns/benchmark/results/table3-e2e-20261120T143950Z-16482/
+
+=== Verifying SSH connectivity ===
+  Proxy SSH: OK
+  Target SSH: OK
+
+=== Generating Corefiles ===
+  Generated 7 Corefiles in /home/ubuntu/codoh-reproduction/artifact/repos/coredns/benchmark/results/table3-e2e-20261120T143950Z-16482/corefiles/
+=== Distributing files to VMs ===
+  Fetching proxy cert...
+  Sending proxy cert to target...
+  Sending Corefiles to proxy...
+  Sending Corefiles to target...
+  Distribution complete.
+
+
+========================================
+Config 1
+========================================
+Cleaning up remote processes...
+--- Starting Config 1: DoH ---
+  Starting DoH server on 163.66.91.192:7443...
+  Waiting for 163.66.91.192:7443 (up to 60s)...
+  163.66.91.192:7443 ready after 1s
+  Flushing Unbound cache on target...
+ok removed 67 rrsets, 3 messages and 2 key entries
+  Running cold (sequential, 10000 queries)...
+  Mean: 116.387
+  P50:  66.849
+  P95:  338.753
+  P99:  945.893
+==================================================
+  Flushing Unbound cache on target...
+ok removed 12447 rrsets, 7738 messages and 354 key entries
+  Running zipf (zipf, 10000 queries)...
+  Mean: 29.225
+  P50:  19.706
+  P95:  81.883
+  P99:  183.716
+==================================================
+  Flushing Unbound cache on target...
+ok removed 7046 rrsets, 2557 messages and 75 key entries
+  Running warm (sequential, 10000 queries)...
+  Mean: 19.575
+  P50:  19.545
+  P95:  19.718
+  P99:  19.804
+==================================================
+  Config 1: 3 passed, 0 failed
+
+========================================
+Config 2
+========================================
+Cleaning up remote processes...
+--- Starting Config 2: ODoH ---
+  Starting ODoH target on 163.66.91.192:9443...
+  Starting ODoH proxy on 150.240.71.66:9080...
+  Waiting for 150.240.71.66:9080 (up to 60s)...
+  150.240.71.66:9080 ready after 1s
+  Waiting for 163.66.91.192:9443 (up to 60s)...
+  163.66.91.192:9443 ready after 1s
+  Flushing Unbound cache on target...
+ok removed 71 rrsets, 4 messages and 2 key entries
+  Running cold (sequential, 10000 queries)...
+  Mean: 165.512
+  P50:  118.138
+  P95:  393.287
+  P99:  913.022
+==================================================
+  Flushing Unbound cache on target...
+ok removed 12293 rrsets, 7238 messages and 347 key entries
+  Running zipf (zipf, 10000 queries)...
+  Mean: 79.973
+  P50:  67.589
+  P95:  148.498
+  P99:  257.081
+==================================================
+  Flushing Unbound cache on target...
+ok removed 6693 rrsets, 2180 messages and 60 key entries
+  Running warm (sequential, 10000 queries)...
+  Mean: 64.396
+  P50:  64.520
+  P95:  64.825
+  P99:  65.377
+==================================================
+  Config 2: 3 passed, 0 failed
+
+========================================
+Config 3
+========================================
+Cleaning up remote processes...
+--- Starting Config 3: CODoH-base ---
+  Starting CODoH-base target on 163.66.91.192:10444...
+  Starting enclave-proxy on 150.240.71.66:10443...
+  Waiting for 150.240.71.66:10443 (up to 60s)...
+  150.240.71.66:10443 ready after 4s
+  Waiting for 163.66.91.192:10444 (up to 60s)...
+  163.66.91.192:10444 ready after 1s
+  Flushing Unbound cache on target...
+ok removed 71 rrsets, 4 messages and 2 key entries
+  Running cold (sequential, 10000 queries)...
+  Mean: 166.932
+  P50:  120.147
+  P95:  399.101
+  P99:  895.682
+==================================================
+  Flushing Unbound cache on target...
+ok removed 12283 rrsets, 7144 messages and 350 key entries
+  Running zipf (zipf, 10000 queries)...
+  Mean: 50.640
+  P50:  32.077
+  P95:  138.685
+  P99:  248.456
+==================================================
+  Flushing Unbound cache on target...
+ok removed 6579 rrsets, 2109 messages and 59 key entries
+  Running warm (sequential, 10000 queries)...
+  Mean: 32.601
+  P50:  32.549
+  P95:  32.729
+  P99:  32.942
+==================================================
+  Config 3: 3 passed, 0 failed
+
+========================================
+Config 4
+========================================
+Cleaning up remote processes...
+--- Starting Config 4: CODoH no-SGX ---
+  Starting enclave-sim on proxy VM...
+  Waiting for enclave IPC socket on proxy (up to 30s)...
+  IPC socket ready after 1s
+  Starting CODoH target on 163.66.91.192:8443...
+  Waiting for 163.66.91.192:8443 (up to 60s)...
+  163.66.91.192:8443 ready after 2s
+  Starting CODoH proxy on 150.240.71.66:8080...
+  Waiting for 150.240.71.66:8080 (up to 60s)...
+  150.240.71.66:8080 ready after 1s
+  Flushing Unbound cache on target...
+ok removed 71 rrsets, 4 messages and 2 key entries
+  Running cold (sequential, 10000 queries)...
+  Mean: 150.501
+  P50:  104.811
+  P95:  366.059
+  P99:  811.729
+==================================================
+  Flushing Unbound cache on target...
+ok removed 12547 rrsets, 8637 messages and 390 key entries
+  Running zipf (zipf, 10000 queries)...
+  Mean: 49.636
+  P50:  35.302
+  P95:  75.962
+  P99:  164.031
+==================================================
+  Flushing Unbound cache on target...
+ok removed 12908 rrsets, 9716 messages and 317 key entries
+  Running warm (sequential, 10000 queries)...
+  Mean: 31.997
+  P50:  30.431
+  P95:  32.658
+  P99:  68.177
+==================================================
+  Config 4: 3 passed, 0 failed
+
+========================================
+Config 5
+========================================
+Cleaning up remote processes...
+--- Starting Config 5: CODoH full (SGX) ---
+  Starting SGX enclave on proxy VM...
+  Waiting for enclave attestation (150.240.71.66:8444, up to 60s)...
+  Enclave attestation ready after 4s
+  Starting CODoH target on 163.66.91.192:8443...
+  Waiting for enclave IPC socket on proxy (up to 30s)...
+  IPC socket ready after 1s
+  Waiting for 163.66.91.192:8443 (up to 60s)...
+  163.66.91.192:8443 ready after 1s
+  Starting CODoH proxy on 150.240.71.66:8080...
+  Waiting for 150.240.71.66:8080 (up to 60s)...
+  150.240.71.66:8080 ready after 1s
+  Flushing Unbound cache on target...
+ok removed 12413 rrsets, 9724 messages and 265 key entries
+  Running cold (sequential, 10000 queries)...
+  Mean: 147.814
+  P50:  101.083
+  P95:  363.827
+  P99:  789.270
+==================================================
+  Flushing Unbound cache on target...
+ok removed 12556 rrsets, 8604 messages and 384 key entries
+  Running zipf (zipf, 10000 queries)...
+  Mean: 50.595
+  P50:  33.080
+  P95:  78.690
+  P99:  165.879
+==================================================
+  Flushing Unbound cache on target...
+ok removed 12961 rrsets, 9754 messages and 319 key entries
+  Running warm (sequential, 10000 queries)...
+  Mean: 34.743
+  P50:  34.044
+  P95:  34.758
+  P99:  67.931
+==================================================
+  Config 5: 3 passed, 0 failed
+
+=== Collecting remote logs ===
+  Logs: /home/ubuntu/codoh-reproduction/artifact/repos/coredns/benchmark/results/table3-e2e-20261120T143950Z-16482/logs/
+
+=== Results Summary ===
+
+Config               Workload     Median        P95        P99        QPS
+------               --------     ------     ------     ------     ------
+codoh-base           cold         120.15     399.10     895.68        5.6
+codoh-base           warm          32.55      32.73      32.94       30.7
+codoh-base           zipf          32.08     138.69     248.46       19.7
+codoh-full           cold         101.08     363.83     789.27        6.5
+codoh-full           warm          34.04      34.76      67.93       28.8
+codoh-full           zipf          33.08      78.69     165.88       19.8
+codoh-nosgx          cold         104.81     366.06     811.73        6.3
+codoh-nosgx          warm          30.43      32.66      68.18       31.3
+codoh-nosgx          zipf          35.30      75.96     164.03       20.1
+doh                  cold          66.85     338.75     945.89        8.6
+doh                  warm          19.55      19.72      19.80       51.1
+doh                  zipf          19.71      81.88     183.72       34.2
+odoh                 cold         118.14     393.29     913.02        5.8
+odoh                 warm          64.52      64.83      65.38       15.5
+odoh                 zipf          67.59     148.50     257.08       12.5
+
+=== Cloud Benchmark Complete ===
+Results: /home/ubuntu/codoh-reproduction/artifact/repos/coredns/benchmark/results/table3-e2e-20261120T143950Z-16482/
+Raw:     /home/ubuntu/codoh-reproduction/artifact/repos/coredns/benchmark/results/table3-e2e-20261120T143950Z-16482/raw/
+Logs:    /home/ubuntu/codoh-reproduction/artifact/repos/coredns/benchmark/results/table3-e2e-20261120T143950Z-16482/logs/
+Cleaning up remote processes...

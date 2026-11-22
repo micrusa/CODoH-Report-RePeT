@@ -1,0 +1,5 @@
+maxprocs: Leaving GOMAXPROCS=4: CPU quota undefined
+[INFO] plugin/odohproxy: ODoH proxy listening on :9080, target: https://163.66.91.192:9443/dns-query
+.:25354
+CoreDNS-1.13.1
+linux/amd64, go1.25.1, 

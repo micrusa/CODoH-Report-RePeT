@@ -1,0 +1,30 @@
+goos: linux
+goarch: amd64
+pkg: github.com/coredns/coredns/enclave
+cpu: Intel Xeon Processor (SapphireRapids)
+BenchmarkHPKE_Seal-4              	 1000000	     66370 ns/op
+BenchmarkHPKE_Seal-4              	 1000000	     66371 ns/op
+BenchmarkHPKE_Seal-4              	 1000000	     66378 ns/op
+BenchmarkHPKE_Open-4              	 1000000	     41488 ns/op
+BenchmarkHPKE_Open-4              	 1000000	     41488 ns/op
+BenchmarkHPKE_Open-4              	 1000000	     41522 ns/op
+BenchmarkAESGCM_Seal-4            	 1000000	      1220 ns/op
+BenchmarkAESGCM_Seal-4            	 1000000	      1209 ns/op
+BenchmarkAESGCM_Seal-4            	 1000000	      1207 ns/op
+BenchmarkAESGCM_Open-4            	 1000000	       602.7 ns/op
+BenchmarkAESGCM_Open-4            	 1000000	       599.1 ns/op
+BenchmarkAESGCM_Open-4            	 1000000	       594.2 ns/op
+BenchmarkAESGCM_Seal_PreNonce-4   	 1000000	       146.5 ns/op
+BenchmarkAESGCM_Seal_PreNonce-4   	 1000000	       146.5 ns/op
+BenchmarkAESGCM_Seal_PreNonce-4   	 1000000	       146.5 ns/op
+BenchmarkNonceGen_Only-4          	 1000000	       421.0 ns/op
+BenchmarkNonceGen_Only-4          	 1000000	       437.0 ns/op
+BenchmarkNonceGen_Only-4          	 1000000	       418.2 ns/op
+BenchmarkEd25519_Sign-4           	 1000000	     20554 ns/op
+BenchmarkEd25519_Sign-4           	 1000000	     20552 ns/op
+BenchmarkEd25519_Sign-4           	 1000000	     20545 ns/op
+BenchmarkEd25519_Verify-4         	 1000000	     45776 ns/op
+BenchmarkEd25519_Verify-4         	 1000000	     45858 ns/op
+BenchmarkEd25519_Verify-4         	 1000000	     45761 ns/op
+PASS
+ok  	github.com/coredns/coredns/enclave	731.579s

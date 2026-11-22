@@ -1,0 +1,21 @@
+\begin{table}[H]
+\centering
+\label{tab:e2e-reproduction-table3}
+\small
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{l rrr rrr rrr}
+\toprule
+ & \multicolumn{3}{c}{Cold} & \multicolumn{3}{c}{Zipf} & \multicolumn{3}{c}{Warm} \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7} \cmidrule(lr){8-10}
+Configuration & p50 & p95 & p99 & p50 & p95 & p99 & p50 & p95 & p99 \\
+\midrule
+DoH & 69.61 & 349.90 & 978.44 & 19.70 & 74.74 & 157.49 & 19.55 & 19.72 & 19.80 \\
+ODoH & 121.58 & 417.87 & 1004.58 & 67.58 & 141.28 & 250.81 & 64.54 & 64.84 & 65.48 \\
+ODoH Cached & 123.57 (1.02$\times$) & 419.38 (1.00$\times$) & 992.46 (0.99$\times$) & 32.08 (0.47$\times$) & 131.95 (0.93$\times$) & 231.33 (0.92$\times$) & 32.55 (0.50$\times$) & 32.73 (0.50$\times$) & 32.94 (0.50$\times$) \\
+CODoH-noTEE & 113.58 (0.93$\times$) & 386.23 (0.92$\times$) & 893.71 (0.89$\times$) & 35.27 (0.52$\times$) & 71.81 (0.51$\times$) & 163.03 (0.65$\times$) & 30.43 (0.47$\times$) & 32.69 (0.50$\times$) & 68.20 (1.04$\times$) \\
+CODoH & 110.00 (0.90$\times$) & 380.10 (0.91$\times$) & 878.83 (0.87$\times$) & 33.05 (0.49$\times$) & 72.53 (0.51$\times$) & 163.73 (0.65$\times$) & 34.02 (0.53$\times$) & 34.76 (0.54$\times$) & 67.97 (1.04$\times$) \\
+\bottomrule
+\end{tabular}%
+}
+\caption{End-to-end latency on IBM Cloud in milliseconds. Ratios in parentheses are relative to ODoH for the same workload and percentile.}
+\end{table}

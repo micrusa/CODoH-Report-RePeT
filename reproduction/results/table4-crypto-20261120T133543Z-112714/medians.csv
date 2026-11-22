@@ -1,0 +1,17 @@
+benchmark,mode,median_us_per_op
+BenchmarkHPKE_Seal,plain,66.792
+BenchmarkHPKE_Open,plain,41.771
+BenchmarkAESGCM_Seal,plain,1.32
+BenchmarkAESGCM_Open,plain,0.7146
+BenchmarkAESGCM_Seal_PreNonce,plain,0.14730000000000001
+BenchmarkNonceGen_Only,plain,0.41969999999999996
+BenchmarkEd25519_Sign,plain,20.54
+BenchmarkEd25519_Verify,plain,45.942
+BenchmarkHPKE_Seal,sgx,75.402
+BenchmarkHPKE_Open,sgx,48.201
+BenchmarkAESGCM_Seal,sgx,1.0
+BenchmarkAESGCM_Open,sgx,0.7
+BenchmarkAESGCM_Seal_PreNonce,sgx,0.1
+BenchmarkNonceGen_Only,sgx,0.4
+BenchmarkEd25519_Sign,sgx,22.201
+BenchmarkEd25519_Verify,sgx,52.101

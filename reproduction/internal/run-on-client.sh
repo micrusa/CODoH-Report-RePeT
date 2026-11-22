@@ -4,6 +4,7 @@ umask 077
 id=$1
 mode=$2
 batch_size=10
+commit_probability=0.1
 base="$HOME/codoh-reproduction"
 core="$base/artifact/repos/coredns"
 bench="$core/benchmark"
@@ -19,26 +20,17 @@ case "$mode" in
     table3)
         [[ "$SGX_MODE" == true ]] || { echo "Table 3 requires SGX." >&2; exit 1; }
         ;;
-    smoke)
-        args+=(--workloads warm --iterations 250)
-        if [[ "$SGX_MODE" == true ]]; then
-            args+=(--configs 1,2,3,4,5)
-        else
-            args+=(--configs 1,2,3,4 --no-sgx)
-        fi
-        ;;
-    plain)
-        args+=(--configs 1,2,4 --no-sgx)
-        ;;
-    baseline)
-        args+=(--configs 2 --no-sgx)
-        ;;
     batch-size)
         [[ "$SGX_MODE" == true ]] || { echo "C5 requires SGX." >&2; exit 1; }
         batch_size=${3:-}
         case "$batch_size" in
-            10|20|50|100|200|400) ;;
-            *) exit 2 ;;
+            10|20|50|256) ;;
+            *) echo "Expected a batch size of 10, 20, 50, or 256." >&2; exit 2 ;;
+        esac
+        commit_probability=${4:-0.1}
+        case "$batch_size:$commit_probability" in
+            *:0.1|20:0.05|50:0.02|256:0.00390625) ;;
+            *) echo "Unexpected commit probability for this batch size." >&2; exit 2 ;;
         esac
         args+=(--configs 5)
         ;;
@@ -51,13 +43,13 @@ mkdir "$result"
 cp "$base/hosts.json" "$base/"*-environment.txt "$result/"
 sha256sum "$bench"/top-{1k,10k}-resolvable.csv > "$result/workloads.sha256"
 printf '%s\n' 'CODOH_CACHE_SIZE=1024' "CODOH_BATCH_SIZE=$batch_size" \
-    'CODOH_BATCH_COMMIT_PROB=0.1' 'CODOH_COVER_COUNT=3' > "$result/parameters.txt"
-export CODOH_CACHE_SIZE=1024 CODOH_BATCH_SIZE="$batch_size" CODOH_BATCH_COMMIT_PROB=0.1 CODOH_COVER_COUNT=3
+    "CODOH_BATCH_COMMIT_PROB=$commit_probability" 'CODOH_COVER_COUNT=3' > "$result/parameters.txt"
+export CODOH_CACHE_SIZE=1024 CODOH_BATCH_SIZE="$batch_size" CODOH_BATCH_COMMIT_PROB="$commit_probability" CODOH_COVER_COUNT=3
 
 bash -o pipefail ./benchmark/cloud-run.sh --run-id "$id" "${args[@]}" 2>&1 | tee "$result/runner.log"
 
 # Keep failure counts visible. A process exit alone does not prove DNS succeeded.
-python3 - "$result" "$mode" <<'PY'
+python3 - "$result" "$mode" "$bench" <<'PY'
 import csv
 import json
 import sys
@@ -65,6 +57,12 @@ from pathlib import Path
 
 result = Path(sys.argv[1])
 mode = sys.argv[2]
+sweep = mode == "batch-size"
+if sweep:
+    sys.path.insert(0, sys.argv[3])
+    from plot_preprocess import compute_percentiles
+
+percentiles = {}
 settings = json.loads((result / "metadata.json").read_text())
 log = (result / "runner.log").read_text()
 if "Failed to flush Unbound cache" in log:
@@ -91,7 +89,14 @@ with (result / "query-counts.csv").open("w", newline="") as out:
                 raise SystemExit(f"No warm cache hits: {name}/{workload}")
             writer.writerow([name, workload, count, summary["successful"], summary["failed"],
                              summary.get("cache_hits", 0)])
+            if sweep:
+                stats = compute_percentiles(prefix.with_suffix(".csv"))
+                if stats is None:
+                    raise SystemExit(f"No latency samples after warmup: {name}/{workload}")
+                percentiles[f"{name}_{workload}"] = stats
+if sweep:
+    (result / "percentiles_trimmed.json").write_text(json.dumps(percentiles, indent=2) + "\n")
 PY
-if [[ "$mode" != smoke ]]; then
+if [[ "$mode" == table3 ]]; then
     ./benchmark/plot.sh "$result"
 fi

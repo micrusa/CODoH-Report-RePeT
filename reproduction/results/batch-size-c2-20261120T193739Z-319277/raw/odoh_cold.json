@@ -1,0 +1,17 @@
+{
+  "protocol": "odoh",
+  "distribution": "sequential",
+  "iterations": 10000,
+  "successful": 9988,
+  "failed": 12,
+  "latency_ms": {
+    "min": 63.381,
+    "max": 1818.435,
+    "mean": 160.62070845014006,
+    "p50": 116.735,
+    "p95": 389.927,
+    "p99": 817.85
+  },
+  "throughput_qps": 5.998486232661219,
+  "total_duration_s": 1665.086758992
+}

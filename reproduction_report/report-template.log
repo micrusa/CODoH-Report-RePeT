@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.25)  20 NOV 2026 14:24
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.25)  22 NOV 2026 13:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -370,39 +370,73 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 34.
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd) [1
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd)
+LaTeX Info: Symbol \textasciiacute not provided by
+            font family ptm in TS1 encoding.
+            Default family used instead on input line 84.
+ [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texlive/texmf-di
-st/fonts/enc/dvips/base/8r.enc}] (./report-template.bbl
+st/fonts/enc/dvips/base/8r.enc}] (./tables/end-to-end-latency.tex) [2]
+(./tables/crypto-latency.tex)
+Overfull \hbox (0.26968pt too wide) in paragraph at lines 116--117
+[]\T1/ptm/m/n/10 In the longer run, re-ported in Ta-ble 4[], AES-GCM with pre-c
+om-puted nonces took ap-prox-i-mately $\OT1/cmr/m/n/10 0\OML/cmm/m/it/10 :\OT1/
+cmr/m/n/10 147 \OML/cmm/m/it/10 ^^V\OT1/cmr/m/n/10 s$
+ []
+
+(./tables/crypto-latency-1m.tex) (./tables/cache-read-latency.tex) [3]
+<figures/cache-read-latency.pdf, id=22, 578.16pt x 325.215pt>
+File: figures/cache-read-latency.pdf Graphic file (type pdf)
+<use figures/cache-read-latency.pdf>
+Package pdftex.def Info: figures/cache-read-latency.pdf  used on input line 130
+.
+(pdftex.def)             Requested size: 426.79135pt x 240.06976pt.
+
+(./tables/pathoram-read-latency.tex) [4 <./figures/cache-read-latency.pdf>]
+(./tables/batch-size-latency.tex) (./tables/batch-size-cache-hits.tex) [5]
+
+LaTeX Warning: Reference `fig-odoh-latency' on page 6 undefined on input line 1
+84.
+
+(./report-template.bbl
 Underfull \hbox (badness 10000) in paragraph at lines 11--16
 \T1/pcr/m/n/10 com / en -[] us / azure / virtual -[] machines / sizes / retirem
 ent / dcsv3 -[] series -[]
  []
 
-) [2] (./report-template.aux)
+) [6] (./report-template.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
+
+
+LaTeX Warning: There were undefined references.
+
  ) 
 Here is how much of TeX's memory you used:
- 5728 strings out of 476129
- 89704 string characters out of 5793185
- 1935975 words of memory out of 5000000
- 27644 multiletter control sequences out of 15000+600000
- 588949 words of font info for 88 fonts, out of 8000000 for 9000
+ 5822 strings out of 476129
+ 92436 string characters out of 5793185
+ 1943975 words of memory out of 5000000
+ 27713 multiletter control sequences out of 15000+600000
+ 592854 words of font info for 92 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 79i,12n,93p,836b,352s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/u
-tmri8a.pfb>
-Output written on report-template.pdf (2 pages, 73069 bytes).
+ 79i,12n,93p,986b,352s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ </home/micrusa/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm0900.6
+00pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
+/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/ti
+mes/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on report-template.pdf (6 pages, 153530 bytes).
 PDF statistics:
- 42 PDF objects out of 1000 (max. 8388607)
- 25 compressed objects within 1 object stream
+ 122 PDF objects out of 1000 (max. 8388607)
+ 54 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

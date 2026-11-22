@@ -1,0 +1,4 @@
+table=6
+iterations=100
+trials=3
+benchmark_commit=26e56eb174663a8af67120500a36df0d62ef7dc7

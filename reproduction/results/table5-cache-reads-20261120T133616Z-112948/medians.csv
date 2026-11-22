@@ -1,0 +1,13 @@
+benchmark,mode,median_us_per_op
+BenchmarkLRUCache_Get/N=256,plain,0.1992
+BenchmarkLRUCache_Get/N=512,plain,0.1144
+BenchmarkLRUCache_Get/N=1024,plain,0.1253
+BenchmarkLRUCache_Get/N=2048,plain,0.1303
+BenchmarkORAMCache_Get/N=256,plain,136.557
+BenchmarkORAMCache_Get/N=512,plain,121.375
+BenchmarkORAMCache_Get/N=1024,plain,115.572
+BenchmarkORAMCache_Get/N=2048,plain,116.124
+BenchmarkORAMCache_Get/N=256,sgx,138.503
+BenchmarkORAMCache_Get/N=512,sgx,129.103
+BenchmarkORAMCache_Get/N=1024,sgx,123.603
+BenchmarkORAMCache_Get/N=2048,sgx,127.403

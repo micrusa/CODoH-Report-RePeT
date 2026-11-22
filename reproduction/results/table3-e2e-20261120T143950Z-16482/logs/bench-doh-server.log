@@ -1,0 +1,4 @@
+maxprocs: Leaving GOMAXPROCS=2: CPU quota undefined
+https://.:7443
+CoreDNS-1.13.1
+linux/amd64, go1.25.1, 

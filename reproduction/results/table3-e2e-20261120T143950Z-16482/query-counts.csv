@@ -1,0 +1,16 @@
+config,workload,iterations,successful,failed,cache_hits
+doh,cold,10000,10000,0,0
+doh,zipf,10000,10000,0,0
+doh,warm,10000,10000,0,0
+odoh,cold,10000,9987,13,0
+odoh,zipf,10000,10000,0,0
+odoh,warm,10000,10000,0,0
+codoh-base,cold,10000,9980,20,0
+codoh-base,zipf,10000,10000,0,7833
+codoh-base,warm,10000,10000,0,9999
+codoh-nosgx,cold,10000,9986,14,298
+codoh-nosgx,zipf,10000,10000,0,5612
+codoh-nosgx,warm,10000,10000,0,9729
+codoh-full,cold,10000,9990,10,286
+codoh-full,zipf,10000,10000,0,5702
+codoh-full,warm,10000,10000,0,9689

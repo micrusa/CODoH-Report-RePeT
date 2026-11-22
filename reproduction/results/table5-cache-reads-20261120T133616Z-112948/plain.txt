@@ -1,0 +1,30 @@
+goos: linux
+goarch: amd64
+pkg: github.com/coredns/coredns/enclave
+cpu: Intel Xeon Processor (SapphireRapids)
+BenchmarkLRUCache_Get/N=256-4         	   10000	       200.6 ns/op
+BenchmarkLRUCache_Get/N=256-4         	   10000	       123.9 ns/op
+BenchmarkLRUCache_Get/N=256-4         	   10000	       199.2 ns/op
+BenchmarkLRUCache_Get/N=512-4         	   10000	       114.4 ns/op
+BenchmarkLRUCache_Get/N=512-4         	   10000	       110.3 ns/op
+BenchmarkLRUCache_Get/N=512-4         	   10000	       121.0 ns/op
+BenchmarkLRUCache_Get/N=1024-4        	   10000	       123.7 ns/op
+BenchmarkLRUCache_Get/N=1024-4        	   10000	       214.8 ns/op
+BenchmarkLRUCache_Get/N=1024-4        	   10000	       125.3 ns/op
+BenchmarkLRUCache_Get/N=2048-4        	   10000	       133.7 ns/op
+BenchmarkLRUCache_Get/N=2048-4        	   10000	       127.0 ns/op
+BenchmarkLRUCache_Get/N=2048-4        	   10000	       130.3 ns/op
+BenchmarkORAMCache_Get/N=256-4        	   10000	    139256 ns/op
+BenchmarkORAMCache_Get/N=256-4        	   10000	    136040 ns/op
+BenchmarkORAMCache_Get/N=256-4        	   10000	    136557 ns/op
+BenchmarkORAMCache_Get/N=512-4        	   10000	    121375 ns/op
+BenchmarkORAMCache_Get/N=512-4        	   10000	    124643 ns/op
+BenchmarkORAMCache_Get/N=512-4        	   10000	    120730 ns/op
+BenchmarkORAMCache_Get/N=1024-4       	   10000	    115572 ns/op
+BenchmarkORAMCache_Get/N=1024-4       	   10000	    114375 ns/op
+BenchmarkORAMCache_Get/N=1024-4       	   10000	    115731 ns/op
+BenchmarkORAMCache_Get/N=2048-4       	   10000	    116124 ns/op
+BenchmarkORAMCache_Get/N=2048-4       	   10000	    115184 ns/op
+BenchmarkORAMCache_Get/N=2048-4       	   10000	    116711 ns/op
+PASS
+ok  	github.com/coredns/coredns/enclave	16.236s

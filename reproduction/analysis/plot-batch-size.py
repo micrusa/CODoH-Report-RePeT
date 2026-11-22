@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import ScalarFormatter
 
 RESULTS = Path(__file__).resolve().parents[1] / "results"
-BATCH_SIZES = (10, 20, 50, 100, 200, 400)
+BATCH_SIZES = (10, 20, 50, 256)
 WORKLOADS = ("cold", "zipf", "warm")
 PERCENTILES = ("p50", "p95", "p99")
 
@@ -34,8 +34,6 @@ def main():
     sweep_id = args.sweep_id
 
     def run_dir(condition):
-        if sweep_id.startswith("batch-"):
-            return RESULTS / f"{sweep_id}-{condition}"
         return RESULTS / f"batch-size-{condition}-{sweep_id}"
 
     try:

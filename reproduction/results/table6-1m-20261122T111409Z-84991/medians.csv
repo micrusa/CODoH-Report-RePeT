@@ -1,0 +1,9 @@
+benchmark,mode,median_us_per_op,stddev_us_per_op
+BenchmarkAccess/blocks=256/blockSize=4096/read,sgx,222.522,0.603988410484842
+BenchmarkAccess/blocks=1024/blockSize=4096/read,sgx,178.083,0.6285850777738865
+BenchmarkAccess/blocks=4096/blockSize=4096/read,sgx,177.847,0.15489092936643717
+BenchmarkAccess/blocks=16384/blockSize=4096/read,sgx,265.136,2.9827153400886193
+BenchmarkLinearScan/blocks=256/blockSize=4096/read,sgx,0.041,0.0005477225575051667
+BenchmarkLinearScan/blocks=1024/blockSize=4096/read,sgx,0.041,0.00044721359549995833
+BenchmarkLinearScan/blocks=4096/blockSize=4096/read,sgx,0.04,0.0005477225575051667
+BenchmarkLinearScan/blocks=16384/blockSize=4096/read,sgx,0.041,0.0005477225575051667

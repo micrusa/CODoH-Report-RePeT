@@ -1,0 +1,21 @@
+\begin{table}
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lrrrrr}
+\toprule
+Operation & Plain & Std. dev. & SGX & Std. dev. & Overhead \\
+\midrule
+HPKE encrypt & 66.36 & 0.01527 & 75.25 & 0.1627 & $1.13\times$ \\
+HPKE decrypt & 41.52 & 0.02744 & 47.79 & 0.04069 & $1.15\times$ \\
+AES-GCM seal & 1.212 & 0.00497 & 1.12 & 0.004561 & $0.924\times$ \\
+\quad AES-GCM seal (precomputed nonce) & 0.1465 & 0.0001225 & 0.148 & 0.0004472 & $1.01\times$ \\
+\quad Nonce generation & 0.4328 & 0.009888 & 0.338 & 0.006058 & $0.781\times$ \\
+AES-GCM open & 0.6081 & 0.002517 & 0.755 & 0.006656 & $1.24\times$ \\
+Ed25519 sign & 20.56 & 0.009094 & 22.16 & 0.003435 & $1.08\times$ \\
+Ed25519 verify & 45.87 & 0.3005 & 51.95 & 0.2943 & $1.13\times$ \\
+\bottomrule
+\end{tabular}
+\caption{Per-operation cryptographic latency in ${}\mu$s. One million operations per trial. Latencies are medians and standard deviations are sample estimates across 5 trials. One warm-up trial per benchmark case and mode was discarded.}
+\label{tab:reproduction-table4-1m}
+\end{table}

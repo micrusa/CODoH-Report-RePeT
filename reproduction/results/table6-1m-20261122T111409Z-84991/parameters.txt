@@ -1,0 +1,9 @@
+table=6
+iterations=1000000
+trials=5
+warmup_trials=1
+benchmark_commit=26e56eb174663a8af67120500a36df0d62ef7dc7
+linear_scan_iterations=1000000
+linear_scan_lookup_cycle=100
+pathoram_lookup_cycle=100
+enclave_heap_mb=512

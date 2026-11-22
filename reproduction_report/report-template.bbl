@@ -26,4 +26,15 @@ Niroula, P., Gloudemans, L., Poudel, A., MacDonald, C., and Herwig, S. (2026).
 \newblock {CODoH}: Privacy-preserving caching for oblivious {DNS} over {HTTPS}.
 \newblock {\em Proceedings on Privacy Enhancing Technologies}.
 
+\bibitem[{The Go Authors}, 2025a]{go124release}
+{The Go Authors} (2025a).
+\newblock {Go 1.24 Release Notes}.
+\newblock \url{https://go.dev/doc/go1.24#crypto/rand}.
+
+\bibitem[{The Go Authors}, 2025b]{go1251getrandom}
+{The Go Authors} (2025b).
+\newblock {Go 1.25.1}: {Linux} \texttt{getrandom} implementation.
+\newblock
+  \url{https://github.com/golang/go/blob/go1.25.1/src/internal/syscall/unix/getrandom.go}.
+
 \end{thebibliography}

@@ -1,0 +1,20 @@
+{
+  "protocol": "codoh",
+  "distribution": "zipf",
+  "iterations": 10000,
+  "successful": 10000,
+  "failed": 0,
+  "cache_hits": 6992,
+  "cache_misses": 3008,
+  "cache_hit_rate": 0.6992,
+  "latency_ms": {
+    "min": 30.186,
+    "max": 617.817,
+    "mean": 45.00365829999982,
+    "p50": 32.962,
+    "p95": 75.99,
+    "p99": 160.386
+  },
+  "throughput_qps": 22.218371367868667,
+  "total_duration_s": 450.077993316
+}

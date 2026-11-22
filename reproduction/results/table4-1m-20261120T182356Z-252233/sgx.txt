@@ -1,0 +1,33 @@
+2026/11/20 18:36:11 INFO EGo version=1.8.1 git_commit=ed270acf42619ecafac4bfecbbd032df2e580c4a
+2026/11/20 18:36:11 INFO EGo version=1.8.1 git_commit=ed270acf42619ecafac4bfecbbd032df2e580c4a
+[erthost] loading enclave ...
+[erthost] entering enclave ...
+[ego] starting application ...
+goos: linux
+goarch: amd64
+pkg: github.com/coredns/coredns/enclave
+BenchmarkHPKE_Seal-4              	 1000000	     75307 ns/op
+BenchmarkHPKE_Seal-4              	 1000000	     75250 ns/op
+BenchmarkHPKE_Seal-4              	 1000000	     75237 ns/op
+BenchmarkHPKE_Open-4              	 1000000	     47616 ns/op
+BenchmarkHPKE_Open-4              	 1000000	     47599 ns/op
+BenchmarkHPKE_Open-4              	 1000000	     47618 ns/op
+BenchmarkAESGCM_Seal-4            	 1000000	      1092 ns/op
+BenchmarkAESGCM_Seal-4            	 1000000	      1102 ns/op
+BenchmarkAESGCM_Seal-4            	 1000000	      1095 ns/op
+BenchmarkAESGCM_Open-4            	 1000000	       763.0 ns/op
+BenchmarkAESGCM_Open-4            	 1000000	       737.0 ns/op
+BenchmarkAESGCM_Open-4            	 1000000	       732.0 ns/op
+BenchmarkAESGCM_Seal_PreNonce-4   	 1000000	       148.0 ns/op
+BenchmarkAESGCM_Seal_PreNonce-4   	 1000000	       147.0 ns/op
+BenchmarkAESGCM_Seal_PreNonce-4   	 1000000	       147.0 ns/op
+BenchmarkNonceGen_Only-4          	 1000000	       335.0 ns/op
+BenchmarkNonceGen_Only-4          	 1000000	       336.0 ns/op
+BenchmarkNonceGen_Only-4          	 1000000	       346.0 ns/op
+BenchmarkEd25519_Sign-4           	 1000000	     22158 ns/op
+BenchmarkEd25519_Sign-4           	 1000000	     22163 ns/op
+BenchmarkEd25519_Sign-4           	 1000000	     22155 ns/op
+BenchmarkEd25519_Verify-4         	 1000000	     52147 ns/op
+BenchmarkEd25519_Verify-4         	 1000000	     51982 ns/op
+BenchmarkEd25519_Verify-4         	 1000000	     51722 ns/op
+PASS
