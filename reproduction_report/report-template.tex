@@ -134,9 +134,16 @@ In our replication, the SGX overhead ratio was 1.01--1.10 on IBM Cloud, signific
 
 \subsection{PathORAM Read Latency}
 
-Our initial attempt to replicate Table~6 from \citet{niroula2026codoh} using the original artifacts was unsuccessful due to the clock issue explored in Section~\ref{sec:cryptoops}: the enclave clock advances in 1ms steps, thus 100 iterations under 10~$\mu$s each can start and end in the same epoch millisecond, invalidating the results. Therefore, in order to achieve a theoretical 0.001~$\mu$s resolution per operation, we performed the experiments with 1,000,000 iterations. Table~\ref{tab:reproduction-table6} reports the median and sample standard deviation of the per-read latencies across the five trials.
+Our initial attempt to replicate Table~6 from \citet{niroula2026codoh} using the original artifacts was unsuccessful due to the clock issue explored in Section~\ref{sec:cryptoops}: the enclave clock advances in 1ms steps, thus 100 iterations under 10~$\mu$s each can start and end in the same epoch millisecond, invalidating the results. Therefore, in order to achieve a theoretical 0.001~$\mu$s resolution per operation, we performed the experiments with 1,000,000 iterations. Table~\ref{tab:reproduction-table6} and Figure~\ref{fig:pathoram-read-latency} report the median and sample standard deviation of the per-read latencies across the five trials.
  
 \input{tables/pathoram-read-latency}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{figures/pathoram-read-latency.pdf}
+    \caption{Median PathORAM and linear scan read latency under SGX (4 KiB blocks) on a logarithmic scale. Error bars show one sample standard deviation on either side of the median across five trials.}
+    \label{fig:pathoram-read-latency}
+\end{figure}
 
 \section{Batch Size effect on End-to-end Latency}
 \label{sec:batchsizeeffect}

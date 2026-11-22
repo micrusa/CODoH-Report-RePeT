@@ -36,7 +36,6 @@
 \newlabel{tab:reproduction-table4-1m}{{4}{3}{}{}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Cache read latency}{3}{}\protected@file@percent }
 \citation{niroula2026codoh}
-\citation{niroula2026codoh}
 \@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Cache read latency in ${}\mu $s by cache capacity. Latencies are shown as median $\pm $ sample standard deviation across five trials. One warm-up trial per benchmark case and mode was discarded.}}{4}{}\protected@file@percent }
 \newlabel{tab:reproduction-table5}{{5}{4}{}{}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Median ORAM read latency by cache capacity. Error bars show one sample standard deviation on either side of the median.}}{4}{}\protected@file@percent }
@@ -45,22 +44,23 @@
 \@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces PathORAM and linear scan read latency under SGX in ${}\mu $s (4 KiB blocks). Latencies are shown as median $\pm $ sample standard deviation across five trials. One warm-up trial per benchmark case and mode was discarded.}}{4}{}\protected@file@percent }
 \newlabel{tab:reproduction-table6}{{6}{4}{}{}{}}
 \citation{niroula2026codoh}
+\citation{niroula2026codoh}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Median PathORAM and linear scan read latency under SGX (4 KiB blocks) on a logarithmic scale. Error bars show one sample standard deviation on either side of the median across five trials.}}{5}{}\protected@file@percent }
+\newlabel{fig:pathoram-read-latency}{{2}{5}{}{}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {4}Batch Size effect on End-to-end Latency}{5}{}\protected@file@percent }
 \newlabel{sec:batchsizeeffect}{{4}{5}{}{}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Batch Size at Constant Batch Commit Probability}{5}{}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces End-to-end latency for full CODoH (C5) by batch size. Each cell reports the mean of the corresponding percentile across five trials $\pm $ its sample standard deviation, in milliseconds. The first 1,000 queries of each workload were excluded from each trial.}}{5}{}\protected@file@percent }
 \newlabel{tab:batch-size-median-latency}{{7}{5}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Cache hit rates for full CODoH (C5) by batch size. Each value is the mean hit percentage $\pm $ the sample standard deviation in percentage points across five trials. Hit rates use queries classified as hits or misses after excluding the first 1,000 queries of each workload in each trial.}}{5}{}\protected@file@percent }
-\newlabel{tab:batch-size-cache-hits}{{8}{5}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Mean cache hit rate for full CODoH (C5) by batch size across workloads. Error bars show one sample standard deviation on either side of the mean across five trials.}}{6}{}\protected@file@percent }
-\newlabel{fig:batch-size-cache-hits}{{2}{6}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Cache hit rates for full CODoH (C5) by batch size. Each value is the mean hit percentage $\pm $ the sample standard deviation in percentage points across five trials. Hit rates use queries classified as hits or misses after excluding the first 1,000 queries of each workload in each trial.}}{6}{}\protected@file@percent }
+\newlabel{tab:batch-size-cache-hits}{{8}{6}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Mean cache hit rate for full CODoH (C5) by batch size across workloads. Error bars show one sample standard deviation on either side of the mean across five trials.}}{6}{}\protected@file@percent }
+\newlabel{fig:batch-size-cache-hits}{{3}{6}{}{}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Batch Size at Constant Insertion Budget}{6}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {5}Conclusion}{6}{}\protected@file@percent }
 \newlabel{sec:conclusion}{{5}{6}{}{}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {6}Use of generative digital tools}{6}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Final Report}{6}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Peer Review}{6}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Seminar Presentation}{6}{}\protected@file@percent }
 \bibstyle{apalike}
 \bibdata{references}
 \bibcite{azure_dcsv2_retirement}{{1}{2026a}{{Microsoft}}{{}}}
@@ -69,5 +69,7 @@
 \bibcite{niroula2026codoh}{{4}{2026}{{Niroula et~al.}}{{}}}
 \bibcite{go124release}{{5}{2025a}{{The Go Authors}}{{}}}
 \bibcite{go1251getrandom}{{6}{2025b}{{The Go Authors}}{{}}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Peer Review}{7}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Seminar Presentation}{7}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Programming Project}{7}{}\protected@file@percent }
 \gdef \@abspage@last{7}

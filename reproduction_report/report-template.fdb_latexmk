@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex report-template"] 1795361361.63516 "report-template.aux" "report-template.bbl" "report-template" 1795361361.902 0
+["bibtex report-template"] 1795361641.02653 "report-template.aux" "report-template.bbl" "report-template" 1795361641.32743 0
   "./references.bib" 1795204338.96466 1980 ab6b07f781a7f00e15e64f31067bfe7f ""
   "/usr/share/texlive/texmf-dist/bibtex/bst/base/apalike.bst" 1292289607 24635 604dafcc79f521a11ea73e506e1fbd98 ""
-  "report-template.aux" 1795361361.84254 6485 5a6ea67abc247ec61e73b36cad9db24a "pdflatex"
+  "report-template.aux" 1795361641.24445 6827 0bf5c3b201f134fead9801fb76999143 "pdflatex"
   (generated)
   "report-template.bbl"
   "report-template.blg"
   (rewritten before read)
-["pdflatex"] 1795361361.64817 "report-template.tex" "report-template.pdf" "report-template" 1795361361.90215 0
+["pdflatex"] 1795361641.04031 "report-template.tex" "report-template.pdf" "report-template" 1795361641.32758 0
   "/etc/texmf/web2c/texmf.cnf" 1758575451.87394 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/micrusa/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm0900.600pk" 1792921101.70312 10448 b91b19b5f1f580070b674b8d9156303f ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
@@ -110,9 +110,10 @@
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1792921880 7277441 ae26ff88bc5eed055374cc6047679b17 ""
   "figures/batch-size-cache-hits.pdf" 1795361321.62169 18037 1bf639371c8012903ab98fba9830639b ""
   "figures/cache-read-latency.pdf" 1795350914.89622 16055 612501cc0c8a51b54ea5875b451b26f6 ""
-  "report-template.aux" 1795361361.84254 6485 5a6ea67abc247ec61e73b36cad9db24a "pdflatex"
-  "report-template.bbl" 1795361361.64254 1536 57d1f6df771f363a9400a67d968f8b8f "bibtex report-template"
-  "report-template.tex" 1795361352.09434 14834 2ebeee143fc17cb4f63ed813dc98688e ""
+  "figures/pathoram-read-latency.pdf" 1795361640.56443 19752 ebdf86967ea8ce362a0c1961da6664f2 ""
+  "report-template.aux" 1795361641.24445 6827 0bf5c3b201f134fead9801fb76999143 "pdflatex"
+  "report-template.bbl" 1795361641.03644 1536 57d1f6df771f363a9400a67d968f8b8f "bibtex report-template"
+  "report-template.tex" 1795361626.60014 15238 3481123d3ebabcf7552b1f7182588808 ""
   "tables/batch-size-cache-hits.tex" 1795343424.53698 727 10c112de8fbb46592f90116c74543ea7 ""
   "tables/batch-size-latency.tex" 1795344986.60818 1407 2a738897fa75500d006485a216c539de ""
   "tables/cache-read-latency.tex" 1795350621.29231 778 2777112eb920e429f108a2ea7276df5b ""
