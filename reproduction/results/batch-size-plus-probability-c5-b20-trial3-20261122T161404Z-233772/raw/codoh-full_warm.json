@@ -1,0 +1,20 @@
+{
+  "protocol": "codoh",
+  "distribution": "sequential",
+  "iterations": 10000,
+  "successful": 10000,
+  "failed": 0,
+  "cache_hits": 9598,
+  "cache_misses": 402,
+  "cache_hit_rate": 0.9598,
+  "latency_ms": {
+    "min": 30.937,
+    "max": 272.239,
+    "mean": 34.02625530000007,
+    "p50": 32.33,
+    "p95": 34.562,
+    "p99": 69.315
+  },
+  "throughput_qps": 29.387308830005754,
+  "total_duration_s": 340.282945194
+}

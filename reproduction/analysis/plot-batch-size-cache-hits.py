@@ -18,11 +18,21 @@ WORKLOADS = (("cold", "Cold"), ("zipf", "Zipf"), ("warm", "Warm"))
 COLORS = ("#93c5fd", "#3b82f6", "#1d4ed8", "#1e3a8a")
 
 
+def format_probability(batch_size: int, prob: float) -> str:
+    if abs(prob - 1.0 / 256.0) < 1e-9:
+        return "1/256"
+    return f"{prob:g}"
+
+
 def load_hit_rates(trials_csv: Path):
     grouped = defaultdict(list)
+    probs = {}
     with trials_csv.open(newline="") as file:
         for row in csv.DictReader(file):
-            grouped[(int(row["batch_size"]), row["workload"])].append(float(row["cache_hit_rate"]) * 100.0)
+            batch_size = int(row["batch_size"])
+            grouped[(batch_size, row["workload"])].append(float(row["cache_hit_rate"]) * 100.0)
+            if "commit_probability" in row and row["commit_probability"]:
+                probs[batch_size] = float(row["commit_probability"])
     stats = {}
     for batch_size in BATCH_SIZES:
         for workload, _ in WORKLOADS:
@@ -30,16 +40,19 @@ def load_hit_rates(trials_csv: Path):
             if len(values) < 2:
                 raise ValueError(f"Expected at least 2 trials for B={batch_size}, workload={workload}")
             stats[(batch_size, workload)] = (mean(values), stdev(values))
-    return stats
+    return stats, probs
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("comparison_dir", type=Path, help="Directory containing trials.csv")
     parser.add_argument("--output-pdf", type=Path, help="Optional extra PDF output path")
+    parser.add_argument("--show-p", action="store_true", help="Include commit probability p in the legend")
+    parser.add_argument("--title", help="Custom chart title")
     args = parser.parse_args()
 
-    stats = load_hit_rates(args.comparison_dir / "trials.csv")
+    stats, probs = load_hit_rates(args.comparison_dir / "trials.csv")
+    show_p = args.show_p or (len(set(probs.values())) > 1)
 
     fig, ax = plt.subplots(figsize=(8, 4.5), layout="constrained")
     x = np.arange(len(WORKLOADS))
@@ -50,6 +63,10 @@ def main():
         means = [stats[(batch_size, w)][0] for w, _ in WORKLOADS]
         sds = [stats[(batch_size, w)][1] for w, _ in WORKLOADS]
         positions = x + offsets[idx]
+        if show_p and batch_size in probs:
+            label = f"B = {batch_size} (p = {format_probability(batch_size, probs[batch_size])})"
+        else:
+            label = f"B = {batch_size}"
         bars = ax.bar(
             positions,
             means,
@@ -60,7 +77,7 @@ def main():
             edgecolor="#1e293b",
             linewidth=0.5,
             error_kw={"ecolor": "#0f172a", "elinewidth": 1.0, "capthick": 1.0},
-            label=f"B = {batch_size}",
+            label=label,
             zorder=3,
         )
         for bar, val, err in zip(bars, means, sds):
@@ -80,7 +97,12 @@ def main():
     ax.set_ylabel("Cache hit rate (%)")
     ax.set_ylim(0, 108)
     ax.set_yticks([0, 20, 40, 60, 80, 100])
-    ax.set_title("Full CODoH (C5) cache hit rate by batch size")
+    default_title = (
+        "Full CODoH (C5) cache hit rate by batch size (p = 1/B)"
+        if show_p
+        else "Full CODoH (C5) cache hit rate by batch size"
+    )
+    ax.set_title(args.title or default_title)
     ax.grid(axis="y", alpha=0.25, zorder=0)
     ax.legend(title="Batch size", frameon=True, loc="upper left")
 

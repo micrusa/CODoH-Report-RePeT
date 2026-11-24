@@ -1,0 +1,60 @@
+Linux codoh-client 6.8.0-1016-ibm #16-Ubuntu SMP Fri Nov  8 01:10:08 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux
+PRETTY_NAME="Ubuntu 24.04.1 LTS"
+NAME="Ubuntu"
+VERSION_ID="24.04"
+VERSION="24.04.1 LTS (Noble Numbat)"
+VERSION_CODENAME=noble
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=noble
+LOGO=ubuntu-logo
+Architecture:                         x86_64
+CPU op-mode(s):                       32-bit, 64-bit
+Address sizes:                        40 bits physical, 48 bits virtual
+Byte Order:                           Little Endian
+CPU(s):                               2
+On-line CPU(s) list:                  0,1
+Vendor ID:                            GenuineIntel
+Model name:                           Intel Xeon Processor (Cascadelake)
+CPU family:                           6
+Model:                                85
+Thread(s) per core:                   2
+Core(s) per socket:                   1
+Socket(s):                            1
+Stepping:                             6
+BogoMIPS:                             4788.61
+Flags:                                fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx pdpe1gb rdtscp lm constant_tsc rep_good nopl xtopology cpuid tsc_known_freq pni pclmulqdq vmx ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm abm 3dnowprefetch cpuid_fault ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid mpx avx512f avx512dq rdseed adx smap clflushopt clwb avx512cd avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves arat vnmi umip pku ospke avx512_vnni overflow_recov succor md_clear flush_l1d arch_capabilities
+Virtualization:                       VT-x
+Hypervisor vendor:                    KVM
+Virtualization type:                  full
+L1d cache:                            64 KiB (2 instances)
+L1i cache:                            64 KiB (2 instances)
+L2 cache:                             4 MiB (1 instance)
+L3 cache:                             16 MiB (1 instance)
+NUMA node(s):                         1
+NUMA node0 CPU(s):                    0,1
+Vulnerability Gather data sampling:   Not affected
+Vulnerability Itlb multihit:          Not affected
+Vulnerability L1tf:                   Not affected
+Vulnerability Mds:                    Not affected
+Vulnerability Meltdown:               Not affected
+Vulnerability Mmio stale data:        Mitigation; Clear CPU buffers; SMT Host state unknown
+Vulnerability Reg file data sampling: Not affected
+Vulnerability Retbleed:               Mitigation; Enhanced IBRS
+Vulnerability Spec rstack overflow:   Not affected
+Vulnerability Spec store bypass:      Mitigation; Speculative Store Bypass disabled via prctl
+Vulnerability Spectre v1:             Mitigation; usercopy/swapgs barriers and __user pointer sanitization
+Vulnerability Spectre v2:             Mitigation; Enhanced / Automatic IBRS; IBPB conditional; RSB filling; PBRSB-eIBRS SW sequence; BHI SW loop, KVM SW loop
+Vulnerability Srbds:                  Not affected
+Vulnerability Tsx async abort:        Not affected
+go version go1.25.1 linux/amd64
+4fd30adbd237100399e8ea5a3ed6378196695346
+ 3ec47ebe8500e565ab0f06345e5725e1c4cfc67c repos/codoh-client (pets26-artifact)
+ 7755872e1de6111f49cf13aad3bb6c102a6a3904 repos/codoh-evals (pets26-artifact)
+ 37bffe3cc1a97574ddffc08500d4a93e22778db4 repos/coredns (pets26-artifact)
+-793ff9e64d7a76c84230b3ef83048dea91f07b85 repos/dnscrypt-proxy
+-26e56eb174663a8af67120500a36df0d62ef7dc7 repos/pathoram-go

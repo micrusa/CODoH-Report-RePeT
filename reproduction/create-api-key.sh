@@ -1,17 +1,25 @@
 #!/usr/bin/env bash
 
 if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
-    printf '%s\n' 'Run source ./create-api-key.sh to export the key in your current shell.' >&2
+    printf '%s\n' 'Run source ./create-api-key.sh [duration] to export the key in your current shell.' >&2
     exit 1
 fi
 
 _codoh_create_api_key() {
-    local expiry name key traced=0 status=0
+    local duration=${1-1h} unit expiry name key traced=0 status=0
+    if [[ $# -gt 1 || ! $duration =~ ^[1-9][0-9]*[mh]$ ]]; then
+        printf '%s\n' 'Usage: source ./create-api-key.sh [duration] (e.g. 5m or 1h, default 1h).' >&2
+        return 1
+    fi
+    case ${duration: -1} in
+        m) unit=minutes ;;
+        h) unit=hours ;;
+    esac
     if ! command -v ibmcloud >/dev/null || ! command -v jq >/dev/null; then
         printf '%s\n' 'Install the IBM Cloud CLI and jq first.' >&2
         return 1
     fi
-    expiry=$(date -u -d '+1 hour' '+%Y-%m-%dT%H:%M:%S+0000') || return
+    expiry=$(date -u -d "+${duration%?} $unit" '+%Y-%m-%dT%H:%M:%S+0000') || return
     name="codoh-terraform-$(date -u '+%Y%m%dT%H%M%S')-$$"
 
     if [[ $- == *x* ]]; then
@@ -35,7 +43,7 @@ _codoh_create_api_key() {
     return "$status"
 }
 
-if _codoh_create_api_key; then
+if _codoh_create_api_key "$@"; then
     unset -f _codoh_create_api_key
 else
     unset -f _codoh_create_api_key

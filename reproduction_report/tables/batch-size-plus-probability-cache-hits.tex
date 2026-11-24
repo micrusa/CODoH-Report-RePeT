@@ -1,0 +1,19 @@
+\begin{table}[H]
+\centering
+\begin{tabular}{llrrr}
+\toprule
+Batch size $B$ & $p$ & Cold & Zipf & Warm \\
+\midrule
+10 & 0.1 & $1.16 \pm 0.15$ & $57.64 \pm 1.46$ & $96.81 \pm 0.11$ \\
+20 & 0.05 & $1.28 \pm 0.12$ & $57.11 \pm 0.98$ & $96.39 \pm 0.52$ \\
+50 & 0.02 & $1.28 \pm 0.04$ & $57.54 \pm 0.99$ & $96.63 \pm 0.40$ \\
+256 & 1/256 & $1.33 \pm 0.17$ & $56.22 \pm 1.06$ & $94.57 \pm 0.78$ \\
+\bottomrule
+\end{tabular}
+\caption{Cache hit rates for full CODoH (C5) by batch size with constant insertion budget ($p = 1/B$).
+Each value is the mean hit percentage $\pm$ the sample standard
+deviation in percentage points across five trials. Hit rates use
+queries classified as hits or misses after excluding the first
+1,000 queries of each workload in each trial.}
+\label{tab:batch-size-plus-probability-cache-hits}
+\end{table}

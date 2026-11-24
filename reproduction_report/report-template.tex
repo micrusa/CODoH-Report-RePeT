@@ -152,23 +152,33 @@ Our initial attempt to replicate Table~6 from \citet{niroula2026codoh} using the
 
 We performed the experiments using the artifacts from Table~3 of \citet{niroula2026codoh}, running five trials per explored Batch Size $B$ and workload (Cold, Zipf, Warm), keeping all other parameters constant: a cache size of $N=1024$ entries, a batch commit probability of $p=0.1$ and a cover count of $k=3$.
 
-Table~\ref{tab:batch-size-median-latency} shows that the latency percentiles did not vary significantly across the tested batch sizes for all workloads. On the other side, the cache hit rate did show a clear difference across batch sizes (Table~\ref{tab:batch-size-cache-hits} and Figure~\ref{fig:batch-size-cache-hits}), which rose from 57.78--59.82\% at $B=10$ and $B=20$ to 70.61--71.01\% at $B=50$ and $B=256$.
+Table~\ref{tab:batch-size-median-latency} shows that the latency percentiles did not vary significantly across the tested batch sizes for all workloads. On the other side, the cache hit rate did show a clear difference across batch sizes (Figure~\ref{fig:batch-size-cache-hits}; exact values in Table~\ref{tab:batch-size-cache-hits}, Appendix~\ref{app:cache-hit-rates}), which rose from 57.78--59.82\% at $B=10$ and $B=20$ to 70.61--71.01\% at $B=50$ and $B=256$.
 
-In the released implementation from \citet{niroula2026codoh}, to compensate the sequential workload, the batching behavior was different from the protocol's: $B$ acts as a limit of inserted entries per batch, while $p$ determines the probability of a query triggering a cache insertion of up to $B$ responses. This may explain the higher cache hit rates in Table~\ref{tab:batch-size-cache-hits}, although it did not translate in a significant reduction in the Zipf latency percentiles.
+In the released implementation from \citet{niroula2026codoh}, to compensate the sequential workload, the batching behavior was different from the protocol's: $B$ acts as a limit of inserted entries per batch, while $p$ determines the probability of a query triggering a cache insertion of up to $B$ responses. This may explain the higher cache hit rates in Figure~\ref{fig:batch-size-cache-hits}, although it did not translate in a significant reduction in the Zipf latency percentiles.
 
 \input{tables/batch-size-latency}
-\input{tables/batch-size-cache-hits}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\linewidth]{figures/batch-size-cache-hits.pdf}
-    \caption{Mean cache hit rate for full CODoH (C5) by batch size across workloads. Error bars show one sample standard deviation on either side of the mean across five trials.}
+    \caption{Mean cache hit rate for full CODoH (C5) by batch size across workloads at constant batch commit probability ($p = 0.1$). Error bars show one sample standard deviation on either side of the mean across five trials.}
     \label{fig:batch-size-cache-hits}
 \end{figure}
 
 \subsection{Batch Size at Constant Insertion Budget}
 
 With a fixed commit probability of $p=0.1$, the average number of insertions to the cache per query also increased with the batch size $B$ increases, by increasing the limit of responses inserted per each insertion. To control this effect, we repeated the experiments with $p=1/B$, attempting to simulate a real workload, where higher batch sizes result in less frequent cache insertions. We kept the same workloads, and the rest of parameters.
+
+Table~\ref{tab:batch-size-plus-probability-latency} reports the resulting end-to-end latency percentiles, and Figure~\ref{fig:batch-size-plus-probability-cache-hits} shows the corresponding cache hit rates (exact values in Table~\ref{tab:batch-size-plus-probability-cache-hits}, Appendix~\ref{app:cache-hit-rates}). Under a constant insertion budget, the Zipf cache hit rate remained steady across batch sizes (56.22--57.64\%) rather than increasing at larger $B$. For the warm workload, the cache hit rate decreased from 96.39--96.81\% for $B \le 50$ to 94.57\% at $B=256$, pushing the warm p95 latency from 33.91--35.38~ms to 64.87~ms as the 95th percentile shifted from cache hits to cache misses.
+
+\input{tables/batch-size-plus-probability-latency}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{figures/batch-size-plus-probability-cache-hits.pdf}
+    \caption{Mean cache hit rate for full CODoH (C5) by batch size across workloads with constant insertion budget ($p = 1/B$). Error bars show one sample standard deviation on either side of the mean across five trials.}
+    \label{fig:batch-size-plus-probability-cache-hits}
+\end{figure}
 
 
 
@@ -195,7 +205,7 @@ No generative digital tools have been used to do the peer review.
 
 LLMs have been used for the following purposes:
 
-\textbf{Generation of Figure~\ref{fig-odoh-latency} chart} with prompts of the type "Generate code that uses matplotlib/python to generate a chart to display [...] from this table: [...]"
+A. Generation of charts with prompts of the type "Generate code that uses matplotlib/python to generate a chart to display [...] from this table: [...]"
 
 \subsection{Programming Project}
 
@@ -216,6 +226,11 @@ E. Generation of tables, with prompts such as \textit{"Add my batch-size-compari
 
 \bibliography{references}
 
+\appendix
+\section{Cache Hit Rate Tables}
+\label{app:cache-hit-rates}
 
+\input{tables/batch-size-cache-hits}
+\input{tables/batch-size-plus-probability-cache-hits}
 
 \end{document}
