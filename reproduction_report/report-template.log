@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.25)  23 NOV 2026 13:39
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.11.26)  27 NOV 2026 21:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -64,7 +64,7 @@ Package: iftex 2022/02/03 v1.0f TeX engine tests
 Package: babel 2024/01/07 v24.1 The Babel package
 \babel@savecnt=\count198
 \U@D=\dimen149
-\l@unhyphenated=\language10
+\l@unhyphenated=\language14
 
 (/usr/share/texlive/texmf-dist/tex/generic/babel/txtbabel.def)
 \bbl@readstream=\read2
@@ -385,40 +385,54 @@ om-puted nonces took ap-prox-i-mately $\OT1/cmr/m/n/10 0\OML/cmm/m/it/10 :\OT1/
 cmr/m/n/10 147 \OML/cmm/m/it/10 ^^V\OT1/cmr/m/n/10 s$
  []
 
-(./tables/crypto-latency-1m.tex) (./tables/cache-read-latency.tex) [3]
-<figures/cache-read-latency.pdf, id=22, 578.16pt x 325.215pt>
+(./tables/crypto-latency-1m.tex)
+Overfull \hbox (12.98512pt too wide) in paragraph at lines 120--121
+[]\T1/ptm/m/n/10 To test this hy-poth-e-sis di-rectly on the same proxy hard-wa
+re, we up-graded the proxy VM to the Ubuntu 24.04
+ []
+
+(./tables/crypto-latency-1m-kernel-7.tex) [3]
+<figures/nonce-gen-kernel-comparison.pdf, id=22, 462.52798pt x 303.534pt>
+File: figures/nonce-gen-kernel-comparison.pdf Graphic file (type pdf)
+<use figures/nonce-gen-kernel-comparison.pdf>
+Package pdftex.def Info: figures/nonce-gen-kernel-comparison.pdf  used on input
+ line 126.
+(pdftex.def)             Requested size: 362.77525pt x 238.08481pt.
+ (./tables/cache-read-latency.tex) [4 <./figures/nonce-gen-kernel-comparison.pd
+f>]
+<figures/cache-read-latency.pdf, id=73, 578.16pt x 325.215pt>
 File: figures/cache-read-latency.pdf Graphic file (type pdf)
 <use figures/cache-read-latency.pdf>
-Package pdftex.def Info: figures/cache-read-latency.pdf  used on input line 130
+Package pdftex.def Info: figures/cache-read-latency.pdf  used on input line 141
 .
 (pdftex.def)             Requested size: 426.79135pt x 240.06976pt.
 
 (./tables/pathoram-read-latency.tex)
-<figures/pathoram-read-latency.pdf, id=23, 578.16pt x 325.215pt>
+<figures/pathoram-read-latency.pdf, id=74, 578.16pt x 325.215pt>
 File: figures/pathoram-read-latency.pdf Graphic file (type pdf)
 <use figures/pathoram-read-latency.pdf>
 Package pdftex.def Info: figures/pathoram-read-latency.pdf  used on input line 
-143.
+154.
 (pdftex.def)             Requested size: 426.79135pt x 240.06976pt.
- [4 <./figures/cache-read-latency.pdf>]
+ [5 <./figures/cache-read-latency.pdf>]
 (./tables/batch-size-latency.tex)
-<figures/batch-size-cache-hits.pdf, id=69, 578.16pt x 325.215pt>
+<figures/batch-size-cache-hits.pdf, id=120, 578.16pt x 325.215pt>
 File: figures/batch-size-cache-hits.pdf Graphic file (type pdf)
 <use figures/batch-size-cache-hits.pdf>
 Package pdftex.def Info: figures/batch-size-cache-hits.pdf  used on input line 
-163.
+174.
 (pdftex.def)             Requested size: 426.79135pt x 240.06976pt.
- [5 <./figures/pathoram-read-latency.pdf>]
+ [6 <./figures/pathoram-read-latency.pdf>]
 (./tables/batch-size-plus-probability-latency.tex)
-<figures/batch-size-plus-probability-cache-hits.pdf, id=127, 578.16pt x 325.215
+<figures/batch-size-plus-probability-cache-hits.pdf, id=178, 578.16pt x 325.215
 pt>
 File: figures/batch-size-plus-probability-cache-hits.pdf Graphic file (type pdf
 )
 <use figures/batch-size-plus-probability-cache-hits.pdf>
 Package pdftex.def Info: figures/batch-size-plus-probability-cache-hits.pdf  us
-ed on input line 178.
+ed on input line 189.
 (pdftex.def)             Requested size: 426.79135pt x 240.06976pt.
- [6 <./figures/batch-size-cache-hits.pdf>] [7 <./figures/batch-size-plus-probab
+ [7 <./figures/batch-size-cache-hits.pdf>] [8 <./figures/batch-size-plus-probab
 ility-cache-hits.pdf>]
 (./report-template.bbl
 Underfull \hbox (badness 10000) in paragraph at lines 11--16
@@ -427,7 +441,7 @@ ent / dcsv3 -[] series -[]
  []
 
 ) (./tables/batch-size-cache-hits.tex)
-(./tables/batch-size-plus-probability-cache-hits.tex) [8] [9]
+(./tables/batch-size-plus-probability-cache-hits.tex) [9] [10]
 (./report-template.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
@@ -435,12 +449,12 @@ L3 programming layer <2024-01-22>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 5862 strings out of 476129
- 94457 string characters out of 5793185
+ 5879 strings out of 476056
+ 95200 string characters out of 5791603
  1943975 words of memory out of 5000000
- 27748 multiletter control sequences out of 15000+600000
+ 27769 multiletter control sequences out of 15000+600000
  590051 words of font info for 90 fonts, out of 8000000 for 9000
- 14 hyphenation exceptions out of 8191
+ 59 hyphenation exceptions out of 8191
  79i,12n,93p,986b,352s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </home/micrusa/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm0900.6
 00pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
@@ -452,10 +466,10 @@ t/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts
 /type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/ti
 mes/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
 </usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on report-template.pdf (9 pages, 203567 bytes).
+Output written on report-template.pdf (10 pages, 218318 bytes).
 PDF statistics:
- 287 PDF objects out of 1000 (max. 8388607)
- 77 compressed objects within 1 object stream
+ 338 PDF objects out of 1000 (max. 8388607)
+ 84 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,0 +1,21 @@
+\begin{table}[H]
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lrrr}
+\toprule
+Operation & Plain & SGX & Overhead \\
+\midrule
+HPKE encrypt & $65.68 \pm 0.01433$ & $76.25 \pm 0.02117$ & $1.16\times$ \\
+HPKE decrypt & $41.57 \pm 0.02864$ & $47.89 \pm 0.0114$ & $1.15\times$ \\
+AES-GCM seal & $0.8353 \pm 0.005137$ & $1.811 \pm 0.03696$ & $2.17\times$ \\
+\quad AES-GCM seal (precomputed nonce) & $0.1465 \pm 0.0001304$ & $0.1481 \pm 0.004172$ & $1.01\times$ \\
+\quad Nonce generation & $0.05259 \pm 0.0001306$ & $0.3367 \pm 0.002804$ & $6.40\times$ \\
+AES-GCM open & $0.6071 \pm 0.003324$ & $1.216 \pm 0.0191$ & $2.00\times$ \\
+Ed25519 sign & $20.57 \pm 0.003347$ & $22.18 \pm 0.0237$ & $1.08\times$ \\
+Ed25519 verify & $45.96 \pm 0.1454$ & $51.81 \pm 0.3256$ & $1.13\times$ \\
+\bottomrule
+\end{tabular}
+\caption{Per-operation cryptographic latency in ${}\mu$s on the proxy VM upgraded to Linux~7.0.0-44-generic (Ubuntu~24.04 HWE). One million operations per trial. Latencies are shown as median $\pm$ sample standard deviation across five trials. One warm-up trial per benchmark case and mode was discarded.}
+\label{tab:reproduction-table4-1m-kernel7}
+\end{table}

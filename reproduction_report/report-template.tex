@@ -117,6 +117,17 @@ In the longer run, reported in Table~\ref{tab:reproduction-table4-1m}, AES-GCM w
 
 \input{tables/crypto-latency-1m}
 
+To test this hypothesis directly on the same proxy hardware, we upgraded the proxy VM to the Ubuntu~24.04 HWE kernel (Linux~7.0.0-44-generic) and repeated the 1M operation benchmark (Table~\ref{tab:reproduction-table4-1m-kernel7}). With the newer kernel, non-SGX nonce generation dropped by $8.2\times$, from $0.433\,\mu\mathrm{s}$ to $0.0526\,\mu\mathrm{s}$ (Figure~\ref{fig:nonce-gen-kernel-comparison}), close to \citet{niroula2026codoh}'s reported $0.04\,\mu\mathrm{s}$. Meanwhile, SGX nonce generation remained unchanged at $0.337\,\mu\mathrm{s}$, shifting its SGX overhead from $0.781\times$ to $6.40\times$ and bringing AES-GCM seal from $0.924\times$ to $2.17\times$. Therefore, the discrepancies in the previous experiments is very likely to be caused by the experiments being ran on different linux kernel versions.
+
+\input{tables/crypto-latency-1m-kernel-7}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\linewidth]{figures/nonce-gen-kernel-comparison.pdf}
+    \caption{Median non-SGX nonce generation latency on the IBM Cloud proxy VM under Linux~6.8.0-1016-ibm vs.\ Linux~7.0.0-44-generic, at 1,000,000 operations per trial. Error bars show one sample standard deviation on either side of the median across five trials.}
+    \label{fig:nonce-gen-kernel-comparison}
+\end{figure}
+
 \subsection{Cache read latency}
 
 We replicated the cache read latency experiments from Table~5 \citep{niroula2026codoh} 

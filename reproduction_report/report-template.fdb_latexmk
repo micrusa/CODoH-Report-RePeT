@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex report-template"] 1795436729.78846 "report-template.aux" "report-template.bbl" "report-template" 1795436730.05971 0
+["bibtex report-template"] 1795810628.21314 "report-template.aux" "report-template.bbl" "report-template" 1795810628.53362 0
   "./references.bib" 1795204338.96466 1980 ab6b07f781a7f00e15e64f31067bfe7f ""
   "/usr/share/texlive/texmf-dist/bibtex/bst/base/apalike.bst" 1292289607 24635 604dafcc79f521a11ea73e506e1fbd98 ""
-  "report-template.aux" 1795436730.00136 8429 446105e6433a08edcfb431b20e98f578 "pdflatex"
+  "report-template.aux" 1795810628.46414 9351 260e18303a1f11510028533042594f46 "pdflatex"
   (generated)
   "report-template.bbl"
   "report-template.blg"
   (rewritten before read)
-["pdflatex"] 1795436729.80159 "report-template.tex" "report-template.pdf" "report-template" 1795436730.05983 0
+["pdflatex"] 1795810628.23038 "report-template.tex" "report-template.pdf" "report-template" 1795810628.53377 0
   "/etc/texmf/web2c/texmf.cnf" 1758575451.87394 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/micrusa/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm0900.600pk" 1792921101.70312 10448 b91b19b5f1f580070b674b8d9156303f ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
@@ -106,20 +106,22 @@
   "/usr/share/texlive/texmf-dist/tex/latex/url/url.sty" 1388531844 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
   "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
-  "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1792230069.14776 128028 f533b797fba58d231669ea19e894e23e ""
-  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1792921880 7277441 ae26ff88bc5eed055374cc6047679b17 ""
+  "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1795716585.89283 165012 f177baa1c39a3ebd62c3096a43521a0d ""
+  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1795716616 7306617 38842b49b7a711420ffb2c5083a02ed2 ""
   "figures/batch-size-cache-hits.pdf" 1795361321.62169 18037 1bf639371c8012903ab98fba9830639b ""
   "figures/batch-size-plus-probability-cache-hits.pdf" 1795436729.34136 18214 d214056010a7b85ed4a4e7d3328026d5 ""
   "figures/cache-read-latency.pdf" 1795350914.89622 16055 612501cc0c8a51b54ea5875b451b26f6 ""
+  "figures/nonce-gen-kernel-comparison.pdf" 1795810627.68012 16113 f0837f9d9e1ff0a773773168e0a4bd36 ""
   "figures/pathoram-read-latency.pdf" 1795361640.56443 19752 ebdf86967ea8ce362a0c1961da6664f2 ""
-  "report-template.aux" 1795436730.00136 8429 446105e6433a08edcfb431b20e98f578 "pdflatex"
-  "report-template.bbl" 1795436729.79984 1536 57d1f6df771f363a9400a67d968f8b8f "bibtex report-template"
-  "report-template.tex" 1795436718.88521 16630 e26952bc070f9a985abc64bc157a2da1 ""
+  "report-template.aux" 1795810628.46414 9351 260e18303a1f11510028533042594f46 "pdflatex"
+  "report-template.bbl" 1795810628.22831 1536 57d1f6df771f363a9400a67d968f8b8f "bibtex report-template"
+  "report-template.tex" 1795810618.94427 17817 d29acf69ca03440ab73edb350bd56911 ""
   "tables/batch-size-cache-hits.tex" 1795436715.96117 776 1aca8ff435016a21293334a29fa91db8 ""
   "tables/batch-size-latency.tex" 1795344986.60818 1407 2a738897fa75500d006485a216c539de ""
   "tables/batch-size-plus-probability-cache-hits.tex" 1795436714.41315 822 5e1bea889e89b4fda8b2e61730eae195 ""
   "tables/batch-size-plus-probability-latency.tex" 1795436713.49714 1494 a79ac8dd2031f3d50b446f64dac2e27d ""
   "tables/cache-read-latency.tex" 1795350621.29231 778 2777112eb920e429f108a2ea7276df5b ""
+  "tables/crypto-latency-1m-kernel-7.tex" 1795810616.85193 1177 861d84c9d4f48b38c824ab2faae2b075 ""
   "tables/crypto-latency-1m.tex" 1795350438.171 1100 34106a1c2c058c59e48321321865f56a ""
   "tables/crypto-latency.tex" 1795191106.3202 640 ba06a2ce44544198d21bbb40786925d6 ""
   "tables/end-to-end-latency.tex" 1795254044.18479 1384 c9c2297ad7068dce69dbd1c52575f9f9 ""

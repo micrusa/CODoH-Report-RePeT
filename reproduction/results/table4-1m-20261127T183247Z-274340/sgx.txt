@@ -1,0 +1,59 @@
+2026/11/27 18:57:05 INFO EGo version=1.8.1 git_commit=ed270acf42619ecafac4bfecbbd032df2e580c4a
+2026/11/27 18:57:05 INFO EGo version=1.8.1 git_commit=ed270acf42619ecafac4bfecbbd032df2e580c4a
+[erthost] loading enclave ...
+[erthost] entering enclave ...
+ERROR: kernel doesn't provide vDSO clock [src/ert/host/vdso.cpp:oe_get_clock_vdso_pointers_ocall:132]
+ERROR: oe_get_clock_vdso_pointers_ocall() failed [src/ertlibc/time.cpp:_init_clock:29]
+[ego] starting application ...
+goos: linux
+goarch: amd64
+pkg: github.com/coredns/coredns/enclave
+BenchmarkHPKE_Seal-4              	 1000000	     76229 ns/op
+BenchmarkHPKE_Seal-4              	 1000000	     76271 ns/op
+BenchmarkHPKE_Seal-4              	 1000000	     76254 ns/op
+BenchmarkHPKE_Seal-4              	 1000000	     76228 ns/op
+BenchmarkHPKE_Seal-4              	 1000000	     76268 ns/op
+BenchmarkHPKE_Seal-4              	 1000000	     76227 ns/op
+BenchmarkHPKE_Open-4              	 1000000	     47942 ns/op
+BenchmarkHPKE_Open-4              	 1000000	     47902 ns/op
+BenchmarkHPKE_Open-4              	 1000000	     47889 ns/op
+BenchmarkHPKE_Open-4              	 1000000	     47881 ns/op
+BenchmarkHPKE_Open-4              	 1000000	     47895 ns/op
+BenchmarkHPKE_Open-4              	 1000000	     47873 ns/op
+BenchmarkAESGCM_Seal-4            	 1000000	      1780 ns/op
+BenchmarkAESGCM_Seal-4            	 1000000	      1860 ns/op
+BenchmarkAESGCM_Seal-4            	 1000000	      1811 ns/op
+BenchmarkAESGCM_Seal-4            	 1000000	      1781 ns/op
+BenchmarkAESGCM_Seal-4            	 1000000	      1813 ns/op
+BenchmarkAESGCM_Seal-4            	 1000000	      1763 ns/op
+BenchmarkAESGCM_Open-4            	 1000000	      1256 ns/op
+BenchmarkAESGCM_Open-4            	 1000000	      1216 ns/op
+BenchmarkAESGCM_Open-4            	 1000000	      1192 ns/op
+BenchmarkAESGCM_Open-4            	 1000000	      1232 ns/op
+BenchmarkAESGCM_Open-4            	 1000000	      1240 ns/op
+BenchmarkAESGCM_Open-4            	 1000000	      1208 ns/op
+BenchmarkAESGCM_Seal_PreNonce-4   	 1000000	       148.0 ns/op
+BenchmarkAESGCM_Seal_PreNonce-4   	 1000000	       157.3 ns/op
+BenchmarkAESGCM_Seal_PreNonce-4   	 1000000	       147.8 ns/op
+BenchmarkAESGCM_Seal_PreNonce-4   	 1000000	       147.9 ns/op
+BenchmarkAESGCM_Seal_PreNonce-4   	 1000000	       148.1 ns/op
+BenchmarkAESGCM_Seal_PreNonce-4   	 1000000	       148.1 ns/op
+BenchmarkNonceGen_Only-4          	 1000000	       339.3 ns/op
+BenchmarkNonceGen_Only-4          	 1000000	       334.9 ns/op
+BenchmarkNonceGen_Only-4          	 1000000	       336.3 ns/op
+BenchmarkNonceGen_Only-4          	 1000000	       341.7 ns/op
+BenchmarkNonceGen_Only-4          	 1000000	       339.9 ns/op
+BenchmarkNonceGen_Only-4          	 1000000	       336.7 ns/op
+BenchmarkEd25519_Sign-4           	 1000000	     22171 ns/op
+BenchmarkEd25519_Sign-4           	 1000000	     22226 ns/op
+BenchmarkEd25519_Sign-4           	 1000000	     22179 ns/op
+BenchmarkEd25519_Sign-4           	 1000000	     22174 ns/op
+BenchmarkEd25519_Sign-4           	 1000000	     22178 ns/op
+BenchmarkEd25519_Sign-4           	 1000000	     22166 ns/op
+BenchmarkEd25519_Verify-4         	 1000000	     51329 ns/op
+BenchmarkEd25519_Verify-4         	 1000000	     51806 ns/op
+BenchmarkEd25519_Verify-4         	 1000000	     52303 ns/op
+BenchmarkEd25519_Verify-4         	 1000000	     51616 ns/op
+BenchmarkEd25519_Verify-4         	 1000000	     51668 ns/op
+BenchmarkEd25519_Verify-4         	 1000000	     52250 ns/op
+PASS

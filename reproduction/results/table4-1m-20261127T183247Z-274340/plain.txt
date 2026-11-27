@@ -1,0 +1,54 @@
+goos: linux
+goarch: amd64
+pkg: github.com/coredns/coredns/enclave
+cpu: Intel Xeon Processor (SapphireRapids)
+BenchmarkHPKE_Seal-4              	 1000000	     65693 ns/op
+BenchmarkHPKE_Seal-4              	 1000000	     65689 ns/op
+BenchmarkHPKE_Seal-4              	 1000000	     65671 ns/op
+BenchmarkHPKE_Seal-4              	 1000000	     65688 ns/op
+BenchmarkHPKE_Seal-4              	 1000000	     65654 ns/op
+BenchmarkHPKE_Seal-4              	 1000000	     65675 ns/op
+BenchmarkHPKE_Open-4              	 1000000	     41526 ns/op
+BenchmarkHPKE_Open-4              	 1000000	     41566 ns/op
+BenchmarkHPKE_Open-4              	 1000000	     41566 ns/op
+BenchmarkHPKE_Open-4              	 1000000	     41573 ns/op
+BenchmarkHPKE_Open-4              	 1000000	     41520 ns/op
+BenchmarkHPKE_Open-4              	 1000000	     41513 ns/op
+BenchmarkAESGCM_Seal-4            	 1000000	       883.4 ns/op
+BenchmarkAESGCM_Seal-4            	 1000000	       840.5 ns/op
+BenchmarkAESGCM_Seal-4            	 1000000	       835.3 ns/op
+BenchmarkAESGCM_Seal-4            	 1000000	       836.0 ns/op
+BenchmarkAESGCM_Seal-4            	 1000000	       826.4 ns/op
+BenchmarkAESGCM_Seal-4            	 1000000	       833.4 ns/op
+BenchmarkAESGCM_Open-4            	 1000000	       610.2 ns/op
+BenchmarkAESGCM_Open-4            	 1000000	       611.4 ns/op
+BenchmarkAESGCM_Open-4            	 1000000	       606.2 ns/op
+BenchmarkAESGCM_Open-4            	 1000000	       607.1 ns/op
+BenchmarkAESGCM_Open-4            	 1000000	       613.0 ns/op
+BenchmarkAESGCM_Open-4            	 1000000	       605.6 ns/op
+BenchmarkAESGCM_Seal_PreNonce-4   	 1000000	       146.5 ns/op
+BenchmarkAESGCM_Seal_PreNonce-4   	 1000000	       146.8 ns/op
+BenchmarkAESGCM_Seal_PreNonce-4   	 1000000	       146.6 ns/op
+BenchmarkAESGCM_Seal_PreNonce-4   	 1000000	       146.5 ns/op
+BenchmarkAESGCM_Seal_PreNonce-4   	 1000000	       146.5 ns/op
+BenchmarkAESGCM_Seal_PreNonce-4   	 1000000	       146.5 ns/op
+BenchmarkNonceGen_Only-4          	 1000000	        52.66 ns/op
+BenchmarkNonceGen_Only-4          	 1000000	        52.88 ns/op
+BenchmarkNonceGen_Only-4          	 1000000	        52.68 ns/op
+BenchmarkNonceGen_Only-4          	 1000000	        52.57 ns/op
+BenchmarkNonceGen_Only-4          	 1000000	        52.59 ns/op
+BenchmarkNonceGen_Only-4          	 1000000	        52.58 ns/op
+BenchmarkEd25519_Sign-4           	 1000000	     20574 ns/op
+BenchmarkEd25519_Sign-4           	 1000000	     20573 ns/op
+BenchmarkEd25519_Sign-4           	 1000000	     20573 ns/op
+BenchmarkEd25519_Sign-4           	 1000000	     20578 ns/op
+BenchmarkEd25519_Sign-4           	 1000000	     20569 ns/op
+BenchmarkEd25519_Sign-4           	 1000000	     20571 ns/op
+BenchmarkEd25519_Verify-4         	 1000000	     46109 ns/op
+BenchmarkEd25519_Verify-4         	 1000000	     46074 ns/op
+BenchmarkEd25519_Verify-4         	 1000000	     45961 ns/op
+BenchmarkEd25519_Verify-4         	 1000000	     45875 ns/op
+BenchmarkEd25519_Verify-4         	 1000000	     45769 ns/op
+BenchmarkEd25519_Verify-4         	 1000000	     46127 ns/op
+PASS
+ok  	github.com/coredns/coredns/enclave	1449.489s
